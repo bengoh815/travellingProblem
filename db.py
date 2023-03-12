@@ -17,6 +17,10 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS users(
 #     latitude real
 # )""")
 
+cursor.execute("""INSERT INTO users ("name", "cell_number", "id")
+VALUES ('John Doe', '+1 (608) 123-9823', 1)
+""")
+
 df = pd.read_sql_query("SELECT * FROM users", con)
 print(df.head())
 
