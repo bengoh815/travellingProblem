@@ -1,18 +1,22 @@
+import sqlite3
 import pandas as pd
 
-def loadAllDB():
-    print("Loading databases...")
-    userDB = load_userDB()
-    geoDB = load_DB()
-    print("Finished loading")
-    return userDB, geoDB
+con = sqlite3.connect("mainDB.db")
+cursor = con.cursor()
+# cursor.execute("""SHOW TABLE""")
+cursor.execute("""CREATE TABLE IF NOT EXISTS users(
+    name text,
+    cell_number text,
+    id int
+)""")
 
-def load_userDB():
-    # special handling for users
-    db = dict()
-    return db
+# cursor.execute("""CREATE TABLE IF NOT EXISTS geo(
+#     id int,
+#     address text,
+#     longtitude real,
+#     latitude real
+# )""")
 
-def load_DB():
-    db = pd.read_csv("./geoDB.csv")
-    print(db)
-    return db
+df = pd.read_sql_query("SELECT * FROM users", con)
+print(df.head())
+
