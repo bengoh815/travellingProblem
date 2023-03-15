@@ -5,7 +5,32 @@
 # assuming each text message box is per line
 
 def parseInput():
-    with open("./input.txt", "r") as f:
-        print(f.readline())
-        pass
+    # returns the number of people coming
+    people = list()
+    with open("./env/input.txt", "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            line = line.strip('\n')
+            start = line.find(']') + 2
+            line = line[start:]
+            # colon split
+            split = line.find(':')
+
+            cell_number = line[:split]
+            msg = line[(split + 2):]
+            print(cell_number, msg)
+            # people.append(())
+
+
     pass
+
+def replaceName(name):
+    with open("./known.txt", "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            line = line.strip('\n')
+            print(line)
+    pass
+
+# parseInput()
+# replaceName("smtg")

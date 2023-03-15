@@ -17,13 +17,20 @@
 
 # usersDB has to be in sync with geoLocationDB?
 
-# from db import loadAllDB
+from db import *
 from input import parseInput
 
 def main():
     print("Starting up...")
-    # loadAllDB()
-    parseInput()
+
+    # Database initilizer
+    if dbExists() == False:
+        starter()
+    # print("Database exists:", dbExists())
+
+    
+
+    # parseInput()
     print("Closing...")
 
 if __name__ == "__main__":

@@ -1,49 +1,55 @@
 import sqlite3
 import pandas as pd
 
-# con = sqlite3.connect("mainDB.db")
-# cursor = con.cursor()
+def starter():
+    try:
+        con = sqlite3.connect("./env/mainDB.db")
+        cur = con.cursor()
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS users(
+            id int,
+            name text,
+            cell_number text,
+            address text,
+            latitude real,
+            longtitude real
+        )
+        """)
+        cur.close()
+        print("Succesful initialization of database.")
 
-# # cursor.execute("""DROP TABLE users""")
-# # cursor.execute("""CREATE TABLE IF NOT EXISTS users(
-# #     name text,
-# #     cell_number text,
-# #     id int
-# # )""")
+    except sqlite3.Error as error:
+        print("Error intitalizing db.", error)
+    finally:
+        if con:
+            con.close()
 
-# # cursor.execute("""CREATE TABLE IF NOT EXISTS geo(
-# #     id int,
-# #     address text,
-# #     longtitude real,
-# #     latitude real
-# # )""")
-
-# cursor.execute("""INSERT INTO users ("name", "cell_number", "id")
-# VALUES ('John', '+1 (860) 123-2345', 364)
-# """)
-
-# con.commit()
-
-# cursor.execute("""SELECT * FROM users""")
-# print(cursor.fetchall())
-
-# No issue just head doesnt print all
-# df = pd.read_sql_query("SELECT * FROM users", con)
-# print(df.head())
-
-# cursor.close()
-# con.close()
+def dbExists():
+    try:
+        con = sqlite3.connect("./env/mainDB.db")
+        cur = con.cursor()
+        listOfTables = cur.execute(
+    """SELECT name FROM sqlite_master WHERE type='table'
+    AND name='users'; """).fetchall()
+        cur.close()
+        return (listOfTables != [])
+        
+    except sqlite3.Error as error:
+        print("Error checking if database exists.", error)
+    finally:
+        if con:
+            con.close()
 
 
-def add_user(name, cell_number, id):
+def add_user(id, name, cell_number, address, lat, lon):
     try:
         con = sqlite3.connect("mainDB.db")
         cur = con.cursor()
 
-        sqlite_insert = """INSERT INTO users (name, cell_number, id)
-        VALUES (?, ?, ?)"""
-        data = (name, cell_number, id)
-        # check if db has same id?
+        sqlite_insert = """INSERT INTO users 
+        (id, name, cell_number, address, latitude, longtitude)
+        VALUES (?, ?, ?, ?, ?, ?)"""
+        data = (id, name, cell_number, address, lat, lon)
         cur.execute(sqlite_insert, data)
         con.commit()
         print("Success data insert into sqlite table.")
