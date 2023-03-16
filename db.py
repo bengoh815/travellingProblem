@@ -8,8 +8,8 @@ def starter():
         cur.execute("""
         CREATE TABLE IF NOT EXISTS users(
             id int,
-            name text,
-            cell_number text,
+            name varchar(255),
+            cell_number varchar(255),
             address text,
             latitude real,
             longtitude real

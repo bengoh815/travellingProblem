@@ -16,9 +16,9 @@ def parseInput():
             # colon split
             split = line.find(':')
 
-            cell_number = line[:split]
+            identifier = line[:split]
             msg = line[(split + 2):]
-            print(cell_number, msg)
+            print(identifier, msg)
             # people.append(())
 
 

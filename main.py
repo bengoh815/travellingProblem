@@ -28,9 +28,9 @@ def main():
         starter()
     # print("Database exists:", dbExists())
 
-    
-
+    # Get input
     # parseInput()
+
     print("Closing...")
 
 if __name__ == "__main__":

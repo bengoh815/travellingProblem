@@ -1,3 +1,6 @@
 /__pycache__
 
 /env
+
+/.vscode
+travelingProblem.session.sql
