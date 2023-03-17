@@ -1,15 +1,9 @@
 import sqlite3
 import pandas as pd
 
-
 # for future playing with two tables
 def add_geo():
     pass
-
-# CONSIDER REFACTORING CODE TO BE MORE MANAGABLE INSTEAD OF 
-# REMAKING CONNECTIONS AND HAVING DUPLICATE CODE
-# def name(con, paras)
-#     do something with con and paras
 
 def connect(path):
     try :
@@ -22,14 +16,14 @@ def disconnect(con):
     con.close()
     return True
 
-def init(con, tableName, tableCols):
+def createTable(con, tableName, tableCols):
     query = "CREATE TABLE IF NOT EXISTS {0}({1})".format(tableName, tableCols)
     cur = con.cursor()
     cur.execute(query)
     cur.close()
     print("Succesful initialization of database.")
 
-def dbExists(con, tableName):
+def exist(con, tableName):
     query = """
     SELECT name FROM sqlite_master 
     WHERE type='table'
@@ -39,7 +33,7 @@ def dbExists(con, tableName):
     cur.close()
     return (listOfTables != [])
 
-def add_user(con, tableName, cols, data):
+def addUser(con, tableName, cols, data):
     try:
         cur = con.cursor()
 
@@ -50,7 +44,49 @@ def add_user(con, tableName, cols, data):
         cur.close()
         return True
     except sqlite3.Error as error:
-        print("Failed to insert data into sqlite table.", error)
+        print("Failed to add data into table.", error)
         return False
 
 # add_user("Candice", "+1 (723) 938-9827", 9)
+
+def getUser(con, tableName, cols, query):
+    # query?
+    try:
+        cur = con.cursor()
+
+        # query = """INSERT INTO {0} {1} VALUES {2}""".format(tableName, cols, data)
+        cur.execute(query)
+        con.commit()
+        cur.close()
+        return True
+    except sqlite3.Error as error:
+        print("Failed to get data from table.", error)
+        return False
+
+def updateUser(con, tableName, cols, data):
+    try:
+        cur = con.cursor()
+
+        # query = """INSERT INTO {0} {1} VALUES {2}""".format(tableName, cols, data)
+        cur.execute(query)
+        con.commit()
+        cur.close()
+        return True
+    except sqlite3.Error as error:
+        print("Failed to get data from table.", error)
+        return False
+
+
+def delUser(con, tableName, ):
+    # how to delete what paras needed
+    try:
+        cur = con.cursor()
+
+        # query = """INSERT INTO {0} {1} VALUES {2}""".format(tableName, cols, data)
+        cur.execute(query)
+        con.commit()
+        cur.close()
+        return True
+    except sqlite3.Error as error:
+        print("Failed to get data from table.", error)
+        return False
