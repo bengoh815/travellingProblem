@@ -23,6 +23,17 @@ def createTable(con, tableName, tableCols):
     cur.close()
     print("Succesful initialization of database.")
 
+def init(con):
+    format = """
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name VARCHAR(255) NOT NULL,
+        cell_number VARCHAR(255) NOT NULL UNIQUE,
+        address TEXT,
+        longitude REAL, 
+        latitude REAL
+    """
+    createTable(con, "users", format)
+
 def exist(con, tableName):
     query = """
     SELECT name FROM sqlite_master 
