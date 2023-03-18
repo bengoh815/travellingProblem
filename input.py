@@ -5,8 +5,10 @@
 # assuming each text message box is per line
 
 def parseInput():
-    # returns the number of people coming
-    people = list()
+    # returns the people coming
+    resNum = list()
+    resName = list()
+
     with open("./env/input.txt", "r") as f:
         lines = f.readlines()
         for line in lines:
@@ -18,19 +20,13 @@ def parseInput():
 
             identifier = line[:split]
             msg = line[(split + 2):]
-            print(identifier, msg)
-            # people.append(())
 
+            # filter out
+            if (msg == "Going" or msg == "Going." or msg == "Going!"):
+                # check identifier
+                if identifier.startswith("+1"):
+                    resNum.append(identifier)
+                else:
+                    resName.append(identifier)
 
-    pass
-
-def replaceName(name):
-    with open("./known.txt", "r") as f:
-        lines = f.readlines()
-        for line in lines:
-            line = line.strip('\n')
-            print(line)
-    pass
-
-# parseInput()
-# replaceName("smtg")
+    return resNum, resName

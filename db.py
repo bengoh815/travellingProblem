@@ -60,19 +60,17 @@ def addUser(con, tableName, cols, data):
 
 # add_user("Candice", "+1 (723) 938-9827", 9)
 
-def getUser(con, tableName, cols, query):
-    # query?
+def getUser(con, tableName, cols, filter):
     try:
         cur = con.cursor()
 
-        # query = """INSERT INTO {0} {1} VALUES {2}""".format(tableName, cols, data)
+        query = """SELECT {0} FROM {1} {2}""".format(cols, tableName, filter)
         cur.execute(query)
-        con.commit()
+        res = cur.fetchall()
         cur.close()
-        return True
+        return res
     except sqlite3.Error as error:
         print("Failed to get data from table.", error)
-        return False
 
 def updateUser(con, tableName, cols, data):
     try:

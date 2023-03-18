@@ -32,6 +32,11 @@ def main():
 
     # Get input
     # parseInput() 
+
+    res = db.getUser(con, "users", "name, cell_number", "WHERE 'John' IN(name, cell_number)")
+    # try this out
+
+    print(res)
     
     db.disconnect(con)
     print("Closing...")
