@@ -1,3 +1,6 @@
 /__pycache__
 
-whatsAppExample.txt
+/env
+
+/.vscode
+travelingProblem.session.sql
