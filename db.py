@@ -23,7 +23,7 @@ def createTable(con, tableName, tableCols):
     cur.close()
     print("Succesful initialization of database.")
 
-def init(con):
+def init(con, tableName):
     format = """
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name VARCHAR(255) NOT NULL,
@@ -32,7 +32,7 @@ def init(con):
         longitude REAL, 
         latitude REAL
     """
-    createTable(con, "users", format)
+    createTable(con, tableName, format)
 
 def exist(con, tableName):
     query = """
@@ -58,7 +58,6 @@ def addUser(con, tableName, cols, data):
         print("Failed to add data into table.", error)
         return False
 
-# add_user("Candice", "+1 (723) 938-9827", 9)
 
 def getUser(con, tableName, cols, filter):
     try:

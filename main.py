@@ -24,19 +24,42 @@ def main():
     print("Starting up...")
 
     con = db.connect("env/mainDB.db")
-
+    table = "users"
     # Database initilizer
-    if db.exist(con, "users") == False:
-        db.init(con)
-    # print("Database exists:", dbExists())
+    if db.exist(con, table) == False:
+        db.init(con, table)
+    # print("Database exists:", db.exists())
 
     # Get input
-    # parseInput() 
+    userNum, userName = parseInput()
 
-    res = db.getUser(con, "users", "name, cell_number", "WHERE 'John' IN(name, cell_number)")
+
+    # check db
+    # if anything then update their info
+    locations = list()
+
+
+
+    # for user in userNum:
+    #     condition = "WHERE '{0}'".format(user)
+    #     db.getUser(con, table, "cell_number", condition)
+    #     pass
+
+    # for user in userName:
+    #     pass
+
+# does user exist in db
+# if exist get long and lat and put into locations
+# if not input new user
+
+    # res = db.getUser(con, table, "name, cell_number", "WHERE 'John' IN(name, cell_number)")
     # try this out
 
     print(res)
+
+    # go through and long and lat
+    # go to website and get long and lat?
+    # find lib?
     
     db.disconnect(con)
     print("Closing...")
