@@ -52,6 +52,9 @@ def main():
 # if exist get long and lat and put into locations
 # if not input new user
 
+    locations = list()
+    # populate with (user, long, lat)
+
     # res = db.getUser(con, table, "name, cell_number", "WHERE 'John' IN(name, cell_number)")
     # try this out
 
