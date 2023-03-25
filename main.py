@@ -36,14 +36,21 @@ def main():
 
     # check db
     # if anything then update their info
+
+    people = list()
     locations = list()
 
+    # check by userNum first
+    for user in userNum:
+        condition = "WHERE '{0}'".format(user)
+        # take all data
+        userData = db.getUser(con, table, "cell_number", condition)
+        # people.append(userData.name)
+        # locations.append((userData.long, userData.lat))
+        # TODO figure out the structure of gettin data
 
-
-    # for user in userNum:
-    #     condition = "WHERE '{0}'".format(user)
-    #     db.getUser(con, table, "cell_number", condition)
-    #     pass
+    # only need name, location
+    # in other words, name, long, lat
 
     # for user in userName:
     #     pass

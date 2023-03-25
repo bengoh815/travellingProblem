@@ -71,17 +71,17 @@ def getUser(con, tableName, cols, filter):
     except sqlite3.Error as error:
         print("Failed to get data from table.", error)
 
-def updateUser(con, tableName, cols, data):
+def updateUser(con, tableName, data, condition):
     try:
         cur = con.cursor()
 
-        # query = """INSERT INTO {0} {1} VALUES {2}""".format(tableName, cols, data)
+        query = """UPDATE {0} SET {1} WHERE {2}""".format(tableName, data, condition)
         cur.execute(query)
         con.commit()
         cur.close()
         return True
     except sqlite3.Error as error:
-        print("Failed to get data from table.", error)
+        print("Failed to update data.", error)
         return False
 
 
