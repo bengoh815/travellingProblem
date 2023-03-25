@@ -42,12 +42,18 @@ def main():
 
     # check by userNum first
     for user in userNum:
-        condition = "WHERE '{0}'".format(user)
+        cols = "name, longitude, latitude"
+        # condition = "cell_number='{0}'".format(user)
+        condition = "cell_number='+1 (205) 678-4065'"
         # take all data
-        userData = db.getUser(con, table, "cell_number", condition)
-        # people.append(userData.name)
-        # locations.append((userData.long, userData.lat))
-        # TODO figure out the structure of gettin data
+        userData = db.getUser(con, table, cols, condition)
+        if len(userData) == 0:
+            print("Missing user")
+        else:
+            people.append(userData[0][0])
+            locations.append((userData[0][1], userData[0][2]))
+    print(people)
+    print(locations)
 
     # only need name, location
     # in other words, name, long, lat
@@ -59,13 +65,13 @@ def main():
 # if exist get long and lat and put into locations
 # if not input new user
 
-    locations = list()
+    # locations = list()
     # populate with (user, long, lat)
 
     # res = db.getUser(con, table, "name, cell_number", "WHERE 'John' IN(name, cell_number)")
     # try this out
 
-    print(res)
+    # print(res)
 
     # go through and long and lat
     # go to website and get long and lat?

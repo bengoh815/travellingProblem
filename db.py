@@ -59,11 +59,11 @@ def addUser(con, tableName, cols, data):
         return False
 
 
-def getUser(con, tableName, cols, filter):
+def getUser(con, tableName, cols, condition):
     try:
         cur = con.cursor()
 
-        query = """SELECT {0} FROM {1} {2}""".format(cols, tableName, filter)
+        query = """SELECT {0} FROM {1} WHERE {2}""".format(cols, tableName, condition)
         cur.execute(query)
         res = cur.fetchall()
         cur.close()
