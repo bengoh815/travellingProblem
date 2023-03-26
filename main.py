@@ -39,27 +39,14 @@ def main():
 
     people = list()
     locations = list()
+    # users that need to be fixed
+    process = list()
+    # error codes
+    # 0 doesnt exist
+    # 2 found multiple
 
     # check by userNum first
-    for user in userNum:
-        cols = "name, longitude, latitude"
-        # condition = "cell_number='{0}'".format(user)
-        condition = "cell_number='+1 (205) 678-4065'"
-        # take all data
-        userData = db.getUser(con, table, cols, condition)
-        if len(userData) == 0:
-            print("Missing user")
-        else:
-            people.append(userData[0][0])
-            locations.append((userData[0][1], userData[0][2]))
-    print(people)
-    print(locations)
 
-    # only need name, location
-    # in other words, name, long, lat
-
-    # for user in userName:
-    #     pass
 
 # does user exist in db
 # if exist get long and lat and put into locations

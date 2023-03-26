@@ -30,3 +30,51 @@ def parseInput():
                     resName.append(identifier)
 
     return resNum, resName
+
+
+def getLocations(ls):
+    for user in userNum:
+        cols = "name, longitude, latitude"
+        # condition = "cell_number='{0}'".format(user)
+        condition = "cell_number='+1 (205) 678-4065'"
+
+        userData = db.getUser(con, table, cols, condition)
+        
+        if len(userData) == 0:
+            # print("Missing user.")
+            process.append((0, user))
+        elif len(userData) > 1:
+            # this would probably never happen
+            # print("Multiple users found.")
+            process.append((2, user))
+        else:
+            people.append(userData[0][0])
+            locations.append((userData[0][1], userData[0][2]))
+    print(people)
+    print(locations)
+
+    # only need name, location
+    # in other words, name, long, lat
+
+    for user in userName:
+        cols = "name, longitude, latitude"
+        # condition = "name='{0}'".format(user)
+        # condition = "name='+1 (205) 678-4065'"
+
+        userData = db.getUser(con, table, cols, condition)
+        
+        if len(userData) == 0:
+            # print("Missing user.")
+            process.append((0, user))
+        elif len(userData) > 1:
+            # this would probably never happen
+            # print("Multiple users found.")
+            process.append((2, user))
+        else:
+            people.append(userData[0][0])
+            locations.append((userData[0][1], userData[0][2]))
+
+    pass
+
+def getLocationsName():
+    pass
