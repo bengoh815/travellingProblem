@@ -23,16 +23,41 @@ from input import parseInput
 def main():
     print("Starting up...")
 
+    # Connection to database
     con = db.connect("env/mainDB.db")
-    table = "users"
+
     # Database initilizer
-    if db.exist(con, table) == False:
-        db.init(con, table)
+    usersTable = "users"
+    if db.exist(con, usersTable) == False:
+        format = """
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name VARCHAR(255) NOT NULL,
+            cell_number VARCHAR(255) NOT NULL UNIQUE,
+            address TEXT,
+            longitude REAL, 
+            latitude REAL
+        """
+        db.createTable(con, usersTable, format)
     # print("Database exists:", db.exists())
 
-    # Get input
-    userNum, userName = parseInput()
+    aliasTable = "alias"
+    if db.exist(con, aliasTable) == False:
+        format = """
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            alias VARCHAR(255) NOT NULL,
+            cell_number VARCHAR(255) NOT NULL UNIQUE
+        """
+        db.createTable(con, aliasTable, format)
+    
 
+
+    # Get input
+    userNums, userNames = parseInput()
+
+    # 
+
+# TODO create a function that gets from table "phoneAlias"
+# parse all the userNames to userNums and then use that from table "users"
 
     # check db
     # if anything then update their info
@@ -40,6 +65,7 @@ def main():
     people = list()
     locations = list()
     # users that need to be fixed
+    # set locations such that if location is missing, then get location and then immdiate ly put long lat or else nothing?
     process = list()
     # error codes
     # 0 doesnt exist
@@ -53,7 +79,7 @@ def main():
 # if not input new user
 
     # locations = list()
-    # populate with (user, long, lat)
+    # populate with (user, (long, lat))
 
     # res = db.getUser(con, table, "name, cell_number", "WHERE 'John' IN(name, cell_number)")
     # try this out
