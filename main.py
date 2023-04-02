@@ -54,10 +54,9 @@ def main():
     # Get input
     userNums, userNames = parseInput()
 
-    # 
-
-# TODO create a function that gets from table "phoneAlias"
-# parse all the userNames to userNums and then use that from table "users"
+    # Convert names to nums
+    res = db.toNums(con, aliasTable, userNames)
+    userNums.extend(res)
 
     # check db
     # if anything then update their info

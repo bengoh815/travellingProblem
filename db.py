@@ -87,3 +87,21 @@ def delUser(con, tableName, ):
     except sqlite3.Error as error:
         print("Failed to get data from table.", error)
         return False
+
+def toNums(con, tableName, names):
+    """This function accepts a list of names and converts it
+    into phone number based on the table and returns
+    the result list"""
+    res = list()
+    cols = ("alias, cell_number")
+    for name in names:
+        condition = "alias='{0}'".format(name)
+        output = getUser(con, tableName, cols, condition)
+        if len(output) == 1:
+            res.append(output[0][1])
+        else:
+            # 0 or 2+ found
+            # this error should not happen
+            print("toNums function error: " + str(len(output)) + "found")
+
+    return res
