@@ -31,28 +31,15 @@ def parseInput():
 
     return resNum, resName
 
+def newUserInput(user):
+    data = [None]*5
+    data[1] = user
 
-def getLocations(userNames):
-    # only need name, location
-    # in other words, name, long, lat
-    for user in userNums:
-        cols = "name, longitude, latitude"
-        # condition = "cell_number='{0}'".format(user)
-        condition = "cell_number='+1 (205) 678-4065'"
-
-        userData = db.getUser(con, table, cols, condition)
-        
-        if len(userData) == 0:
-            # print("Missing user.")
-            process.append((0, user))
-        elif len(userData) > 1:
-            # this would probably never happen
-            # print("Multiple users found.")
-            process.append((2, user))
-        else:
-            people.append(userData[0][0])
-            locations.append((userData[0][1], userData[0][2]))
-    print(people)
-    print(locations)
-
-    pass
+    print("This user {0} is not found.")
+    while True:
+        list[0] = input("Name of user: ")
+        list[2] = input("Address of user: ")
+        i = input("Confirm correct information (Y/N): ")
+        if (i == "Y"):
+            break
+    print("---------------------------")

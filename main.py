@@ -48,46 +48,47 @@ def main():
             cell_number VARCHAR(255) NOT NULL UNIQUE
         """
         db.createTable(con, aliasTable, format)
-    
 
 
     # Get input
     userNums, userNames = parseInput()
 
     # Convert names to nums
+    # aliasTable also might not have new numbers as it updates
+    # modify aliastable to be more general use
     res = db.toNums(con, aliasTable, userNames)
     userNums.extend(res)
 
-    # check db
-    # if anything then update their info
 
-    people = list()
-    locations = list()
-    # users that need to be fixed
-    # set locations such that if location is missing, then get location and then immdiate ly put long lat or else nothing?
+    userLocs = list()
     process = list()
-    # error codes
-    # 0 doesnt exist
-    # 2 found multiple
 
-    # check by userNum first
+    for user in userNums:
+        if (db.userExists(con, usersTable, user)):
+            # assume all data exists and not empty
+            # this should return (name, (long, lat))
+            userData = db.getLocation(con, usersTable, user)
+            userLocs.append(userData)
+        else:
+            process.append(user)
+
+    # add new users
+    if (len(process) != 0):
+        print("Users not found in database: ", len(process))
+        # for user in process:
+        # ask for users info
+        # get their long, lat data
+        # 
+        # cols = "(name, cell_number, address, longitude, latitude )"
+        # db.addUser(con, usersTable,)
+        # 
+        # should also add to userLocs
+
+    # userLocs are done
+    # display to UI
+    
 
 
-# does user exist in db
-# if exist get long and lat and put into locations
-# if not input new user
-
-    # locations = list()
-    # populate with (user, (long, lat))
-
-    # res = db.getUser(con, table, "name, cell_number", "WHERE 'John' IN(name, cell_number)")
-    # try this out
-
-    # print(res)
-
-    # go through and long and lat
-    # go to website and get long and lat?
-    # find lib?
     
     db.disconnect(con)
     print("Closing...")

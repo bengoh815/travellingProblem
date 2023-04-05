@@ -105,3 +105,23 @@ def toNums(con, tableName, names):
             print("toNums function error: " + str(len(output)) + "found")
 
     return res
+
+def getLocation(con, tableName, userNum):
+    # only need name, location
+    # in other words, name, long, lat
+    cols = "name, longitude, latitude"
+    condition = "cell_number='{0}'".format(userNum)
+    # condition = "cell_number='+1 (205) 678-4065'"
+
+    userData = getUser(con, tableName, cols, condition)
+    
+    # elif len(userData) > 1:
+    #     # this would probably never happen
+    #     # print("Multiple users found.")
+    #     process.append((2, user))
+    # else:
+    #     people.append(userData[0][0])
+    #     locations.append((userData[0][1], userData[0][2]))
+
+def userExists(con, tableName, user):
+    pass
