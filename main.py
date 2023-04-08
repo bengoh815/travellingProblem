@@ -1,22 +1,3 @@
-# interface
-# receive input
-# parse input
-# get ID data from userDB
-    # need either name or phone number to ID
-    # how bout name to phone number to ID
-# get from geoLo data with ID
-
-# show on map
-
-# have tools and options to select
-# able to format output
-# OR
-# implement clustering algo
-# OR
-# HK solution
-
-# usersDB has to be in sync with geoLocationDB?
-
 import db
 from input import parseInput
 
@@ -38,7 +19,6 @@ def main():
             latitude REAL
         """
         db.createTable(con, usersTable, format)
-    # print("Database exists:", db.exists())
 
     aliasTable = "alias"
     if db.exist(con, aliasTable) == False:
@@ -49,24 +29,19 @@ def main():
         """
         db.createTable(con, aliasTable, format)
 
-
     # Get input
     userNums, userNames = parseInput()
 
     # Convert names to nums
-    # aliasTable also might not have new numbers as it updates
-    # modify aliastable to be more general use
     res = db.toNums(con, aliasTable, userNames)
     userNums.extend(res)
-
 
     userLocs = list()
     process = list()
 
     for user in userNums:
         if (db.userExists(con, usersTable, user)):
-            # assume all data exists and not empty
-            # this should return (name, (long, lat))
+            # returns (name, (long, lat))
             userData = db.getLocation(con, usersTable, user)
             userLocs.append(userData)
         else:
@@ -84,9 +59,9 @@ def main():
         # 
         # should also add to userLocs
 
+
     # userLocs are done
     # display to UI
-    
 
 
     

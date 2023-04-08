@@ -1,10 +1,6 @@
 import sqlite3
 import pandas as pd
 
-# for future playing with two tables
-def add_geo():
-    pass
-
 def connect(path):
     try :
         return sqlite3.connect(path)
@@ -80,7 +76,7 @@ def delUser(con, tableName, ):
         cur = con.cursor()
 
         # query = """INSERT INTO {0} {1} VALUES {2}""".format(tableName, cols, data)
-        cur.execute(query)
+        # cur.execute(query)
         con.commit()
         cur.close()
         return True
@@ -100,8 +96,8 @@ def toNums(con, tableName, names):
         if len(output) == 1:
             res.append(output[0][1])
         else:
-            # 0 or 2+ found
             # this error should not happen
+            # only happens when output has length 0 or 2+
             print("toNums function error: " + str(len(output)) + "found")
 
     return res
