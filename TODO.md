@@ -20,7 +20,8 @@ main idea
 
 top priority
 - [ ] start working on geoloc.py
-    [ ] determine which is more accurate Nominatim or google maps api
+    [X] determine which is more accurate Nominatim or google maps api
+    [ ] make sure GCP is limited so payments wont occur
 - [ ] implement db.py userExist()
 - [ ] finish implmenting db.py getLocation()
 - [ ] make userData has the correct format 
