@@ -22,6 +22,10 @@ top priority
 - [ ] start working on geoloc.py
     [X] determine which is more accurate Nominatim or google maps api
     [ ] make sure GCP is limited so payments wont occur
+        this repo was helpful
+        https://github.com/googlemaps/google-maps-services-python
+    [ ] try more different values on geocoding
+        like values that may result in 0 or 2+ items?
 - [ ] implement db.py userExist()
 - [ ] finish implmenting db.py getLocation()
 - [ ] make userData has the correct format 

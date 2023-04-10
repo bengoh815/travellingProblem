@@ -8,3 +8,6 @@ gmaps = GoogleMaps(GCP_GC_API_KEY)
 address = '344 West Dayton Street'
 res = gmaps.geocode(address)
 print(res)
+print(res[0]['geometry']['location']['lat'])
+print(res[0]['geometry']['location']['lng'])
+# I GOT IT?
