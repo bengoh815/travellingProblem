@@ -36,7 +36,7 @@ def addUser(con, tableName, cols, data):
         query = """INSERT INTO {0} {1} VALUES {2}""".format(tableName, cols, data)
         cur.execute(query)
         con.commit()
-        # print("Success data insert into sqlite table.")
+        print("Success data insert into sqlite table.")
         cur.close()
         return True
     except sqlite3.Error as error:
@@ -107,17 +107,14 @@ def getLocation(con, tableName, userNum):
     # in other words, name, long, lat
     cols = "name, longitude, latitude"
     condition = "cell_number='{0}'".format(userNum)
-    # condition = "cell_number='+1 (205) 678-4065'"
 
     userData = getUser(con, tableName, cols, condition)
-    
-    # elif len(userData) > 1:
-    #     # this would probably never happen
-    #     # print("Multiple users found.")
-    #     process.append((2, user))
-    # else:
-    #     people.append(userData[0][0])
-    #     locations.append((userData[0][1], userData[0][2]))
+    return userData[0]
 
-def userExists(con, tableName, user):
-    pass
+def userExists(con, user):
+    condition = "cell_number='{}'".format(user)
+    res = getUser(con, "users", "cell_number", condition)
+    if (len(res) == 1):
+        return True
+    else:
+        return False

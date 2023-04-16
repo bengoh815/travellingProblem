@@ -19,22 +19,19 @@ main idea
 # usersDB has to be in sync with geoLocationDB?
 
 top priority
-- [ ] start working on geoloc.py
-    [X] determine which is more accurate Nominatim or google maps api
-    [ ] make sure GCP is limited so payments wont occur
-        this repo was helpful
-        https://github.com/googlemaps/google-maps-services-python
-    [ ] try more different values on geocoding
-        like values that may result in 0 or 2+ items?
-- [ ] implement db.py userExist()
-- [ ] finish implmenting db.py getLocation()
-- [ ] make userData has the correct format 
+- [X] implement db.py userExist()
+- [X] finish implmenting db.py getLocation()
+- [X] make userData has the correct format 
     should be on line 45
     after checking if user exists
-- [ ] make sure input.py newUserInput() is returning correct format and better UI
-- [ ] implement adding new users
+- [X] make sure input.py newUserInput() is returning correct format and better UI
+- [ ] check if everything is working
+    - I have backup data stored
+- [ ] check if userNums and userLocs are aligned
+- [X] implement adding new users
     - depends on geoloc.py working
 - [ ] implement aliasTable to handle new numbers that might exist
+- [ ] probably could have a better structure of db.py
 - [ ] modify aliastable to be more general use
 - [ ] implement db.py delUser()
 lowest priority

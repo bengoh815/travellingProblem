@@ -3,6 +3,7 @@
 # main idea is to parse ] to : and check if there is word "Going." / "Going"
 # need to think of a funny word
 # assuming each text message box is per line
+from geoloc import strToCoord
 
 def parseInput():
     # returns the people coming
@@ -32,14 +33,21 @@ def parseInput():
     return resNum, resName
 
 def newUserInput(user):
-    data = [None]*5
+    # format
+    # (name, cell_number, address, longitude, latitude )
+    data = [None for _ in range(5)]
+    print(data)
     data[1] = user
 
-    print("This user {0} is not found.")
+    print("This user {0} is not found.".format(user))
     while True:
-        list[0] = input("Name of user: ")
-        list[2] = input("Address of user: ")
+        data[0] = input("Name of user: ")
+        data[2] = input("Address of user: ")
         i = input("Confirm correct information (Y/N): ")
         if (i == "Y"):
             break
     print("---------------------------")
+    lng, lat = strToCoord(data[2])
+    data[3] = lng
+    data[4] = lat
+    return tuple(data)

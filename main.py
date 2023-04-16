@@ -1,5 +1,5 @@
 import db
-from input import parseInput
+import input
 
 def main():
     print("Starting up...")
@@ -30,7 +30,7 @@ def main():
         db.createTable(con, aliasTable, format)
 
     # Get input
-    userNums, userNames = parseInput()
+    userNums, userNames = input.parseInput()
 
     # Convert names to nums
     res = db.toNums(con, aliasTable, userNames)
@@ -40,8 +40,8 @@ def main():
     process = list()
 
     for user in userNums:
-        if (db.userExists(con, usersTable, user)):
-            # returns (name, (long, lat))
+        if (db.userExists(con, user)):
+            # returns (name, long, lat)
             userData = db.getLocation(con, usersTable, user)
             userLocs.append(userData)
         else:
@@ -50,19 +50,18 @@ def main():
     # add new users
     if (len(process) != 0):
         print("Users not found in database: ", len(process))
-        # for user in process:
-        # ask for users info
-        # get their long, lat data
-        # 
-        # cols = "(name, cell_number, address, longitude, latitude )"
-        # db.addUser(con, usersTable,)
-        # 
-        # should also add to userLocs
+        for user in process:
+            # userData = input.newUserInput(user)
+            print("careful", user)
+            userData = ('kev', '+1 (608) 982-2157', '344 West Dayton Street', -89.39116, 43.07339)
 
+            cols = "(name, cell_number, address, longitude, latitude )"
+            # db.addUser(con, usersTable, cols, userData)
 
-    # userLocs are done
-    # display to UI
-
+            # should also add to userLocs
+            index = userNums.index(userData[1])
+            userNums.append(userNums.pop(index))
+            userLocs.append((userData[0], userData[3], userData[4]))
 
     
     db.disconnect(con)
