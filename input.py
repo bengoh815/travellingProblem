@@ -21,9 +21,10 @@ def parseInput():
 
             identifier = line[:split]
             msg = line[(split + 2):]
+            msg = msg.lower()
 
             # filter out
-            if (msg == "Going" or msg == "Going." or msg == "Going!"):
+            if ("je vein" in msg):
                 # check identifier
                 if identifier.startswith("+1"):
                     resNum.append(identifier)
@@ -36,7 +37,6 @@ def newUserInput(user):
     # format
     # (name, cell_number, address, longitude, latitude )
     data = [None for _ in range(5)]
-    print(data)
     data[1] = user
 
     print("This user {0} is not found.".format(user))
@@ -46,7 +46,9 @@ def newUserInput(user):
         i = input("Confirm correct information (Y/N): ")
         if (i == "Y"):
             break
+        print()
     print("---------------------------")
+    print()
     lng, lat = strToCoord(data[2])
     data[3] = lng
     data[4] = lat

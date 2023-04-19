@@ -1,5 +1,6 @@
 import db
 import input
+import plot
 
 def main():
     print("Starting up...")
@@ -51,19 +52,23 @@ def main():
     if (len(process) != 0):
         print("Users not found in database: ", len(process))
         for user in process:
-            # userData = input.newUserInput(user)
-            print("careful", user)
-            userData = ('kev', '+1 (608) 982-2157', '344 West Dayton Street', -89.39116, 43.07339)
+            userData = input.newUserInput(user)
+            # print("careful", user)
+            # userData = ('kev', '+1 (608) 982-2157', '344 West Dayton Street', -89.39116, 43.07339)
 
             cols = "(name, cell_number, address, longitude, latitude )"
-            # db.addUser(con, usersTable, cols, userData)
+            db.addUser(con, usersTable, cols, userData)
 
             # should also add to userLocs
             index = userNums.index(userData[1])
             userNums.append(userNums.pop(index))
             userLocs.append((userData[0], userData[3], userData[4]))
 
-    
+    # all userLocs gotten
+    print(userLocs)
+    # plot data?
+    # plot.plotGraph(userLocs)
+
     db.disconnect(con)
     print("Closing...")
 

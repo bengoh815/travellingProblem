@@ -19,18 +19,14 @@ main idea
 # usersDB has to be in sync with geoLocationDB?
 
 top priority
-- [X] implement db.py userExist()
-- [X] finish implmenting db.py getLocation()
-- [X] make userData has the correct format 
-    should be on line 45
-    after checking if user exists
-- [X] make sure input.py newUserInput() is returning correct format and better UI
-- [ ] check if everything is working
+- [X] check if everything is working
     - I have backup data stored
+    - compile a list of data to be tested
+    - seems to be working
+- [ ] start working on UI
+    - latitude (the y axis) and longitude (the x axis)
 - [ ] check if userNums and userLocs are aligned
-- [X] implement adding new users
-    - depends on geoloc.py working
-- [ ] implement aliasTable to handle new numbers that might exist
+- [ ] implement aliasTable to handle new alias that might exist
 - [ ] probably could have a better structure of db.py
 - [ ] modify aliastable to be more general use
 - [ ] implement db.py delUser()
