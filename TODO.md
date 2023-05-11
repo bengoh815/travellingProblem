@@ -24,6 +24,8 @@ top priority
     - compile a list of data to be tested
     - seems to be working
 - [ ] start working on UI
+    - want to display on a website thing
+        [ ] research how to do so
     - latitude (the y axis) and longitude (the x axis)
 - [ ] check if userNums and userLocs are aligned
 - [ ] implement aliasTable to handle new alias that might exist
