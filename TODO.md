@@ -16,6 +16,8 @@ lowest priority
         [X] research how to do so
     - latitude (the y axis) and longitude (the x axis)
     - setting up a new backend system for the project
+        - [X] finished rudimentary backend
+    - [ ] working on frontend UI
     - going to be using react, django, sqlite
 
 ### Done
