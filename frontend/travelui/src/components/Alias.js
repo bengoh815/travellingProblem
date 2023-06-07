@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { variables } from "../Variables.js";
+import Modal from "./Modal.js";
 
 export default function Alias() {
   const [alias, setAlias] = useState([]);
+  const [modalTitle, setModalTitle] = useState("");
 
   useEffect(() => {
     async function fetchAlias() {
@@ -15,6 +17,8 @@ export default function Alias() {
 
   return (
     <div>
+      <div>Add Alias</div>
+      <Modal />
       <table className="table table-striped">
         <thead>
           <tr>
