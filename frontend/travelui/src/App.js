@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Alias from "./components/Alias";
 import Users from "./components/Users";
+import CarSelection from "./components/CarSelection";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <br />
         <Routes>
           <Route path="/home" element={<Home />} />
+          <Route path="/carselection" element={<CarSelection />} />
           <Route path="/alias" element={<Alias />} />
           <Route path="/users" element={<Users />} />
         </Routes>

@@ -1,0 +1,12 @@
+.textAlign {
+  text-align: left;
+}
+
+.container {
+  background-color: rgba(128, 128, 128, 0.3);
+}
+
+.half {
+  width: 50%;
+  display: inline-block;
+}
