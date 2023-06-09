@@ -1,5 +1,6 @@
 import { useDraggable } from "@dnd-kit/core";
-import { CSS } from "@dnd-kit/ultilities";
+import { CSS } from "@dnd-kit/utilities";
+import styles from "../styles/Passenger.module.css";
 
 export default function Passenger(props) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -11,8 +12,10 @@ export default function Passenger(props) {
   };
 
   return (
-    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      {props.children}
-    </button>
+    <div className={styles.container}>
+      <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
+        {props.children}
+      </button>
+    </div>
   );
 }
