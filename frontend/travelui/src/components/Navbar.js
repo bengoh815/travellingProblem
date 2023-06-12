@@ -13,9 +13,17 @@ export default function Navbar() {
           <li className="nav-item m-1">
             <NavLink
               className="btn btn-light btn-outline-primary"
-              to="/carselection"
+              to="/userselection"
             >
-              Car Selection
+              User Selection
+            </NavLink>
+          </li>
+          <li className="nav-item m-1">
+            <NavLink
+              className="btn btn-light btn-outline-primary"
+              to="/carassignment"
+            >
+              Car Assignment
             </NavLink>
           </li>
           <li className="nav-item m-1">

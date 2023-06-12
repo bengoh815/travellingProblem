@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { DndContext } from "@dnd-kit/core";
 import Passenger from "./Passenger";
 import Car from "./Car";
-import styles from "../styles/CarSelection.module.css";
+import styles from "../styles/CarAssignment.module.css";
 
-export default function CarSelection() {
+export default function CarAssignment() {
   // Get data from somehow
   const input = {
     passengers: [],
@@ -14,6 +14,7 @@ export default function CarSelection() {
       { Id: 10, Name: "Maude", Longitude: 9.5, Latitude: 5.9 },
       { Id: 5, Name: "Rae", Longitude: 8.1, Latitude: 1.8 },
     ],
+    carNextId: 5,
     cars: [
       { Id: 1, Name: "Jen", Passengers: [] },
       {
@@ -186,42 +187,63 @@ export default function CarSelection() {
     setDragObj(e.active.id);
   }
 
-  return (
-    <div className="bg-light">
-      <h3>Car Selection</h3>
+  function handleAddUser(e) {
+    // TODO get user from db
+    const newUser = {
+      Id: 125235,
+      Name: "Clone",
+      Longitude: 6.6,
+      Latitude: 9.7,
+    };
+    const newUnassigned = [...data.unassigned, newUser];
+    const newData = { ...data, unassigned: newUnassigned };
+    setData(newData);
+  }
 
-      <div className={styles.half}></div>
-      <div className={styles.half}>
+  function handleAddCar(e) {
+    // should probably ask for name
+    const defaultName = "John Smith";
+    const newCar = { Id: data.carNextId, Name: defaultName, Passengers: [] };
+    const newCars = [...data.cars, newCar];
+    const newCarNextId = data.carNextId + 1;
+
+    const newData = { ...data, carNextId: newCarNextId, cars: newCars };
+    setData(newData);
+  }
+
+  return (
+    <div className={styles.container}>
+      <h3>Car Assignment</h3>
+
+      <div className={styles.map}>Map</div>
+      <div className={styles.seatings}>
         <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
-          <div className={styles.half}>
+          <div className={styles.people}>
             <p>People</p>
+            <button onClick={handleAddUser}>Add User</button>
             {data.unassigned.map((p, index) => (
               <Passenger key={index} id={p.Id}>
                 {p.Name}
               </Passenger>
             ))}
           </div>
-          <div className={styles.half}>
+          <div className={styles.cars}>
             <p>Car</p>
-            {data.cars.map((car, index) => (
-              <Car
-                key={index}
-                id={car.Id}
-                driver={car.Name}
-                passengers={car.Passengers}
-              >
-                {car.Passengers.map((p, i) => (
-                  <Passenger key={i} id={p.Id}>
-                    {p.Name}
-                  </Passenger>
-                ))}
-              </Car>
-            ))}
+            <button onClick={handleAddCar}>Add Car</button>
+            <div className={styles.carLst}>
+              {data.cars.map((car, index) => (
+                <Car key={index} id={car.Id} driver={car.Name}>
+                  {car.Passengers.map((p, i) => (
+                    <Passenger key={i} id={p.Id}>
+                      {p.Name}
+                    </Passenger>
+                  ))}
+                </Car>
+              ))}
+            </div>
           </div>
         </DndContext>
       </div>
     </div>
   );
 }
-
-// could it be possible instead of rending passengers twice I save them in an array and just use them as I wish?

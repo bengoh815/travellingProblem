@@ -1,0 +1,34 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "header header"
+    "map seatings";
+}
+
+.container h3 {
+  grid-area: header;
+}
+.container .map {
+  /* for another time */
+}
+
+.container .seatings {
+  grid-area: seatings;
+  display: flex;
+}
+
+.container .people {
+  width: 50%;
+  /* bootstrap light? */
+  background-color: var(--bs-light, #f8f9fa);
+  border-radius: 20px;
+  margin: 0.2rem;
+}
+.container .cars {
+  width: 50%;
+  background-color: var(--bs-light, #f8f9fa);
+  border-radius: 20px;
+  margin: 0.2rem;
+}
