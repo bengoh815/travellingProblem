@@ -3,7 +3,7 @@ env/
 
 # misc
 .DS_STORE
-.vs_code/
+.vscode
 
 # db
 *.sqlite3
