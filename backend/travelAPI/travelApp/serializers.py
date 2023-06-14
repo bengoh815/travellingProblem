@@ -9,4 +9,4 @@ class AliasSerializer(serializers.ModelSerializer):
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ('UsersId', 'PhoneNumber', 'Name', 'Address', 'Date', 'Longitude', 'Latitude')
+        fields = ('UserId', 'PhoneNumber', 'Name', 'Address', 'Date', 'Longitude', 'Latitude')

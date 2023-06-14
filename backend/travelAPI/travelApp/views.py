@@ -51,7 +51,7 @@ def usersApi(req, id=0):
         return JsonResponse("Failed to Add", safe=False)
     elif req.method == 'PUT':
         users_data = JSONParser().parse(req)
-        users = Users.objects.get(UsersId=users_data['UsersId'])
+        users = Users.objects.get(UserId=users_data['UserId'])
 
         users_serializer = UsersSerializer(users, data=users_data)
         if users_serializer.is_valid():
@@ -59,6 +59,6 @@ def usersApi(req, id=0):
             return JsonResponse("Updated Successfully", safe=False)
         return JsonResponse("Failed to Update", safe=False)
     elif req.method == 'DELETE':
-        users = Users.objects.get(UsersId=id)
+        users = Users.objects.get(UserId=id)
         users.delete()
         return JsonResponse("Deleted Successfully", safe=False)

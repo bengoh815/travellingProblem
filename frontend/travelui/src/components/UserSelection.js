@@ -23,7 +23,7 @@ export default function UserSelection() {
   }
 
   function handleSubmit() {
-    const sendData = selected.map((id) => users.find((e) => e.UsersId === id));
+    const sendData = selected.map((id) => users.find((e) => e.UserId === id));
     // console.log(selected);
     console.log(sendData);
     setCheckedState(new Array(users.length).fill(false));
@@ -47,7 +47,7 @@ export default function UserSelection() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>UsersId</th>
+            <th>UserId</th>
             <th>Users Name</th>
             <th>Address</th>
             <th>Phone Number</th>
@@ -56,17 +56,17 @@ export default function UserSelection() {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={user.UsersId}>
-              <td>{user.UsersId}</td>
+            <tr key={user.UserId}>
+              <td>{user.UserId}</td>
               <td>{user.Name}</td>
               <td>{user.Address}</td>
               <td>{user.PhoneNumber}</td>
               <td>
                 <input
                   type="checkbox"
-                  id={user.UsersId}
+                  id={user.UserId}
                   checked={checkedState[index]}
-                  onChange={() => handleSelected(index, user.UsersId)}
+                  onChange={() => handleSelected(index, user.UserId)}
                 />
               </td>
             </tr>

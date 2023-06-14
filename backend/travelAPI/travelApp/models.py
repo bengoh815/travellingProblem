@@ -7,7 +7,7 @@ class Alias(models.Model):
     Name = models.CharField(max_length=32)
 
 class Users(models.Model):
-    UsersId = models.AutoField(primary_key=True)
+    UserId = models.AutoField(primary_key=True)
     PhoneNumber = models.CharField(max_length=32, unique=True)
     Name = models.CharField(max_length=32)
     Address = models.CharField(max_length=64)

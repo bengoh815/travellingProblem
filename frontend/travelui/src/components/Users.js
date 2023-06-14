@@ -10,7 +10,7 @@ export default class Users extends Component {
       modalTitle: "",
       UsersName: "",
       UsersPhoneNumber: "",
-      UsersId: 0,
+      UserId: 0,
       Longitude: 0.0,
       Latitude: 0.0,
     };
@@ -43,7 +43,7 @@ export default class Users extends Component {
   addClick() {
     this.setState({
       modalTitle: "Add Users",
-      UsersId: 0,
+      UserId: 0,
       UsersPhoneNumber: "",
       UsersName: "",
       UsersAddress: "",
@@ -52,7 +52,7 @@ export default class Users extends Component {
   editClick(Users) {
     this.setState({
       modalTitle: "Edit Users",
-      UsersId: Users.UsersId,
+      UserId: Users.UserId,
       UsersPhoneNumber: Users.PhoneNumber,
       UsersName: Users.Name,
       UsersAddress: Users.Address,
@@ -96,7 +96,7 @@ export default class Users extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        UsersId: this.state.UsersId,
+        UserId: this.state.UserId,
         PhoneNumber: this.state.UsersPhoneNumber,
         Name: this.state.UsersName,
         Address: this.state.UsersAddress,
@@ -142,7 +142,7 @@ export default class Users extends Component {
     const {
       Users,
       modalTitle,
-      UsersId,
+      UserId,
       UsersPhoneNumber,
       UsersAddress,
       UsersName,
@@ -162,7 +162,7 @@ export default class Users extends Component {
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>UsersId</th>
+              <th>UserId</th>
               <th>Phone Number</th>
               <th>Users Name</th>
               <th>Address</th>
@@ -172,8 +172,8 @@ export default class Users extends Component {
           </thead>
           <tbody>
             {Users.map((Users) => (
-              <tr key={Users.UsersId}>
-                <td>{Users.UsersId}</td>
+              <tr key={Users.UserId}>
+                <td>{Users.UserId}</td>
                 <td>{Users.PhoneNumber}</td>
                 <td>{Users.Name}</td>
                 <td>{Users.Address}</td>
@@ -205,7 +205,7 @@ export default class Users extends Component {
                   <button
                     type="button"
                     className="btn btn-light mr-1"
-                    onClick={() => this.deleteClick(Users.UsersId)}
+                    onClick={() => this.deleteClick(Users.UserId)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -271,7 +271,7 @@ export default class Users extends Component {
                   />
                 </div>
 
-                {UsersId === 0 ? (
+                {UserId === 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
@@ -281,7 +281,7 @@ export default class Users extends Component {
                   </button>
                 ) : null}
 
-                {UsersId !== 0 ? (
+                {UserId !== 0 ? (
                   <button
                     type="button"
                     className="btn btn-primary float-start"
