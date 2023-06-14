@@ -12,10 +12,34 @@ export default function CarAssignment() {
   const input = {
     passengers: [],
     unassigned: [
-      { Id: 12, Name: "Bradford", Longitude: 6.6, Latitude: 9.7 },
-      { Id: 4, Name: "Karina", Longitude: 9.1, Latitude: 9.0 },
-      { Id: 10, Name: "Maude", Longitude: 9.5, Latitude: 5.9 },
-      { Id: 5, Name: "Rae", Longitude: 8.1, Latitude: 1.8 },
+      {
+        Id: 12,
+        Name: "Bradford",
+        Longitude: -89.4275,
+        Latitude: 43.0756,
+        AssignedCarId: -1,
+      },
+      {
+        Id: 4,
+        Name: "Karina",
+        Longitude: -89.4234,
+        Latitude: 43.0633,
+        AssignedCarId: -1,
+      },
+      {
+        Id: 10,
+        Name: "Maude",
+        Longitude: -89.413,
+        Latitude: 43.0656,
+        AssignedCarId: -1,
+      },
+      {
+        Id: 5,
+        Name: "Rae",
+        Longitude: -89.4047,
+        Latitude: 43.067,
+        AssignedCarId: -1,
+      },
     ],
     carNextId: 5,
     cars: [
@@ -24,15 +48,35 @@ export default function CarAssignment() {
         Id: 2,
         Name: "Brat",
         Passengers: [
-          { Id: 7, Name: "Craig", Longitude: 5.2, Latitude: 6.1 },
-          { Id: 3, Name: "Von", Longitude: 5.3, Latitude: 9.5 },
+          {
+            Id: 7,
+            Name: "Craig",
+            Longitude: -89.4046,
+            Latitude: 43.0702,
+            AssignedCarId: 2,
+          },
+          {
+            Id: 3,
+            Name: "Von",
+            Longitude: -89.4091,
+            Latitude: 43.0632,
+            AssignedCarId: 2,
+          },
         ],
       },
       { Id: 3, Name: "Kent", Passengers: [] },
       {
         Id: 4,
         Name: "Alex",
-        Passengers: [{ Id: 6, Name: "Stu", Longitude: 9.2, Latitude: 7.2 }],
+        Passengers: [
+          {
+            Id: 6,
+            Name: "Stu",
+            Longitude: -89.3904,
+            Latitude: 43.0748,
+            AssignedCarId: 4,
+          },
+        ],
       },
     ],
     assigned: [
@@ -57,6 +101,9 @@ export default function CarAssignment() {
         // get passenger
         const passenger = data.unassigned[rtnVal];
 
+        // update passenger
+        const newPassenger = { ...passenger, AssignedCarId: desId };
+
         // rmv passenger from unassigned
         const newUnassigned = data.unassigned.filter(
           (p) => p.Id !== passengerId
@@ -67,7 +114,7 @@ export default function CarAssignment() {
         const car = data.cars[carIndex];
 
         // put passenger in car
-        const newPassengers = [...car.Passengers, passenger];
+        const newPassengers = [...car.Passengers, newPassenger];
         const newCar = { ...car, Passengers: newPassengers };
         const newCars = data.cars.map((car, index) => {
           return index === carIndex ? newCar : car;
@@ -99,6 +146,8 @@ export default function CarAssignment() {
             (p) => p.Id === passengerId
           );
           const passenger = car.Passengers[passengerIndex];
+          // update passenger
+          const newPassenger = { ...passenger, AssignedCarId: desId };
 
           // rmv passenger from car
           const midPassengers = car.Passengers.filter(
@@ -119,7 +168,7 @@ export default function CarAssignment() {
           const desCar = data.cars[desCarIndex];
 
           // put passenger in car
-          const newPassengers = [...desCar.Passengers, passenger];
+          const newPassengers = [...desCar.Passengers, newPassenger];
           const newCar = { ...desCar, Passengers: newPassengers };
           const newCars = midCars.map((car, index) => {
             return index === desCarIndex ? newCar : car;
@@ -154,6 +203,8 @@ export default function CarAssignment() {
           (p) => p.Id === passengerId
         );
         const passenger = car.Passengers[passengerIndex];
+        // update passenger
+        const newPassenger = { ...passenger, AssignedCarId: -1 };
 
         // rmv passenger from car
         const newPassengers = car.Passengers.filter(
@@ -171,7 +222,7 @@ export default function CarAssignment() {
         const newAssigned = data.assigned.filter((e) => e[0] !== passengerId);
 
         // put passenger in unassigned
-        const newUnassigned = [...data.unassigned, passenger];
+        const newUnassigned = [...data.unassigned, newPassenger];
 
         // update data
         const newData = {
@@ -195,8 +246,9 @@ export default function CarAssignment() {
     const newUser = {
       Id: 125235,
       Name: "Clone",
-      Longitude: 6.6,
-      Latitude: 9.7,
+      Longitude: -89.3966,
+      Latitude: 43.0763,
+      AssignedCarId: -11,
     };
     const newUnassigned = [...data.unassigned, newUser];
     const newData = { ...data, unassigned: newUnassigned };
@@ -210,6 +262,7 @@ export default function CarAssignment() {
     const newCars = [...data.cars, newCar];
     const newCarNextId = data.carNextId + 1;
 
+    // should add car number should not be more than passenger num
     const newData = { ...data, carNextId: newCarNextId, cars: newCars };
     setData(newData);
   }

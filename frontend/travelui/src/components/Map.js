@@ -22,10 +22,17 @@ export default function Map(props) {
     height: "55vh",
   };
 
+  const renderAssigned = [];
+  // mutating
+  props.data.cars.map((c) =>
+    c.Passengers.length ? renderAssigned.push(...c.Passengers) : null
+  );
+
   return (
     <div>
       <GoogleMap
         center={defaultProps.center}
+        clickableIcons={false}
         zoom={defaultProps.zoom}
         mapContainerStyle={containerStyle}
         options={{
@@ -36,11 +43,21 @@ export default function Map(props) {
       >
         {props.data.unassigned.map((p) => (
           <Marker
+            key={p.Id}
             position={{ lat: p.Latitude, lng: p.Longitude }}
             title={p.Name}
           />
         ))}
+        {renderAssigned.map((p) => (
+          <Marker
+            key={p.Id}
+            position={{ lat: p.Latitude, lng: p.Longitude }}
+            title={p.Name}
+            label={p.AssignedCarId.toString()}
+          />
+        ))}
       </GoogleMap>
     </div>
+    // <div></div>
   );
 }
