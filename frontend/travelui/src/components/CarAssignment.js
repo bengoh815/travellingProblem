@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { DndContext } from "@dnd-kit/core";
 import Passenger from "./Passenger";
 import Car from "./Car";
+import Modal from "./Modal";
+import Map from "./Map";
+
 import styles from "../styles/CarAssignment.module.css";
 
 export default function CarAssignment() {
@@ -215,7 +218,11 @@ export default function CarAssignment() {
     <div className={styles.container}>
       <h3>Car Assignment</h3>
 
-      <div className={styles.map}>Map</div>
+      {/* <Modal></Modal> */}
+
+      <div className={styles.map}>
+        <Map data={data}></Map>
+      </div>
       <div className={styles.seatings}>
         <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
           <div className={styles.people}>

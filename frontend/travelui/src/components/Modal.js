@@ -1,44 +1,45 @@
 import React, { useState } from "react";
-import "../styles/Modal.module.css";
+import styles from "../styles/Modal.module.css";
 
 export default function Modal() {
-  const [modal, setModal] = useState(false);
+  const [modal, setModalState] = useState(false);
 
   const toggleModal = () => {
-    console.log("activated");
-    setModal(!modal);
+    setModalState(!modal);
   };
-
-  if (modal) {
-    console.log("evaluated add");
-    document.body.classList.add("active-modal");
-  } else {
-    console.log("evaluated rmv");
-    document.body.classList.remove("active-modal");
-  }
 
   return (
     <div>
-      <button onClick={toggleModal} className="btn-modal">
-        Open
-      </button>
-
+      <button onClick={toggleModal}>Open</button>
       {modal && (
-        <div className="modal">
-          <div onClick={toggleModal} className="overlay"></div>
-          <div className="modal-content">
-            <h2>Hello Modal</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-              perferendis suscipit officia recusandae, eveniet quaerat assumenda
-              id fugit, dignissimos maxime non natus placeat illo iusto!
-              Sapiente dolorum id maiores dolores? Illum pariatur possimus
-              quaerat ipsum quos molestiae rem aspernatur dicta tenetur. Sunt
-              placeat tempora vitae enim incidunt porro fuga ea.
-            </p>
-            <button className="close-modal" onClick={toggleModal}>
-              CLOSE
-            </button>
+        <div className={styles.modalBackground}>
+          <div className={styles.modalContainer}>
+            <div className={styles.titleCloseBtn}>
+              <button
+                onClick={() => {
+                  setModalState(false);
+                }}
+              >
+                X
+              </button>
+            </div>
+            <div className={styles.title}>
+              <h1>Are You Sure You Want to Continue?</h1>
+            </div>
+            <div className={styles.body}>
+              <p>The next page looks amazing. Hope you want to go there!</p>
+            </div>
+            <div className={styles.footer}>
+              <button
+                onClick={() => {
+                  setModalState(false);
+                }}
+                id={styles.cancelBtn}
+              >
+                Cancel
+              </button>
+              <button>Continue</button>
+            </div>
           </div>
         </div>
       )}
