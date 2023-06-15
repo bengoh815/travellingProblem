@@ -11,7 +11,7 @@ export default function Car(props) {
     <div className={styles.container}>
       <div ref={setNodeRef} style={style}>
         <p>
-          {props.driver}'s car | Car Id: {props.id}
+          {props.id}. {props.driver}'s car
         </p>
         {props.children}
       </div>

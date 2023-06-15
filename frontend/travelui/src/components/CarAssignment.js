@@ -1,97 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DndContext } from "@dnd-kit/core";
 import Passenger from "./Passenger";
 import Car from "./Car";
-import Modal from "./Modal";
+import BSModal from "./BSModal";
 import Map from "./Map";
 import { useLocation } from "react-router-dom";
 
 import styles from "../styles/CarAssignment.module.css";
+import AddCar from "./buttons/AddCar";
 
 export default function CarAssignment() {
   // Get data from somehow
-  const { state } = useLocation();
-  console.log(state);
-
-  const input = {
-    passengers: [],
-    unassigned: [
-      {
-        Id: 12,
-        Name: "Bradford",
-        Longitude: -89.4275,
-        Latitude: 43.0756,
-        AssignedCarId: -1,
-      },
-      {
-        Id: 4,
-        Name: "Karina",
-        Longitude: -89.4234,
-        Latitude: 43.0633,
-        AssignedCarId: -1,
-      },
-      {
-        Id: 10,
-        Name: "Maude",
-        Longitude: -89.413,
-        Latitude: 43.0656,
-        AssignedCarId: -1,
-      },
-      {
-        Id: 5,
-        Name: "Rae",
-        Longitude: -89.4047,
-        Latitude: 43.067,
-        AssignedCarId: -1,
-      },
-    ],
-    carNextId: 5,
-    cars: [
-      { Id: 1, Name: "Jen", Passengers: [] },
-      {
-        Id: 2,
-        Name: "Brat",
-        Passengers: [
-          {
-            Id: 7,
-            Name: "Craig",
-            Longitude: -89.4046,
-            Latitude: 43.0702,
-            AssignedCarId: 2,
-          },
-          {
-            Id: 3,
-            Name: "Von",
-            Longitude: -89.4091,
-            Latitude: 43.0632,
-            AssignedCarId: 2,
-          },
-        ],
-      },
-      { Id: 3, Name: "Kent", Passengers: [] },
-      {
-        Id: 4,
-        Name: "Alex",
-        Passengers: [
-          {
-            Id: 6,
-            Name: "Stu",
-            Longitude: -89.3904,
-            Latitude: 43.0748,
-            AssignedCarId: 4,
-          },
-        ],
-      },
-    ],
-    assigned: [
-      [7, 2],
-      [3, 2],
-      [6, 4],
-    ],
-  };
-
   const [dragObj, setDragObj] = useState(null);
-  const [data, setData] = useState(input);
+  const [data, setData] = useState({
+    unassigned: [],
+    carNextId: 1,
+    cars: [],
+    assigned: [],
+  });
+
+  const { state } = useLocation();
+  useEffect(() => {
+    if (state) {
+      const selected = state.selected.map((s) => ({
+        Id: s.UserId,
+        Name: s.Name,
+        Latitude: s.Latitude,
+        Longitude: s.Longitude,
+        AssignedCarId: -1,
+      }));
+      const newData = {
+        unassigned: selected,
+        carNextId: 1,
+        cars: [],
+        assigned: [],
+      };
+      setData(newData);
+    }
+  }, []);
 
   function handleDragEnd({ over }) {
     if (over) {
@@ -259,10 +205,9 @@ export default function CarAssignment() {
     setData(newData);
   }
 
-  function handleAddCar(e) {
-    // should probably ask for name
-    const defaultName = "John Smith";
-    const newCar = { Id: data.carNextId, Name: defaultName, Passengers: [] };
+  function handleAddCar(carName) {
+    const Name = carName ? carName : "Smith";
+    const newCar = { Id: data.carNextId, Name: Name, Passengers: [] };
     const newCars = [...data.cars, newCar];
     const newCarNextId = data.carNextId + 1;
 
@@ -284,7 +229,8 @@ export default function CarAssignment() {
         <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
           <div className={styles.people}>
             <p>People</p>
-            <button onClick={handleAddUser}>Add User</button>
+            <BSModal buttonName={"Add User"} submitFcn={handleAddUser} />
+
             {data.unassigned.map((p, index) => (
               <Passenger key={index} id={p.Id}>
                 {p.Name}
@@ -293,7 +239,7 @@ export default function CarAssignment() {
           </div>
           <div className={styles.cars}>
             <p>Car</p>
-            <button onClick={handleAddCar}>Add Car</button>
+            <AddCar fcn={handleAddCar} />
             <div className={styles.carLst}>
               {data.cars.map((car, index) => (
                 <Car key={index} id={car.Id} driver={car.Name}>

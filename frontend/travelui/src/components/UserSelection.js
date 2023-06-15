@@ -23,7 +23,6 @@ export default function UserSelection() {
           setSelected(newSelected);
         }
       }
-
       return index === i ? !item : item;
     });
     setCheckedState(updatedCheckedState);
