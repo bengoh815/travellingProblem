@@ -147,7 +147,6 @@ export default class Users extends Component {
       UsersAddress,
       UsersName,
     } = this.state;
-    console.log(Users);
     return (
       <div>
         <button

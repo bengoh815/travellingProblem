@@ -1,33 +1,40 @@
 import { useState, useEffect } from "react";
 import { variables } from "../Variables";
 import styles from "../styles/UserSelection.module.css";
+import { Link } from "react-router-dom";
 
 export default function UserSelection() {
   const [users, setUsers] = useState([]);
   const [checkedState, setCheckedState] = useState([]);
   const [selected, setSelected] = useState([]);
 
-  function handleSelected(i, id) {
-    if (selected.find((e) => e === id)) {
-      const newSelected = selected.filter((e) => e !== id);
-      setSelected(newSelected);
-    } else {
-      const newSelected = [...selected, id];
-      setSelected(newSelected);
-    }
+  function handleSelected(i, user) {
+    const updatedCheckedState = checkedState.map((item, index) => {
+      if (index === i) {
+        if (!item) {
+          // turning true
+          // add to selected
+          const newSelected = [...selected, user];
+          setSelected(newSelected);
+        } else {
+          // turning false
+          // remove from selected
+          const newSelected = selected.filter((e) => e.id !== user.id);
+          setSelected(newSelected);
+        }
+      }
 
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === i ? !item : item
-    );
+      return index === i ? !item : item;
+    });
     setCheckedState(updatedCheckedState);
   }
 
-  function handleSubmit() {
-    const sendData = selected.map((id) => users.find((e) => e.UserId === id));
-    // console.log(selected);
-    console.log(sendData);
-    setCheckedState(new Array(users.length).fill(false));
-  }
+  // function handleSubmit() {
+  //   const sendData = selected.map((id) => users.find((e) => e.UserId === id));
+  //   // console.log(selected);
+  //   console.log(sendData);
+  //   setCheckedState(new Array(users.length).fill(false));
+  // }
 
   async function fetchUsers() {
     const response = await fetch(variables.API_URL + "users");
@@ -66,16 +73,16 @@ export default function UserSelection() {
                   type="checkbox"
                   id={user.UserId}
                   checked={checkedState[index]}
-                  onChange={() => handleSelected(index, user.UserId)}
+                  onChange={() => handleSelected(index, user)}
                 />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button type="submit" onClick={handleSubmit}>
+      <Link to="/carassignment" state={{ selected: selected }}>
         Next
-      </button>
+      </Link>
     </div>
   );
 }

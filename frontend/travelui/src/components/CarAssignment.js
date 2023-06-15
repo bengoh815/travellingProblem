@@ -4,11 +4,15 @@ import Passenger from "./Passenger";
 import Car from "./Car";
 import Modal from "./Modal";
 import Map from "./Map";
+import { useLocation } from "react-router-dom";
 
 import styles from "../styles/CarAssignment.module.css";
 
 export default function CarAssignment() {
   // Get data from somehow
+  const { state } = useLocation();
+  console.log(state);
+
   const input = {
     passengers: [],
     unassigned: [
