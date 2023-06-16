@@ -8,12 +8,15 @@ export default function AddCar(props) {
     setCarName(e.target.value);
   };
 
-  const target = "AddCarModal";
+  const target = "AddCar".concat("Modal");
   const label = target + "label";
   const buttonName = "Add Car";
   const title = "Add Car";
   const submitButton = "Save changes";
-  const submitFcn = props.fcn;
+  const submitFcn = () => {
+    props.fcn(carName);
+    setCarName("");
+  };
   return (
     <div>
       <button
@@ -67,7 +70,7 @@ export default function AddCar(props) {
                 type="button"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
-                onClick={() => submitFcn(carName)}
+                onClick={submitFcn}
               >
                 {submitButton}
               </button>

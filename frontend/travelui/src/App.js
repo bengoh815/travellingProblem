@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Alias from "./components/Alias";
 import Users from "./components/Users";
-import UserSelection from "./components/UserSelection";
 import CarAssignment from "./components/CarAssignment";
 
 export default function App() {
@@ -17,7 +16,6 @@ export default function App() {
         <br />
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/userselection" element={<UserSelection />} />
           <Route path="/carassignment" element={<CarAssignment />} />
           <Route path="/alias" element={<Alias />} />
           <Route path="/users" element={<Users />} />

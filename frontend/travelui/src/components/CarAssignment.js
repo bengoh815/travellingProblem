@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { DndContext } from "@dnd-kit/core";
 import Passenger from "./Passenger";
 import Car from "./Car";
-import BSModal from "./BSModal";
 import Map from "./Map";
-import { useLocation } from "react-router-dom";
+import AddCar from "./buttons/AddCar";
+import AddUser from "./buttons/AddUser";
 
 import styles from "../styles/CarAssignment.module.css";
-import AddCar from "./buttons/AddCar";
 
 export default function CarAssignment() {
   // Get data from somehow
@@ -22,13 +22,7 @@ export default function CarAssignment() {
   const { state } = useLocation();
   useEffect(() => {
     if (state) {
-      const selected = state.selected.map((s) => ({
-        Id: s.UserId,
-        Name: s.Name,
-        Latitude: s.Latitude,
-        Longitude: s.Longitude,
-        AssignedCarId: -1,
-      }));
+      const selected = state.selected;
       const newData = {
         unassigned: selected,
         carNextId: 1,
@@ -191,16 +185,30 @@ export default function CarAssignment() {
     setDragObj(e.active.id);
   }
 
-  function handleAddUser(e) {
-    // TODO get user from db
-    const newUser = {
-      Id: 125235,
-      Name: "Clone",
-      Longitude: -89.3966,
-      Latitude: 43.0763,
-      AssignedCarId: -11,
-    };
-    const newUnassigned = [...data.unassigned, newUser];
+  function handleAddUsers(users) {
+    const midUsers = users.map((s) => ({
+      Id: s.UserId,
+      Name: s.Name,
+      Latitude: s.Latitude,
+      Longitude: s.Longitude,
+      AssignedCarId: -1,
+    }));
+
+    // no duplicates
+    // get all passengers
+    let allUsers = [...data.unassigned];
+    for (const c of data.cars) {
+      allUsers = allUsers.concat(c.Passengers);
+    }
+
+    // filter out from incoming users
+    let newUsers = midUsers;
+    for (const p of allUsers) {
+      newUsers = newUsers.filter((e) => e.Id !== p.Id);
+    }
+
+    // update data
+    const newUnassigned = data.unassigned.concat(newUsers);
     const newData = { ...data, unassigned: newUnassigned };
     setData(newData);
   }
@@ -219,9 +227,6 @@ export default function CarAssignment() {
   return (
     <div className={styles.container}>
       <h3>Car Assignment</h3>
-
-      {/* <Modal></Modal> */}
-
       <div className={styles.map}>
         <Map data={data}></Map>
       </div>
@@ -229,7 +234,7 @@ export default function CarAssignment() {
         <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
           <div className={styles.people}>
             <p>People</p>
-            <BSModal buttonName={"Add User"} submitFcn={handleAddUser} />
+            <AddUser fcn={handleAddUsers} />
 
             {data.unassigned.map((p, index) => (
               <Passenger key={index} id={p.Id}>

@@ -4,6 +4,3 @@ env/
 # misc
 .DS_STORE
 .vscode
-
-# db
-*.sqlite3

@@ -1,12 +1,20 @@
 // mainly served as a copy paste template
 
 export default function BSModal(props) {
-  const target = props.target ? props.target : "templateModal";
+  // const target = props.target ? props.target : "templateModal";
+  // const label = target + "label";
+  // const buttonName = props.buttonName ? props.buttonName : "Open Modal";
+  // const title = props.title ? props.title : "Title";
+  // const submitButton = props.submitButton ? props.submitButton : "Save changes";
+  // const submitFcn = props.submitFcn ? props.submitFcn : () => {};
+
+  const target = "template".concat("Modal");
   const label = target + "label";
-  const buttonName = props.buttonName ? props.buttonName : "Open Modal";
-  const title = props.title ? props.title : "Title";
-  const submitButton = props.submitButton ? props.submitButton : "Save changes";
-  const submitFcn = props.submitFcn ? props.submitFcn : () => {};
+  const buttonName = "Open Modal";
+  const title = "Title";
+  const submitButton = "Save changes";
+  const submitFcn = () => {};
+
   return (
     <div>
       <button
