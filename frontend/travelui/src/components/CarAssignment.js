@@ -8,30 +8,25 @@ import AddCar from "./buttons/AddCar";
 import AddUser from "./buttons/AddUser";
 
 import styles from "../styles/CarAssignment.module.css";
+import DeleteUsers from "./buttons/DeleteUsers";
 
 export default function CarAssignment() {
   // Get data from somehow
   const [dragObj, setDragObj] = useState(null);
   const [data, setData] = useState({
-    unassigned: [],
+    unassigned: [
+      {
+        Id: 12,
+        Name: "Bradford",
+        Longitude: -89.4275,
+        Latitude: 43.0756,
+        AssignedCarId: -1,
+      },
+    ],
     carNextId: 1,
-    cars: [],
+    cars: [{ Id: 0, Name: "Delete", Passengers: [] }],
     assigned: [],
   });
-
-  const { state } = useLocation();
-  useEffect(() => {
-    if (state) {
-      const selected = state.selected;
-      const newData = {
-        unassigned: selected,
-        carNextId: 1,
-        cars: [],
-        assigned: [],
-      };
-      setData(newData);
-    }
-  }, []);
 
   function handleDragEnd({ over }) {
     if (over) {
@@ -245,16 +240,22 @@ export default function CarAssignment() {
           <div className={styles.cars}>
             <p>Car</p>
             <AddCar fcn={handleAddCar} />
+            <DeleteUsers id={-1} className="btn btn-light mr-1" />
             <div className={styles.carLst}>
-              {data.cars.map((car, index) => (
-                <Car key={index} id={car.Id} driver={car.Name}>
-                  {car.Passengers.map((p, i) => (
-                    <Passenger key={i} id={p.Id}>
-                      {p.Name}
-                    </Passenger>
-                  ))}
-                </Car>
-              ))}
+              {data.cars.map((car, index) => {
+                if (index === 0) {
+                  return <div key={index}></div>;
+                }
+                return (
+                  <Car key={index} id={car.Id} driver={car.Name}>
+                    {car.Passengers.map((p, i) => (
+                      <Passenger key={i} id={p.Id}>
+                        {p.Name}
+                      </Passenger>
+                    ))}
+                  </Car>
+                );
+              })}
             </div>
           </div>
         </DndContext>

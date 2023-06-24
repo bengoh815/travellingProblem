@@ -20,6 +20,7 @@ export default class Users extends Component {
     fetch(variables.API_URL + "users")
       .then((response) => response.json())
       .then((data) => {
+        console.log(JSON.stringify(data));
         this.setState({ Users: data, UsersWithoutFilter: data });
       });
   }
