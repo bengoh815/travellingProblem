@@ -1,6 +1,9 @@
 # environment
-env/
+*.env
 
 # misc
-.DS_STORE
-.vscode
+*.DS_STORE
+*.vscode
+
+# dependencies
+*/node_modules
