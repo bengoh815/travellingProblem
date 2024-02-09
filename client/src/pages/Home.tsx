@@ -1,12 +1,28 @@
 import Navbar from "../components/Navbar";
-import Typography from "@mui/material/Typography";
+import { Box, Link, Typography } from "@mui/material";
 
 export default function Home() {
   return (
-    <div>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Navbar />
-      <Typography>Family Group Ride Organizer</Typography>
-      <Typography>Come join us now!</Typography>
-    </div>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "90vh",
+        }}
+      >
+        <Typography
+          sx={{ fontSize: "4rem", textAlign: "center", mx: "auto", mb: 2 }}
+        >
+          Family Group Ride Organizer
+        </Typography>
+        <Typography sx={{ fontSize: "2rem", textAlign: "center" }}>
+          Come <Link>join us now</Link>!
+        </Typography>
+      </Box>
+    </Box>
   );
 }
