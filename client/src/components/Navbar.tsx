@@ -1,24 +1,30 @@
 import { Link } from "react-router-dom";
-import { Box, Button } from "@mui/material";
+import { Box, Button, styled } from "@mui/material";
+
+const StyledButton = styled(Button)({
+  fontSize: "1rem",
+});
 
 export default function Navbar() {
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-      <Box sx={{ display: "flex" }}>
-        <Button component={Link} to="/" sx={{ fontSize: "1rem" }}>
-          Home
-        </Button>
-        <Button component={Link} to="/about">
-          About
-        </Button>
+    <Box
+      sx={{ height: "5vh", display: "flex", justifyContent: "space-between" }}
+    >
+      <Box sx={{ display: "flex", gap: 2 }}>
+        <Link to="/">
+          <StyledButton>Home</StyledButton>
+        </Link>
+        <Link to="/about">
+          <StyledButton>About</StyledButton>
+        </Link>
       </Box>
       <Box sx={{ display: "flex" }}>
-        <Button component={Link} to="/login">
-          Log in
-        </Button>
-        <Button component={Link} to="/signup">
-          Sign up
-        </Button>
+        <Link to="/login">
+          <StyledButton>Log in</StyledButton>
+        </Link>
+        <Link to="/signup">
+          <StyledButton>Sign up</StyledButton>
+        </Link>
       </Box>
     </Box>
   );
