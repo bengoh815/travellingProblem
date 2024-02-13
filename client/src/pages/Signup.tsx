@@ -5,8 +5,9 @@ import {
   Box,
   Button,
   FormControl,
+  Input,
   InputLabel,
-  TextField,
+  Paper,
   Typography,
 } from "@mui/material";
 
@@ -57,71 +58,85 @@ export default function Signup() {
             justifyContent: "center",
           }}
         >
-          <Typography sx={{ textAlign: "center" }}>
-            Sign up and join the fun!
-          </Typography>
-          <form onSubmit={handleSubmit}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                gap: 2,
-              }}
-            >
-              <Box>
-                <TextField
-                  id="su-fn"
-                  name="firstName"
-                  label="First Name"
-                  variant="standard"
-                  value={formState.firstName}
-                  onChange={handleFormChange}
-                />
-                <TextField
-                  id="su-ln"
-                  name="lastName"
-                  label="Last Name"
-                  variant="standard"
-                  value={formState.lastName}
-                  onChange={handleFormChange}
-                />
-              </Box>
-              <TextField
-                id="su-e"
-                name="email"
-                label="Email"
-                variant="standard"
-                value={formState.email}
-                onChange={handleFormChange}
-              />
-              <FormControl>
-                <TextField
-                  id="su-p"
-                  name="password"
-                  type="password"
-                  label="Password"
-                  variant="standard"
-                  value={formState.password}
-                  onChange={handleFormChange}
-                />
-              </FormControl>
-              <FormControl>
-                <TextField
-                  id="su-cp"
-                  name="confirmPassword"
-                  type="password"
-                  label="Confirm Password"
-                  variant="standard"
-                  value={formState.confirmPassword}
-                  onChange={handleFormChange}
-                />
-              </FormControl>
-            </Box>
-            {error && <Typography color="error">{error}</Typography>}
+          <Paper sx={{ p: 3, borderRadius: 5 }}>
+            <Typography variant="h5" sx={{ my: 4, textAlign: "center" }}>
+              Sign up and join the fun!
+            </Typography>
+            <form onSubmit={handleSubmit}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: 3,
+                  m: 2,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 2,
+                  }}
+                >
+                  <FormControl>
+                    <InputLabel htmlFor="su-fn">First Name</InputLabel>
+                    <Input
+                      id="su-fn"
+                      name="firstName"
+                      type="text"
+                      value={formState.firstName}
+                      onChange={handleFormChange}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputLabel htmlFor="su-ln">Last Name</InputLabel>
+                    <Input
+                      id="su-ln"
+                      name="lastName"
+                      type="text"
+                      value={formState.lastName}
+                      onChange={handleFormChange}
+                    />
+                  </FormControl>
+                </Box>
+                <FormControl>
+                  <InputLabel htmlFor="su-e">Email</InputLabel>
+                  <Input
+                    id="su-e"
+                    name="email"
+                    type="text"
+                    value={formState.email}
+                    onChange={handleFormChange}
+                  />
+                </FormControl>
+                <FormControl>
+                  <InputLabel htmlFor="su-p">Password</InputLabel>
+                  <Input
+                    id="su-p"
+                    name="password"
+                    type="password"
+                    value={formState.password}
+                    onChange={handleFormChange}
+                  />
+                </FormControl>
+                <FormControl>
+                  <InputLabel htmlFor="su-cp">Confirm Password</InputLabel>
+                  <Input
+                    id="su-cp"
+                    name="confirmPassword"
+                    type="password"
+                    value={formState.confirmPassword}
+                    onChange={handleFormChange}
+                  />
+                </FormControl>
+                {error && <Typography color="error">{error}</Typography>}
 
-            <Button type="submit">Sign up</Button>
-          </form>
+                <Button variant="contained" type="submit" sx={{ mt: 5 }}>
+                  Sign up
+                </Button>
+              </Box>
+            </form>
+          </Paper>
         </Box>
       </Box>
     </Box>
