@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 
 export default function Home() {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", p: 0 }}>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Navbar />
       <Box
         sx={{
