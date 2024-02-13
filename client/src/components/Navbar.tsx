@@ -10,7 +10,7 @@ export default function Navbar() {
     <Box
       sx={{ height: "5vh", display: "flex", justifyContent: "space-between" }}
     >
-      <Box sx={{ display: "flex", gap: 2 }}>
+      <Box sx={{ display: "flex", p: 1, gap: 2 }}>
         <Link to="/">
           <StyledButton>Home</StyledButton>
         </Link>
@@ -18,7 +18,7 @@ export default function Navbar() {
           <StyledButton>About</StyledButton>
         </Link>
       </Box>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", p: 1, gap: 2 }}>
         <Link to="/login">
           <StyledButton>Log in</StyledButton>
         </Link>
