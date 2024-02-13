@@ -3,16 +3,16 @@ import { Box, Button } from "@mui/material";
 
 export default function Navbar() {
   return (
-    <Box display="flex" justifyContent={"space-between"}>
-      <Box display="flex">
-        <Button component={Link} to="/">
+    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ display: "flex" }}>
+        <Button component={Link} to="/" sx={{ fontSize: "1rem" }}>
           Home
         </Button>
         <Button component={Link} to="/about">
           About
         </Button>
       </Box>
-      <Box display="flex">
+      <Box sx={{ display: "flex" }}>
         <Button component={Link} to="/login">
           Log in
         </Button>

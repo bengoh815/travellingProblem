@@ -5,7 +5,16 @@ export default function Login() {
   return (
     <Box>
       <Navbar />
-      This is the log in page
+      <Box
+        sx={{
+          minHeight: "90vh",
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        <Box sx={{ display: "flex", bgcolor: "red" }}></Box>
+      </Box>
     </Box>
   );
 }

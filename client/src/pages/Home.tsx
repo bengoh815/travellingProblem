@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
+import { Box, Link as MuiLink, Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
-import { Box, Link, Typography } from "@mui/material";
 
 export default function Home() {
   return (
@@ -20,7 +21,11 @@ export default function Home() {
           Family Group Ride Organizer
         </Typography>
         <Typography sx={{ fontSize: "2rem", textAlign: "center" }}>
-          Come <Link>join us now</Link>!
+          Come{" "}
+          <MuiLink component={Link} to="/signup">
+            join us now
+          </MuiLink>
+          !
         </Typography>
       </Box>
     </Box>
