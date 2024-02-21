@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Box, Button, styled } from "@mui/material";
+import { Box, Button, Divider, styled } from "@mui/material";
 
 const StyledButton = styled(Button)({
   fontSize: "1rem",
@@ -16,6 +16,13 @@ export default function Navbar() {
         </Link>
         <Link to="/about">
           <StyledButton>About</StyledButton>
+        </Link>
+        <Divider orientation="vertical" />
+        <Link to="/dashboard/host">
+          <StyledButton>host Dashboard</StyledButton>
+        </Link>
+        <Link to="/dashboard/admin">
+          <StyledButton>Admin Dashboard</StyledButton>
         </Link>
       </Box>
       <Box sx={{ display: "flex", p: 1, gap: 2 }}>
