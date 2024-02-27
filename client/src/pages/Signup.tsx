@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function Signup() {
+const Signup = () => {
   const defaultUser: Pick<User, "firstName" | "lastName" | "email"> & {
     password: string;
     confirmPassword: string;
@@ -141,4 +141,6 @@ export default function Signup() {
       </Box>
     </Box>
   );
-}
+};
+
+export default Signup;

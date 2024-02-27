@@ -1,23 +1,7 @@
-import { Box, Grid, Typography, TypographyProps } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Grid, Typography } from "@mui/material";
+import StyledLink from "../components/StyledLink";
 
-const StyledTypography: React.FC<TypographyProps> = ({ children }) => {
-  return (
-    <Typography
-      variant="body1"
-      component={Link}
-      to="/signup"
-      color="primary"
-      sx={{
-        textDecoration: "none",
-      }}
-    >
-      {children}
-    </Typography>
-  );
-};
-
-export default function Error() {
+const Error = () => {
   return (
     <Grid
       container
@@ -33,12 +17,14 @@ export default function Error() {
           Here are some helpful links:
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-          <StyledTypography>Home</StyledTypography>
-          <StyledTypography>About</StyledTypography>
-          <StyledTypography>Log in</StyledTypography>
-          <StyledTypography>Sign up</StyledTypography>
+          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/about">About</StyledLink>
+          <StyledLink to="/login">Log in</StyledLink>
+          <StyledLink to="/signup">Sign up</StyledLink>
         </Box>
       </Grid>
     </Grid>
   );
-}
+};
+
+export default Error;

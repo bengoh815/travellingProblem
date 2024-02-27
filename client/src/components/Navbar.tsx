@@ -1,38 +1,24 @@
-import { Link } from "react-router-dom";
-import { Box, Button, Divider, styled } from "@mui/material";
+import { Box, Divider } from "@mui/material";
+import StyledLink from "./StyledLink";
 
-const StyledButton = styled(Button)({
-  fontSize: "1rem",
-});
-
-export default function Navbar() {
+const Navbar = () => {
   return (
     <Box
       sx={{ height: "5vh", display: "flex", justifyContent: "space-between" }}
     >
       <Box sx={{ display: "flex", p: 1, gap: 2 }}>
-        <Link to="/">
-          <StyledButton>Home</StyledButton>
-        </Link>
-        <Link to="/about">
-          <StyledButton>About</StyledButton>
-        </Link>
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/about">About</StyledLink>
         <Divider orientation="vertical" />
-        <Link to="/dashboard/host">
-          <StyledButton>host Dashboard</StyledButton>
-        </Link>
-        <Link to="/dashboard/admin">
-          <StyledButton>Admin Dashboard</StyledButton>
-        </Link>
+        <StyledLink to="/dashboard/host">Host Dashboard</StyledLink>
+        <StyledLink to="/dashboard/admin">Admin Dashboard</StyledLink>
+        <StyledLink to="/playground">Playground</StyledLink>
       </Box>
       <Box sx={{ display: "flex", p: 1, gap: 2 }}>
-        <Link to="/login">
-          <StyledButton>Log in</StyledButton>
-        </Link>
-        <Link to="/signup">
-          <StyledButton>Sign up</StyledButton>
-        </Link>
+        <StyledLink to="/login">Log in</StyledLink>
+        <StyledLink to="/signup">Sign up</StyledLink>
       </Box>
     </Box>
   );
-}
+};
+export default Navbar;

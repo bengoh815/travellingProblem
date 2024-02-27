@@ -7,6 +7,8 @@ export type User = {
   isAdmin: boolean;
 };
 
-export default function Profile() {
+const Profile = () => {
   return <div>This is profile page </div>;
-}
+};
+
+export default Profile;

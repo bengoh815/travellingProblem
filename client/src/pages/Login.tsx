@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function Login() {
+const Login = () => {
   const defaultUser: Pick<User, "email"> & {
     password: string;
   } = {
@@ -97,4 +97,6 @@ export default function Login() {
       </Box>
     </Box>
   );
-}
+};
+
+export default Login;
