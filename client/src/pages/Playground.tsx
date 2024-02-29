@@ -1,10 +1,21 @@
 import { Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 const Playground = () => {
+  const getBackend = axios
+    .get("http://backend:5000/")
+    .then((response) => {
+      console.log("Response data:", response.data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
   return (
     <div>
       <Navbar />
+      {getBackend + ""}
       <Typography variant="body1">'body1'</Typography>
       <Typography variant="body2">'body2'</Typography>
       <Typography variant="button">'button'</Typography>
