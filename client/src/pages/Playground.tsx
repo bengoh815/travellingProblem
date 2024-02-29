@@ -1,14 +1,15 @@
 import { Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { useState } from "react";
 
 const Playground = () => {
-  const smtg: any = [];
-  const getBackend = axios
+  const [message, setMessage] = useState("");
+  axios
     .get("http://backend:5000/")
     .then((response) => {
-      smtg.push(response.data);
       console.log("Response data:", response.data);
+      setMessage(response.data);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -17,9 +18,8 @@ const Playground = () => {
   return (
     <div>
       <Navbar />
-      {getBackend + ""}
       <div>
-        there is something here {">>"} {smtg}
+        there is something here {">>"} {message}
       </div>
       <Typography variant="body1">'body1'</Typography>
       <Typography variant="body2">'body2'</Typography>
