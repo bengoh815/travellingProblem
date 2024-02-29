@@ -1,19 +1,21 @@
 import { Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Playground = () => {
   const [message, setMessage] = useState("");
-  axios
-    .get("http://backend:5000/")
-    .then((response) => {
-      console.log("Response data:", response.data);
-      setMessage(response.data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/")
+      .then((response) => {
+        console.log("Response data:", response.data);
+        setMessage(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
 
   return (
     <div>
