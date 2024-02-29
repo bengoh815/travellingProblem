@@ -3,9 +3,11 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 
 const Playground = () => {
+  const smtg: any = [];
   const getBackend = axios
     .get("http://backend:5000/")
     .then((response) => {
+      smtg.push(response.data);
       console.log("Response data:", response.data);
     })
     .catch((error) => {
@@ -16,6 +18,9 @@ const Playground = () => {
     <div>
       <Navbar />
       {getBackend + ""}
+      <div>
+        there is something here {">>"} {smtg}
+      </div>
       <Typography variant="body1">'body1'</Typography>
       <Typography variant="body2">'body2'</Typography>
       <Typography variant="button">'button'</Typography>

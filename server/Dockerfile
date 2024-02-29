@@ -2,7 +2,7 @@
 FROM node:14
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /server/app
 
 # Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
@@ -13,12 +13,11 @@ RUN npm install
 # Bundle your app's source code inside the Docker image
 COPY . .
 
-RUN npm run build && ls /app/dist
-
 RUN npm run build
+RUN ls dist
 
 # Expose the port your app runs on
-EXPOSE 3000
+EXPOSE 5000
 
 # Define the command to run your app
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/server.js"]

@@ -2,7 +2,7 @@
 FROM node:14
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /client/app
 
 # Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
