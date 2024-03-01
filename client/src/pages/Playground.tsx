@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 const Playground = () => {
   const [message, setMessage] = useState("");
+  const [anotherMessage, setAnotherMessage] = useState("");
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/")
@@ -15,13 +17,24 @@ const Playground = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
+
+    axios
+      .get("http://backend:5000/")
+      .then((response) => {
+        console.log("Response data:", response.data);
+        setAnotherMessage(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }, []);
 
   return (
     <div>
       <Navbar />
       <div>
-        there is something here {">>"} {message}
+        there is localhost here {">>"} {message}
+        there is backend here {">>"} {anotherMessage}
       </div>
       <Typography variant="body1">'body1'</Typography>
       <Typography variant="body2">'body2'</Typography>

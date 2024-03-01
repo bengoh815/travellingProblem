@@ -6,7 +6,13 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+    # network:
+    #   - something
   backend:
-    build: ./server
+    build: ./services/server
     ports:
       - "5000:5000"
+    # network:
+    #   - something
+# networks:
+#   something:
