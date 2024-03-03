@@ -1,12 +1,12 @@
 import Navbar from "../components/Navbar";
 
-const UserDashboard = () => {
+const OrgDashboard = () => {
   return (
     <div>
       <Navbar />
-      This is a user dashboard.
+      This is organizer dashboard
     </div>
   );
 };
 
-export default UserDashboard;
+export default OrgDashboard;

@@ -8,6 +8,7 @@ import HostDashboard from "./pages/HostDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Error from "./pages/Error";
 import Playground from "./pages/Playground";
+import OrgDashboard from "./pages/OrgDashboard";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<UserDashboard />} />
         <Route path="/dashboard/host" element={<HostDashboard />} />
+        <Route path="/dashboard/organizer" element={<OrgDashboard />} />
         <Route path="/dashboard/admin" element={<AdminDashboard />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="*" element={<Error />} />

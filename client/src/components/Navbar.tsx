@@ -10,8 +10,10 @@ const Navbar = () => {
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/about">About</StyledLink>
         <Divider orientation="vertical" />
-        <StyledLink to="/dashboard/host">Host Dashboard</StyledLink>
-        <StyledLink to="/dashboard/admin">Admin Dashboard</StyledLink>
+        <StyledLink to="/dashboard">Dashboard</StyledLink>
+        <StyledLink to="/dashboard/host">Host</StyledLink>
+        <StyledLink to="/dashboard/organizer">Organizer</StyledLink>
+        <StyledLink to="/dashboard/admin">Admin</StyledLink>
         <StyledLink to="/playground">Playground</StyledLink>
       </Box>
       <Box sx={{ display: "flex", p: 1, gap: 2 }}>

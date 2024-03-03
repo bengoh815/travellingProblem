@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Navbar from "../components/Navbar";
 
 const HostDashboard = () => {
   // Host does all the organizing
@@ -18,6 +19,7 @@ const HostDashboard = () => {
 
   return (
     <Box sx={{ height: "98vh", width: "99vw", background: "azure" }}>
+      <Navbar />
       <Typography>Host Dashbaord</Typography>
       <Box sx={{ width: "30%", p: 1, pt: 2 }}>
         <FormControl fullWidth>
