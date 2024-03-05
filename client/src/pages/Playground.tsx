@@ -34,6 +34,7 @@ const Playground = () => {
       <Navbar />
       <div>
         there is localhost here {">>"} {message}
+        <br />
         there is backend here {">>"} {anotherMessage}
       </div>
       <Typography variant="body1">'body1'</Typography>
