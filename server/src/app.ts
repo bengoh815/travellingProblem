@@ -12,7 +12,7 @@ const corsOptions: cors.CorsOptions = {
 };
 
 // Routes
-app.get("/", cors(corsOptions), (req, res) => res.send("Hello world!asdfsd"));
+app.get("/", cors(corsOptions), (req, res) => res.send("Hello world!"));
 app.use("/api", usersRouter);
 
 export default app;

@@ -1,3 +1,4 @@
+import { Check, Close } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -11,24 +12,13 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-type Applications = {
+export type Applications = {
   firstName: string;
   lastName: string;
   appType: string;
   decision: number;
   //   0 = pending, 1 = approved, 2 = denied
 };
-
-function createData(
-  firstName: string,
-  lastName: string,
-  appType: string,
-  decision: number
-) {
-  return { firstName, lastName, appType, decision };
-}
-
-const fakeData: Applications[] = [createData("Kent", "Jennefier", "Driver", 0)];
 
 const Options = ({
   state,
@@ -45,6 +35,7 @@ const Options = ({
             variant="contained"
             color="success"
             onClick={() => handleDecision(0)}
+            endIcon={<Check />}
           >
             Approved
           </Button>
@@ -58,6 +49,7 @@ const Options = ({
             variant="contained"
             color="error"
             onClick={() => handleDecision(0)}
+            endIcon={<Close />}
           >
             Denied
           </Button>
@@ -70,6 +62,7 @@ const Options = ({
             variant="contained"
             color="success"
             onClick={() => handleDecision(1)}
+            endIcon={<Check />}
           >
             Approve
           </Button>
@@ -77,6 +70,7 @@ const Options = ({
             variant="contained"
             color="error"
             onClick={() => handleDecision(2)}
+            endIcon={<Close />}
           >
             Deny
           </Button>
@@ -85,7 +79,11 @@ const Options = ({
   }
 };
 
-const AppsTable = () => {
+interface AppsTableProps {
+  data: Applications[];
+}
+
+const AppsTable: React.FC<AppsTableProps> = ({ data }) => {
   const [decision, setDecision] = useState(0);
 
   const handleDecision = (n: number) => {
@@ -103,7 +101,7 @@ const AppsTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {fakeData.map((a) => {
+          {data.map((a) => {
             return (
               <TableRow>
                 <TableCell>

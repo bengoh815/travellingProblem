@@ -4,7 +4,7 @@ const DriverDashboard = () => {
   return (
     <div>
       <Navbar />
-      This is Drivaslfkjsahgldsjkghlsdjghsadlkfgjdsher dashboard
+      This is Driver dashboard
     </div>
   );
 };
