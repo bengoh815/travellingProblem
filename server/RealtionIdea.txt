@@ -1,0 +1,45 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+
+Table users {
+  id integer [primary key]
+  email varchar
+  username varchar
+  password varchar
+  role varchar
+  created_at timestamp
+}
+
+Table events {
+  id integer [primary key]
+  organizer integer
+
+  created_at timestamp
+}
+Ref: events.id > users.id
+
+Table participates {
+  id integer [primary key]
+  participant integer
+  event integer
+  created_at timestamp
+}
+Ref: participates.participant > users.id
+Ref: participates.event > events.id
+
+Table rides {
+  id integer [primary key]
+  eventId integer
+  passengerId integer
+  carId integer 
+}
+Ref: rides.eventId > events.id
+Ref: rides.passengerId > users.id
+Ref: rides.carId > cars.id
+
+Table cars {
+  id integer [primary key]
+  owner integer
+}
+Ref: cars.owner > users.id
