@@ -15,7 +15,7 @@ Doxa Ride Finder is a full-stack application designed to streamline the process 
 
 To install Doxa Ride Finder, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/doxa-ride-finder.git`
+1. Clone the repository: `git clone https://github.com/bengoh815/travellingProblem.git`
 2. Navigate to the project directory: `cd doxa-ride-finder`
 3. Install dependencies: `npm install`
 4. Set up the environment variables.
