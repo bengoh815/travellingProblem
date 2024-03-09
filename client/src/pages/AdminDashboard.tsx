@@ -8,24 +8,42 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Navbar from "../components/Navbar";
 import StyledTable from "../components/Table";
-import AppsTable, { Applications } from "../components/AppsTable";
+import AppsTable from "../components/AppsTable";
+import { ApplicationDecision, Applications } from "../models/application.types";
+import { User, UserRoles } from "../models/user.types";
 
 function createData(
   firstName: string,
   lastName: string,
-  appType: string,
+  appType: UserRoles,
   decision: number
 ) {
-  return { firstName, lastName, appType, decision };
+  const user: User = {
+    id: 0,
+    firstName,
+    lastName,
+    email: "",
+    password: "",
+    roles: [],
+  };
+  return { id: 0, user, appType, decision };
 }
 
-const fakeData: Applications[] = [createData("Kent", "Jennefier", "Driver", 0)];
+const fakeData: Applications[] = [
+  createData(
+    "Kent",
+    "Jennefier",
+    UserRoles.Driver,
+    ApplicationDecision.Pending
+  ),
+];
 
 const AdminDashboard = () => {
   return (
     <div>
       <Navbar />
       <Box sx={{ p: 3 }}>
+        <div>Want to see growth, google api usage, overall events/groups</div>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>Driver Application</Typography>

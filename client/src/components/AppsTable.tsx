@@ -11,14 +11,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { useState } from "react";
-
-export type Applications = {
-  firstName: string;
-  lastName: string;
-  appType: string;
-  decision: number;
-  //   0 = pending, 1 = approved, 2 = denied
-};
+import { Applications } from "../models/application.types";
 
 const Options = ({
   state,
@@ -105,7 +98,7 @@ const AppsTable: React.FC<AppsTableProps> = ({ data }) => {
             return (
               <TableRow>
                 <TableCell>
-                  {a.firstName}, {a.lastName}
+                  {a.user.firstName}, {a.user.lastName}
                 </TableCell>
                 <TableCell>{a.appType}</TableCell>
                 <TableCell>

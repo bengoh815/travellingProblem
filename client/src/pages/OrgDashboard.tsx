@@ -21,6 +21,8 @@ const OrgDashboard = () => {
     <Box sx={{ height: "98vh", width: "99vw", background: "azure" }}>
       <Navbar />
       <Typography>Organizer Dashbaord</Typography>
+      <div>Want to see overall event/group hosting</div>
+      <div>Want to who coming, driving, who sit who car</div>
       <Box sx={{ width: "30%", p: 1, pt: 2 }}>
         <FormControl fullWidth>
           <InputLabel id="event-select-label">Event</InputLabel>

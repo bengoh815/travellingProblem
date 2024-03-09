@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import AppsModal from "../components/AppsModal";
 
 const Playground = () => {
   const [message, setMessage] = useState("");
@@ -37,6 +38,7 @@ const Playground = () => {
         <br />
         there is backend here {">>"} {anotherMessage}
       </div>
+      <AppsModal />
       <Typography variant="body1">'body1'</Typography>
       <Typography variant="body2">'body2'</Typography>
       <Typography variant="button">'button'</Typography>
