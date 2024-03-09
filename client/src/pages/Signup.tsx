@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User } from "./Profile";
+import { User } from "../models/user.types";
 import Navbar from "../components/Navbar";
 import {
   Box,

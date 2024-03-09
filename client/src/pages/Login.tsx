@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { User } from "./Profile";
 import Navbar from "../components/Navbar";
 import {
   Box,
@@ -10,6 +9,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import { User } from "../models/user.types";
 
 const Login = () => {
   const defaultUser: Pick<User, "email"> & {

@@ -1,7 +1,14 @@
+import { User, UserRoles } from "./user.types";
+
+export enum ApplicationDecision {
+  Pending = 0,
+  Approved = 1,
+  Denied = 2,
+}
+
 export type Applications = {
-  firstName: string;
-  lastName: string;
-  appType: string;
-  decision: number;
-  //   0 = pending, 1 = approved, 2 = denied
+  id: number;
+  user: User;
+  appType: UserRoles;
+  decision: ApplicationDecision;
 };
