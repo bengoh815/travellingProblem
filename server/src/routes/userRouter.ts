@@ -1,16 +1,22 @@
 import express from "express";
-import { getUsers, postUsers } from "../controllers/userController";
+import {
+  getUsers,
+  postUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+} from "../controllers/userController";
 
 const usersRouter = express.Router();
 
-// api/v1
-// GET /api/v1/users
-usersRouter.get("/v1/users", getUsers);
+// API version prefix
+const v1 = "/api/v1";
 
-// POST /api/v1/users
-usersRouter.get("/v1/users", postUsers);
-// GET /api/v1/users/:id
-// PUT /api/v1/users/:id
-// DELETE /api/v1/users/:id
+// Routes
+usersRouter.get(`${v1}/users`, getUsers);
+usersRouter.post(`${v1}/users`, postUsers);
+usersRouter.get(`${v1}/users/:id`, getUserById);
+usersRouter.put(`${v1}/users/:id`, updateUser);
+usersRouter.delete(`${v1}/users/:id`, deleteUser);
 
 export default usersRouter;
