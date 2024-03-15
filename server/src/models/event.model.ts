@@ -1,5 +1,5 @@
-import { Ride } from "./Ride";
-import { User } from "./User";
+import { Ride } from "./ride.model";
+import { User } from "./user.model";
 
 export type Event = {
   id: number;

@@ -1,5 +1,5 @@
-import { Car } from "./Car";
-import { User } from "./User";
+import { Car } from "./car.model";
+import { User } from "./user.model";
 
 type CarRide = {
   car: Car;

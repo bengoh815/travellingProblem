@@ -1,4 +1,4 @@
-import { User, UserRoles } from "./User";
+import { User, UserRoles } from "./user.model";
 
 export enum ApplicationDecision {
   Pending = 0,
