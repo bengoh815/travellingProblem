@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
 import MembershipModel, { IMembership } from "../models/membership.model";
-import { handleError } from "../utils/errorHandle";
+import { handleError } from "../utils/errorHandler";
 
 export const getAllMemberships = async (req: Request, res: Response) => {
   try {

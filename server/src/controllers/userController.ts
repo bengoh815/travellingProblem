@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
 import User, { IUser } from "../models/user.model";
-import { handleError } from "../utils/errorHandle";
+import { handleError } from "../utils/errorHandler";
 
 export const getAllUsers = async (_req: Request, res: Response) => {
   try {

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
 import EventModel, { IEvent } from "../models/event.model";
-import { handleError } from "../utils/errorHandle";
+import { handleError } from "../utils/errorHandler";
 
 export const getAllEvents = async (req: Request, res: Response) => {
   try {

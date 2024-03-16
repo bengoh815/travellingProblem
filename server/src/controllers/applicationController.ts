@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
 import ApplicationModel, { IApplication } from "../models/application.model";
-import { handleError } from "../utils/errorHandle";
+import { handleError } from "../utils/errorHandler";
 
 export const getAllApplications = async (req: Request, res: Response) => {
   try {

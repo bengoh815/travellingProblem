@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
 import GroupModel, { IGroup } from "../models/group.model";
-import { handleError } from "../utils/errorHandle";
+import { handleError } from "../utils/errorHandler";
 
 export const getAllGroups = async (req: Request, res: Response) => {
   try {

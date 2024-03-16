@@ -1,7 +1,7 @@
 import express from "express";
 import {
-  getEvents,
-  postEvents,
+  getAllEvents,
+  createEvent,
   getEventById,
   updateEvent,
   deleteEvent,
@@ -13,8 +13,8 @@ const eventsRouter = express.Router();
 const v1 = "/api/v1";
 
 // Routes
-eventsRouter.get(`${v1}/events`, getEvents);
-eventsRouter.post(`${v1}/events`, postEvents);
+eventsRouter.get(`${v1}/events`, getAllEvents);
+eventsRouter.post(`${v1}/events`, createEvent);
 eventsRouter.get(`${v1}/events/:id`, getEventById);
 eventsRouter.put(`${v1}/events/:id`, updateEvent);
 eventsRouter.delete(`${v1}/events/:id`, deleteEvent);

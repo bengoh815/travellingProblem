@@ -9,6 +9,8 @@ import groupsRouter from "./routes/groupRoutes";
 import ridesRouter from "./routes/rideRoutes";
 import membershipRouter from "./routes/membershipRoutes";
 
+require("dotenv").config();
+
 const app = express();
 
 const corsOptions: cors.CorsOptions = {

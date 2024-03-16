@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
-import { handleError } from "../utils/errorHandle";
+import { handleError } from "../utils/errorHandler";
 import CarModel, { ICar } from "../models/car.model";
 
 export const getAllCars = async (req: Request, res: Response) => {
