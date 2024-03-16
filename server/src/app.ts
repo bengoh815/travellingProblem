@@ -7,6 +7,7 @@ import carsRouter from "./routes/carRoutes";
 import eventsRouter from "./routes/eventRoutes";
 import groupsRouter from "./routes/groupRoutes";
 import ridesRouter from "./routes/rideRoutes";
+import membershipRouter from "./routes/membershipRoutes";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(applicationsRouter);
 app.use(carsRouter);
 app.use(eventsRouter);
 app.use(groupsRouter);
+app.use(membershipRouter);
 app.use(ridesRouter);
 app.use(usersRouter);
 

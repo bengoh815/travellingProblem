@@ -1,3 +1,7 @@
+/**
+ * REMEMBER TO UPDATE FRONTEND MODELS
+ */
+
 import mongoose, { Schema, Document } from "mongoose";
 import { IUser } from "./user.model"; // Assuming you have a User model defined
 import { IEvent } from "./event.model";

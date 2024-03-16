@@ -1,3 +1,7 @@
+/**
+ * REMEMBER TO UPDATE FRONTEND MODELS
+ */
+
 import mongoose, { Schema, Document } from "mongoose";
 import { IUser } from "./user.model";
 

@@ -1,3 +1,7 @@
+/**
+ * REMEMBER TO UPDATE FRONTEND MODELS
+ */
+
 import mongoose, { Document, Schema } from "mongoose";
 import { IGroup } from "./group.model";
 import { IUser } from "./user.model";

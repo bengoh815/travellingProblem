@@ -1,3 +1,7 @@
+/**
+ * REMEMBER TO UPDATE FRONTEND MODELS
+ */
+
 import bcrypt from "bcrypt";
 import mongoose, { Schema, Document } from "mongoose";
 import { IMembership } from "./membership.model";
