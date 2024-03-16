@@ -15,4 +15,6 @@ const carSchema = new Schema<ICar>({
   capacity: { type: Number, required: true },
 });
 
-export default mongoose.model<ICar>("Car", carSchema);
+const CarModel = mongoose.model<ICar>("Car", carSchema);
+
+export default CarModel;

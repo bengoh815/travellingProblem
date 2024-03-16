@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 import { IGroup } from "./group.model";
 import { IUser } from "./user.model";
-import { IRide } from "./ride.model";
+import { IRidePlan } from "./ride.model";
 
 export interface IEvent extends Document {
   name: string;
@@ -9,7 +9,7 @@ export interface IEvent extends Document {
   date: Date;
   groupId: IGroup["_id"];
   attendees: IUser["_id"][];
-  ridePlan: IRide["_id"];
+  ridePlan?: IRidePlan["_id"];
 }
 
 const eventSchema = new Schema<IEvent>({
@@ -22,7 +22,7 @@ const eventSchema = new Schema<IEvent>({
     required: true,
   },
   attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  ridePlan: { type: mongoose.Schema.Types.ObjectId, ref: "Ride" },
+  ridePlan: { type: mongoose.Schema.Types.ObjectId, ref: "RidePlan" },
 });
 
 const EventModel = mongoose.model<IEvent>("Event", eventSchema);

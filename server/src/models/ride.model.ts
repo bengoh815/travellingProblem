@@ -1,37 +1,34 @@
 import mongoose, { Schema, Document } from "mongoose";
 import { IUser } from "./user.model";
 
-// Interface for RideAssignment
-export interface IRideAssignment extends Document {
-  driver: IUser | mongoose.Types.ObjectId;
-  passengers: (IUser | mongoose.Types.ObjectId)[];
+export interface IRideAssignment {
+  driver: IUser["_id"];
+  passengers: IUser["_id"][];
 }
 
-// Schema for RideAssignment
-const rideAssignmentSchema = new Schema<IRideAssignment>({
-  driver: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  passengers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-});
-
-// Interface for Ride
-export interface IRide extends Document {
+export interface IRidePlan extends Document {
   eventId: mongoose.Types.ObjectId;
   assignments: IRideAssignment[];
 }
 
-// Schema for Ride
-const rideSchema = new Schema<IRide>({
+const rideSchema = new Schema<IRidePlan>({
   eventId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Event",
     required: true,
   },
-  assignments: [rideAssignmentSchema],
+  assignments: [
+    {
+      driver: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      passengers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    },
+  ],
 });
 
-// Create and export the models
-export const RideAssignmentModel = mongoose.model<IRideAssignment>(
-  "RideAssignment",
-  rideAssignmentSchema
-);
-export const RideModel = mongoose.model<IRide>("Ride", rideSchema);
+const RidePlanModel = mongoose.model<IRidePlan>("RidePlan", rideSchema);
+
+export default RidePlanModel;
