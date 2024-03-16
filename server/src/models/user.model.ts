@@ -22,7 +22,7 @@ export interface IUser extends Document {
   memberships: IMembership["_id"][];
 }
 
-const userSchema: Schema = new Schema(
+const userSchema: Schema = new Schema<IUser>(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
