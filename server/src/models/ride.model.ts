@@ -6,12 +6,12 @@ export interface IRideAssignment {
   passengers: IUser["_id"][];
 }
 
-export interface IRidePlan extends Document {
+export interface IRide extends Document {
   eventId: mongoose.Types.ObjectId;
   assignments: IRideAssignment[];
 }
 
-const rideSchema = new Schema<IRidePlan>({
+const rideSchema = new Schema<IRide>({
   eventId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Event",
@@ -29,6 +29,6 @@ const rideSchema = new Schema<IRidePlan>({
   ],
 });
 
-const RidePlanModel = mongoose.model<IRidePlan>("RidePlan", rideSchema);
+const RideModel = mongoose.model<IRide>("Ride", rideSchema);
 
-export default RidePlanModel;
+export default RideModel;

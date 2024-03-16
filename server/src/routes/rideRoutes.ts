@@ -1,7 +1,7 @@
 import express from "express";
 import {
-  getRides,
-  postRides,
+  getAllRides,
+  createRide,
   getRideById,
   updateRide,
   deleteRide,
@@ -13,8 +13,8 @@ const ridesRouter = express.Router();
 const v1 = "/api/v1";
 
 // Routes
-ridesRouter.get(`${v1}/rides`, getRides);
-ridesRouter.post(`${v1}/rides`, postRides);
+ridesRouter.get(`${v1}/rides`, getAllRides);
+ridesRouter.post(`${v1}/rides`, createRide);
 ridesRouter.get(`${v1}/rides/:id`, getRideById);
 ridesRouter.put(`${v1}/rides/:id`, updateRide);
 ridesRouter.delete(`${v1}/rides/:id`, deleteRide);

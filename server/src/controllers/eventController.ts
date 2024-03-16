@@ -1,26 +1,63 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
+import EventModel, { IEvent } from "../models/event.model";
+import { handleError } from "../utils/errorHandle";
 
-export const getEvents = async (req: Request, res: Response) => {
-  res.status(Status.OK).send("Hey events!");
+export const getAllEvents = async (req: Request, res: Response) => {
+  try {
+    const events = await EventModel.find();
+    res.status(Status.OK).json(events);
+  } catch (error: unknown) {
+    handleError(res, "Error fetching events", error);
+  }
 };
 
-export const postEvents = async (req: Request, res: Response) => {
-  // Assuming event creation logic is successful
-  res.status(Status.Created).send("Event created successfully!");
+export const createEvent = async (req: Request, res: Response) => {
+  try {
+    const newEvent = new EventModel(req.body as IEvent);
+    await newEvent.save();
+    res.status(Status.Created).json(newEvent);
+  } catch (error: unknown) {
+    handleError(res, "Error creating event", error);
+  }
 };
 
 export const getEventById = async (req: Request, res: Response) => {
-  // Assuming event is found
-  res.status(Status.OK).send("Event details");
+  try {
+    const event = await EventModel.findById(req.params.id);
+    if (!event) {
+      return res.status(Status.NotFound).json({ message: "Event not found" });
+    }
+    res.status(Status.OK).json(event);
+  } catch (error: unknown) {
+    handleError(res, "Error getting event", error);
+  }
 };
 
 export const updateEvent = async (req: Request, res: Response) => {
-  // Assuming event update is successful
-  res.status(Status.OK).send("Event updated successfully!");
+  try {
+    const updatedEvent = await EventModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updatedEvent) {
+      return res.status(Status.NotFound).json({ message: "Event not found" });
+    }
+    res.status(Status.OK).json(updatedEvent);
+  } catch (error: unknown) {
+    handleError(res, "Error updating event", error);
+  }
 };
 
 export const deleteEvent = async (req: Request, res: Response) => {
-  // Assuming event deletion is successful
-  res.status(Status.NoContent).send();
+  try {
+    const deletedEvent = await EventModel.findByIdAndDelete(req.params.id);
+    if (!deletedEvent) {
+      return res.status(Status.NotFound).json({ message: "Event not found" });
+    }
+    res.status(Status.NoContent).send();
+  } catch (error: unknown) {
+    handleError(res, "Error deleting event", error);
+  }
 };
