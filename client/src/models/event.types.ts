@@ -1,9 +1,10 @@
-import { Ride } from "./ride.types";
-import { User } from "./user.types";
+import { IRide } from "./ride.types";
 
-export type Event = {
-  id: number;
-  joining: User[];
-  food: string;
-  rides: Ride;
-};
+export interface IEvent {
+  name: string;
+  description: string;
+  date: Date;
+  groupId: string;
+  attendees: string;
+  ridePlan?: IRide;
+}

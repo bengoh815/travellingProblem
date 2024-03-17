@@ -1,13 +1,11 @@
-import { User } from "./user.types";
-import { Car } from "./car.types";
+import { IUser } from "./user.types";
 
-type CarRide = {
-  car: Car;
-  passengers: User[];
-};
+export interface IRideAssignment {
+  driver: string;
+  passengers: IUser[];
+}
 
-export type Ride = {
-  id: number;
-  drivers: User[];
-  carRides: CarRide[];
-};
+export interface IRide extends Document {
+  eventId: string;
+  assignments: IRideAssignment[];
+}

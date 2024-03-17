@@ -1,4 +1,4 @@
-import { User, UserRoles } from "./user.types";
+import { UserRoles } from "./user.types";
 
 export enum ApplicationDecision {
   Pending = 0,
@@ -6,9 +6,8 @@ export enum ApplicationDecision {
   Denied = 2,
 }
 
-export type Applications = {
-  id: number;
-  user: User;
+export interface IApplication {
+  user: string;
   appType: UserRoles;
   decision: ApplicationDecision;
-};
+}

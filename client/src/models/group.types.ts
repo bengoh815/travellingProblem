@@ -1,10 +1,8 @@
-import { Event } from "./event.types";
-import { User } from "./user.types";
+import { IEvent } from "./event.types";
 
-export type Group = {
-  id: number;
+export interface IGroup {
   name: string;
   description: string;
-  members: User[];
-  events: Event[];
-};
+  members: string;
+  events: IEvent[];
+}

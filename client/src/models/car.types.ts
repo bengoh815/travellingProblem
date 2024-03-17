@@ -1,8 +1,6 @@
-import { User } from "./user.types";
-
-export type Car = {
-  id: number;
-  model: string;
-  owner: User;
+export interface ICar {
+  carModel: string;
+  description: string;
+  owner: string;
   capacity: number;
-};
+}
