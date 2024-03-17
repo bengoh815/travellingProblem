@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const MONGODB_URI: string =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/mydb";
+  process.env.MONGODB_URI_TEST || "mongodb://localhost:27017/mydb";
 
 const connectToDatabase = async (): Promise<void> => {
   try {

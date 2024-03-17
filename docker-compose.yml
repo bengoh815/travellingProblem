@@ -15,3 +15,5 @@ services:
       - "5000:5000"
     volumes:
       - ./server:/app
+    env_file:
+      - ./server/.env
