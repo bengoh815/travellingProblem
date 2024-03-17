@@ -6,6 +6,8 @@ import bcrypt from "bcrypt";
 import mongoose, { Schema, Document } from "mongoose";
 import { IMembership } from "./membership.model";
 
+const SALT_ROUNDS = Number(process.env.SALT_ROUNDS) || 10;
+
 export enum UserRoles {
   Driver = "driver",
   Organizer = "organizer",
@@ -45,12 +47,9 @@ const userSchema: Schema = new Schema<IUser>(
   }
 );
 
-// TODO Fix saltRounds
-const saltRounds = "banana";
-
 userSchema.pre<IUser>("save", async function (next) {
   if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, saltRounds);
+    this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
   }
   next();
 });

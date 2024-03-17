@@ -16,6 +16,7 @@ const corsOptions: cors.CorsOptions = {
 };
 
 // Middleware
+app.use(express.json());
 app.use(cors(corsOptions)); // Apply CORS to all routes
 
 // Database connection
