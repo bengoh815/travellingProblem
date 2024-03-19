@@ -1,3 +1,4 @@
+import { Box, Divider } from "@mui/material";
 import { IGroup } from "../models/group.types";
 import GroupCard from "./GroupCard";
 
@@ -50,11 +51,13 @@ const GroupRec = () => {
   ];
 
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       {groupsData.map((e) => (
-        <GroupCard data={e} />
+        <Box>
+          <GroupCard data={e} />
+        </Box>
       ))}
-    </>
+    </Box>
   );
 };
 
