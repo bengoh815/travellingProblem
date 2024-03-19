@@ -5,6 +5,6 @@ export interface IEvent {
   description: string;
   date: Date;
   groupId: string;
-  attendees: string;
+  attendees: string[];
   ridePlan?: IRide;
 }

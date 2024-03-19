@@ -9,10 +9,10 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { User } from "../models/user.types";
+import { IUser } from "../models/user.types";
 
 const Login = () => {
-  const defaultUser: Pick<User, "email"> & {
+  const defaultUser: Pick<IUser, "email"> & {
     password: string;
   } = {
     email: "",

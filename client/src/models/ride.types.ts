@@ -5,7 +5,7 @@ export interface IRideAssignment {
   passengers: IUser[];
 }
 
-export interface IRide extends Document {
+export interface IRide {
   eventId: string;
   assignments: IRideAssignment[];
 }

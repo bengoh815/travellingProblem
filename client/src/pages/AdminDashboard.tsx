@@ -9,8 +9,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Navbar from "../components/Navbar";
 import StyledTable from "../components/Table";
 import AppsTable from "../components/AppsTable";
-import { ApplicationDecision, Applications } from "../models/application.types";
-import { User, UserRoles } from "../models/user.types";
+import { ApplicationDecision, IApplication } from "../models/application.types";
+import { IUser, UserRoles } from "../models/user.types";
 
 function createData(
   firstName: string,
@@ -18,18 +18,18 @@ function createData(
   appType: UserRoles,
   decision: number
 ) {
-  const user: User = {
-    id: 0,
+  const user: IUser = {
     firstName,
     lastName,
     email: "",
     password: "",
     roles: [],
+    memberships: [],
   };
-  return { id: 0, user, appType, decision };
+  return { user, appType, decision };
 }
 
-const fakeData: Applications[] = [
+const fakeData: IApplication[] = [
   createData(
     "Kent",
     "Jennefier",

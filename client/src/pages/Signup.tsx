@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User } from "../models/user.types";
+import { IUser } from "../models/user.types";
 import Navbar from "../components/Navbar";
 import {
   Box,
@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 
 const Signup = () => {
-  const defaultUser: Pick<User, "firstName" | "lastName" | "email"> & {
+  const defaultUser: Pick<IUser, "firstName" | "lastName" | "email"> & {
     password: string;
     confirmPassword: string;
   } = {

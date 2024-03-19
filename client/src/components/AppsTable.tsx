@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { useState } from "react";
-import { Applications } from "../models/application.types";
+import { IApplication } from "../models/application.types";
 
 const Options = ({
   state,
@@ -73,7 +73,7 @@ const Options = ({
 };
 
 interface AppsTableProps {
-  data: Applications[];
+  data: IApplication[];
 }
 
 const AppsTable: React.FC<AppsTableProps> = ({ data }) => {
