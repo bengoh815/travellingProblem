@@ -31,21 +31,18 @@ const GroupCard: React.FC<GroupCardProps> = ({ data }) => {
             <Typography variant="body2" color="text.secondary">
               {data.description}
             </Typography>
-            <Typography>
-              Members:{" "}
-              {data.members.map((e) => (
-                <Typography>{e}</Typography>
-              ))}
+            <Typography variant="body2" color="text.secondary">
+              {data.members.length} members
             </Typography>
-            {data.events.map((e) => (
-              <Typography>{e.name}</Typography>
-            ))}
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small">Join</Button>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
+          <Button variant="contained" size="small" sx={{ px: 2 }}>
+            Join Group
+          </Button>
+          <Button variant="contained" size="small" sx={{ px: 2 }}>
+            Share
+          </Button>
         </CardActions>
       </Card>
     </>

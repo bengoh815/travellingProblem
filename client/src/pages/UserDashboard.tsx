@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 import GroupRec from "../components/GroupRec";
+import GroupInfo from "../components/GroupInfo";
 
 const hasGroup = false;
 
@@ -27,13 +28,10 @@ const UserDashboard = () => {
             Heres a few groups that you might be interested
           </Typography>
           <GroupRec />
+
+          <GroupInfo />
         </Box>
       )}
-
-      {/* <div>Want to see events / groups</div>
-      <Box>Subscribed</Box>
-      <Box>Recommended</Box>
-      <EventRec /> */}
     </div>
   );
 };
