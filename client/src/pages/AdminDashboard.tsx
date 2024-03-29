@@ -49,7 +49,7 @@ const AdminDashboard = () => {
             <Typography>Driver Application</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <AppsTable data={fakeData} />
+            <AppsTable appsData={fakeData} />
           </AccordionDetails>
         </Accordion>
         <Accordion>
@@ -57,7 +57,7 @@ const AdminDashboard = () => {
             <Typography>Organizer Application</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <AppsTable data={fakeData} />
+            <AppsTable appsData={fakeData} />
           </AccordionDetails>
         </Accordion>
         <Accordion>

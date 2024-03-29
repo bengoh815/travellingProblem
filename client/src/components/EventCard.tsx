@@ -8,14 +8,11 @@ import {
 } from "@mui/material";
 import { IEvent } from "../models/event.types";
 
-const EventCard = () => {
-  const eventData: IEvent = {
-    name: "Sample Event",
-    description: "This is a fake event for demonstration purposes.",
-    date: new Date("2023-10-05T14:00:00Z"),
-    groupId: "fakeGroupId",
-    attendees: ["attendee1", "attendee2"],
-  };
+interface EventCardProps {
+  eventData: IEvent;
+}
+
+const EventCard: React.FC<EventCardProps> = ({ eventData }) => {
   return (
     <Box sx={{ p: 2 }}>
       <Card variant="outlined">

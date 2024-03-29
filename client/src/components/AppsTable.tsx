@@ -73,10 +73,10 @@ const Options = ({
 };
 
 interface AppsTableProps {
-  data: IApplication[];
+  appsData: IApplication[];
 }
 
-const AppsTable: React.FC<AppsTableProps> = ({ data }) => {
+const AppsTable: React.FC<AppsTableProps> = ({ appsData }) => {
   const [decision, setDecision] = useState(0);
 
   const handleDecision = (n: number) => {
@@ -94,7 +94,7 @@ const AppsTable: React.FC<AppsTableProps> = ({ data }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((a) => {
+          {appsData.map((a) => {
             return (
               <TableRow>
                 <TableCell>

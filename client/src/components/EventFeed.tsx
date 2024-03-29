@@ -1,10 +1,16 @@
+import { IEvent } from "../models/event.types";
 import EventCard from "./EventCard";
 
-const EventFeed = () => {
+interface EventFeedProps {
+  eventsData: IEvent[];
+}
+
+const EventFeed: React.FC<EventFeedProps> = ({ eventsData }) => {
   return (
     <>
-      A list of event recommendations
-      <EventCard />
+      {eventsData.map((e) => (
+        <EventCard eventData={e} />
+      ))}
     </>
   );
 };
