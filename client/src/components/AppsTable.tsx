@@ -1,7 +1,4 @@
-import { Check, Close } from "@mui/icons-material";
 import {
-  Box,
-  Button,
   Paper,
   Table,
   TableBody,
@@ -10,84 +7,65 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { useState } from "react";
-import { IApplication } from "../models/application.types";
+import { ApplicationDecision, IApplication } from "../models/application.types";
+import { IUser, UserRoles } from "../models/user.types";
+import Options from "./AppsOption";
 
 // TODO: Pagination
-
-const Options = ({
-  state,
-  handleDecision,
-}: {
-  state: number;
-  handleDecision: (n: number) => void;
-}) => {
-  switch (state) {
-    case 1:
-      return (
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() => handleDecision(0)}
-            endIcon={<Check />}
-          >
-            Approved
-          </Button>
-        </Box>
-      );
-
-    case 2:
-      return (
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => handleDecision(0)}
-            endIcon={<Close />}
-          >
-            Denied
-          </Button>
-        </Box>
-      );
-    default:
-      return (
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() => handleDecision(1)}
-            endIcon={<Check />}
-          >
-            Approve
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => handleDecision(2)}
-            endIcon={<Close />}
-          >
-            Deny
-          </Button>
-        </Box>
-      );
-  }
-};
+// TODO Options update function to call
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-interface AppsTableProps {
-  appsData: IApplication[];
-}
+const AppsTable = () => {
+  const fakeUser: IUser[] = [
+    {
+      firstName: "John",
+      lastName: "Doe",
+      email: "johndoe@example.com",
+      password: "password123",
+      roles: [],
+      memberships: [],
+    },
+    {
+      firstName: "Kent",
+      lastName: "Ady",
+      email: "Kentady@example.com",
+      password: "password123",
+      roles: [],
+      memberships: [],
+    },
+    {
+      firstName: "Jerry",
+      lastName: "Synth",
+      email: "JerrySynth@example.com",
+      password: "password123",
+      roles: [],
+      memberships: [],
+    },
+  ];
 
-const AppsTable: React.FC<AppsTableProps> = ({ appsData }) => {
-  const [decision, setDecision] = useState(0);
-
-  const handleDecision = (n: number) => {
-    setDecision(n);
-  };
+  const fakeData: IApplication[] = [
+    {
+      user: fakeUser[0],
+      appType: UserRoles.Driver,
+      decision: ApplicationDecision.Pending,
+      createdAt: new Date("2023-04-15T10:00:00Z"),
+    },
+    {
+      user: fakeUser[1],
+      appType: UserRoles.Driver,
+      decision: ApplicationDecision.Pending,
+      createdAt: new Date("2023-04-15T10:00:00Z"),
+    },
+    {
+      user: fakeUser[2],
+      appType: UserRoles.Organizer,
+      decision: ApplicationDecision.Pending,
+      createdAt: new Date("2023-04-15T10:00:00Z"),
+    },
+  ];
 
   return (
     <TableContainer component={Paper} sx={{ my: 3 }}>
@@ -102,7 +80,7 @@ const AppsTable: React.FC<AppsTableProps> = ({ appsData }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {appsData.map((a) => {
+          {fakeData.map((a) => {
             return (
               <TableRow>
                 <TableCell>
@@ -112,7 +90,7 @@ const AppsTable: React.FC<AppsTableProps> = ({ appsData }) => {
                 <TableCell>{a.decision}</TableCell>
                 <TableCell>{a.createdAt.toDateString()}</TableCell>
                 <TableCell>
-                  {Options({ state: decision, handleDecision })}
+                  <Options initialState={0} updateFunction="smtg" />
                 </TableCell>
               </TableRow>
             );
