@@ -80,15 +80,15 @@ const AppsTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {fakeData.map((a) => {
+          {fakeData.map((e, i) => {
             return (
-              <TableRow>
+              <TableRow key={i}>
                 <TableCell>
-                  {a.user.firstName}, {a.user.lastName}
+                  {e.user.firstName}, {e.user.lastName}
                 </TableCell>
-                <TableCell>{capitalizeFirstLetter(a.appType)}</TableCell>
-                <TableCell>{a.decision}</TableCell>
-                <TableCell>{a.createdAt.toDateString()}</TableCell>
+                <TableCell>{capitalizeFirstLetter(e.appType)}</TableCell>
+                <TableCell>{e.decision}</TableCell>
+                <TableCell>{e.createdAt.toDateString()}</TableCell>
                 <TableCell>
                   <Options initialState={0} updateFunction="smtg" />
                 </TableCell>

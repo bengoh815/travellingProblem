@@ -21,11 +21,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`group-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -65,6 +61,9 @@ const GroupInfo = () => {
       },
     ],
   };
+
+  const isAdmin: boolean = true;
+
   return (
     <Grid container spacing={2}>
       <Grid item md={12}>
@@ -90,11 +89,12 @@ const GroupInfo = () => {
             </Tabs>
           </Box>
           <CustomTabPanel value={tabState} index={0}>
+            {isAdmin && <Box>There is something here</Box>}
             <EventFeed eventsData={groupData.events} />
           </CustomTabPanel>
           <CustomTabPanel value={tabState} index={1}>
-            {groupData.members.map((e) => (
-              <Box>{e}</Box>
+            {groupData.members.map((e, i) => (
+              <Box key={i}>{e}</Box>
             ))}
           </CustomTabPanel>
           <CustomTabPanel value={tabState} index={2}>

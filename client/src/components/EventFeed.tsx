@@ -8,8 +8,8 @@ interface EventFeedProps {
 const EventFeed: React.FC<EventFeedProps> = ({ eventsData }) => {
   return (
     <>
-      {eventsData.map((e) => (
-        <EventCard eventData={e} />
+      {eventsData.map((e, i) => (
+        <EventCard eventData={e} key={i} />
       ))}
     </>
   );

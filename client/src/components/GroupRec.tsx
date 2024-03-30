@@ -55,10 +55,8 @@ const GroupRec = () => {
       <Divider />
       <Typography variant="h4">Groups</Typography>
       <Box sx={{ px: 5, display: "flex" }}>
-        {groupsData.map((e) => (
-          <Box>
-            <GroupCard data={e} />
-          </Box>
+        {groupsData.map((e, i) => (
+          <GroupCard data={e} key={i} />
         ))}
       </Box>
       <Divider />

@@ -10,6 +10,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Error from "./pages/Error";
 import Playground from "./pages/Playground";
 import GroupInfo from "./pages/GroupInfo";
+import EventInfo from "./pages/EventInfo";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/dashboard/organizer" element={<OrgDashboard />} />
         <Route path="/dashboard/admin" element={<AdminDashboard />} />
         <Route path="/groups/:id" element={<GroupInfo />} />
+        <Route path="/events/:id" element={<EventInfo />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="*" element={<Error />} />
       </Routes>
