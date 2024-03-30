@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 import GroupRec from "../components/GroupRec";
-import GroupInfo from "../components/GroupInfo";
+import GroupInfo from "./GroupInfo";
 
 const hasGroup = false;
 

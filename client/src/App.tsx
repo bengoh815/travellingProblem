@@ -9,6 +9,7 @@ import OrgDashboard from "./pages/OrgDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Error from "./pages/Error";
 import Playground from "./pages/Playground";
+import GroupInfo from "./pages/GroupInfo";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/dashboard/driver" element={<DriverDashboard />} />
         <Route path="/dashboard/organizer" element={<OrgDashboard />} />
         <Route path="/dashboard/admin" element={<AdminDashboard />} />
+        <Route path="/groups/:id" element={<GroupInfo />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="*" element={<Error />} />
       </Routes>

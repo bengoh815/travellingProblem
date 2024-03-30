@@ -1,8 +1,8 @@
-import { Image } from "@mui/icons-material";
 import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
-import EventFeed from "./EventFeed";
+import EventFeed from "../components/EventFeed";
 import { useState } from "react";
 import { IGroup } from "../models/group.types";
+import Navbar from "../components/Navbar";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -67,6 +67,9 @@ const GroupInfo = () => {
   };
   return (
     <Grid container spacing={2}>
+      <Grid item md={12}>
+        <Navbar />
+      </Grid>
       <Grid item md={12}>
         <Typography variant="h3">{groupData.name}</Typography>
         <Typography variant="body1" color="text.secondary">

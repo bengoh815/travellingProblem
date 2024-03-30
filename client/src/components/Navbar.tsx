@@ -14,6 +14,7 @@ const Navbar = () => {
         <StyledLink to="/dashboard/driver">Driver</StyledLink>
         <StyledLink to="/dashboard/organizer">Organizer</StyledLink>
         <StyledLink to="/dashboard/admin">Admin</StyledLink>
+        <StyledLink to="/groups/:id">Group</StyledLink>
         <StyledLink to="/playground">Playground</StyledLink>
       </Box>
       <Box sx={{ display: "flex", p: 1, gap: 2 }}>
