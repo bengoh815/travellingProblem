@@ -13,6 +13,8 @@ import {
 import { useState } from "react";
 import { IApplication } from "../models/application.types";
 
+// TODO: Pagination
+
 const Options = ({
   state,
   handleDecision,
@@ -72,6 +74,10 @@ const Options = ({
   }
 };
 
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 interface AppsTableProps {
   appsData: IApplication[];
 }
@@ -88,9 +94,11 @@ const AppsTable: React.FC<AppsTableProps> = ({ appsData }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ width: "30%" }}>Name</TableCell>
-            <TableCell sx={{ width: "30%" }}>Application Type</TableCell>
-            <TableCell sx={{ width: "40%" }}>Decision</TableCell>
+            <TableCell sx={{ width: "20%" }}>Applicant Name</TableCell>
+            <TableCell sx={{ width: "20%" }}>Application Type</TableCell>
+            <TableCell sx={{ width: "20%" }}>Status</TableCell>
+            <TableCell sx={{ width: "20%" }}>Submission Date</TableCell>
+            <TableCell sx={{ width: "20%" }}>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -100,7 +108,9 @@ const AppsTable: React.FC<AppsTableProps> = ({ appsData }) => {
                 <TableCell>
                   {a.user.firstName}, {a.user.lastName}
                 </TableCell>
-                <TableCell>{a.appType}</TableCell>
+                <TableCell>{capitalizeFirstLetter(a.appType)}</TableCell>
+                <TableCell>{a.decision}</TableCell>
+                <TableCell>{a.createdAt.toDateString()}</TableCell>
                 <TableCell>
                   {Options({ state: decision, handleDecision })}
                 </TableCell>

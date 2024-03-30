@@ -1,73 +1,65 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Typography,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Box, Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
-import StyledTable from "../components/Table";
 import AppsTable from "../components/AppsTable";
 import { ApplicationDecision, IApplication } from "../models/application.types";
 import { IUser, UserRoles } from "../models/user.types";
+import Analytics from "../components/Analytics";
 
-function createData(
-  firstName: string,
-  lastName: string,
-  appType: UserRoles,
-  decision: number
-) {
-  const user: IUser = {
-    firstName,
-    lastName,
-    email: "",
-    password: "",
+const fakeUser: IUser[] = [
+  {
+    firstName: "John",
+    lastName: "Doe",
+    email: "johndoe@example.com",
+    password: "password123",
     roles: [],
     memberships: [],
-  };
-  return { user, appType, decision };
-}
+  },
+  {
+    firstName: "Kent",
+    lastName: "Ady",
+    email: "Kentady@example.com",
+    password: "password123",
+    roles: [],
+    memberships: [],
+  },
+  {
+    firstName: "Jerry",
+    lastName: "Synth",
+    email: "JerrySynth@example.com",
+    password: "password123",
+    roles: [],
+    memberships: [],
+  },
+];
 
 const fakeData: IApplication[] = [
-  createData(
-    "Kent",
-    "Jennefier",
-    UserRoles.Driver,
-    ApplicationDecision.Pending
-  ),
+  {
+    user: fakeUser[0],
+    appType: UserRoles.Driver,
+    decision: ApplicationDecision.Pending,
+    createdAt: new Date("2023-04-15T10:00:00Z"),
+  },
+  {
+    user: fakeUser[1],
+    appType: UserRoles.Driver,
+    decision: ApplicationDecision.Pending,
+    createdAt: new Date("2023-04-15T10:00:00Z"),
+  },
+  {
+    user: fakeUser[2],
+    appType: UserRoles.Organizer,
+    decision: ApplicationDecision.Pending,
+    createdAt: new Date("2023-04-15T10:00:00Z"),
+  },
 ];
 
 const AdminDashboard = () => {
   return (
     <div>
       <Navbar />
-      <Box sx={{ p: 3 }}>
-        <div>Want to see growth, google api usage, overall events/groups</div>
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Driver Application</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <AppsTable appsData={fakeData} />
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Organizer Application</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <AppsTable appsData={fakeData} />
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>All Users</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <StyledTable />
-          </AccordionDetails>
-        </Accordion>
+      <Analytics />
+      <Box sx={{ px: 3 }}>
+        <AppsTable appsData={fakeData} />
       </Box>
     </div>
   );

@@ -10,4 +10,5 @@ export interface IApplication {
   user: IUser;
   appType: UserRoles;
   decision: ApplicationDecision;
+  createdAt: Date;
 }
