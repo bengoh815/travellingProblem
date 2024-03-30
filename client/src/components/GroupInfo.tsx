@@ -68,9 +68,6 @@ const GroupInfo = () => {
   return (
     <Grid container spacing={2}>
       <Grid item md={12}>
-        <Image />
-      </Grid>
-      <Grid item md={12}>
         <Typography variant="h3">{groupData.name}</Typography>
         <Typography variant="body1" color="text.secondary">
           {groupData.members.length} members

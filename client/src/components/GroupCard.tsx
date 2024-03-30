@@ -18,12 +18,6 @@ const GroupCard: React.FC<GroupCardProps> = ({ data }) => {
     <>
       <Card sx={{ m: 2, maxWidth: 345 }}>
         <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
-            alt={`Gathering picture of ${data.name}`}
-          />
           <CardContent sx={{ p: 2 }}>
             <Typography gutterBottom variant="h5" component="div">
               {data.name}
