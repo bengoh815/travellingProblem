@@ -1,10 +1,16 @@
 import { Breadcrumbs, Grid, Link, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
-import EventCreate from "../components/EventCreate";
 import Navbar from "../components/Navbar";
 import { IGroup } from "../models/group.types";
 
 const EventInfo = () => {
+  const eventData = {
+    name: "Tech Talk",
+    description: "A discussion on the latest trends in technology.",
+    date: new Date("2023-05-20T18:00:00Z"),
+    groupId: "group1",
+    attendees: ["member1", "member2"],
+  };
+
   const groupData: IGroup = {
     name: "Tech Enthusiasts",
     description:
@@ -26,14 +32,6 @@ const EventInfo = () => {
         attendees: ["member2", "member3"],
       },
     ],
-  };
-
-  const eventData = {
-    name: "Tech Talk",
-    description: "A discussion on the latest trends in technology.",
-    date: new Date("2023-05-20T18:00:00Z"),
-    groupId: "group1",
-    attendees: ["member1", "member2"],
   };
 
   return (

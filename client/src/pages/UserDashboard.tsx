@@ -28,8 +28,6 @@ const UserDashboard = () => {
             Heres a few groups that you might be interested
           </Typography>
           <GroupRec />
-
-          <GroupInfo />
         </Box>
       )}
     </div>
