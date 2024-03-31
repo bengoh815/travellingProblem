@@ -74,9 +74,9 @@ const AppsTable = () => {
           <TableRow>
             <TableCell sx={{ width: "20%" }}>Applicant Name</TableCell>
             <TableCell sx={{ width: "20%" }}>Application Type</TableCell>
-            <TableCell sx={{ width: "20%" }}>Status</TableCell>
+            <TableCell sx={{ width: "15%" }}>Status</TableCell>
             <TableCell sx={{ width: "20%" }}>Submission Date</TableCell>
-            <TableCell sx={{ width: "20%" }}>Actions</TableCell>
+            <TableCell sx={{ width: "25%" }}>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

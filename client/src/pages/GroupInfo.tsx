@@ -1,8 +1,9 @@
-import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
 import EventFeed from "../components/EventFeed";
 import { useState } from "react";
 import { IGroup } from "../models/group.types";
 import Navbar from "../components/Navbar";
+import { Add } from "@mui/icons-material";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -89,7 +90,11 @@ const GroupInfo = () => {
             </Tabs>
           </Box>
           <CustomTabPanel value={tabState} index={0}>
-            {isAdmin && <Box>There is something here</Box>}
+            {isAdmin && (
+              <Button variant="contained" endIcon={<Add />}>
+                Create new event
+              </Button>
+            )}
             <EventFeed eventsData={groupData.events} />
           </CustomTabPanel>
           <CustomTabPanel value={tabState} index={1}>
