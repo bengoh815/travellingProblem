@@ -4,6 +4,7 @@ import { useState } from "react";
 import { IGroup } from "../models/group.types";
 import Navbar from "../components/Navbar";
 import { Add } from "@mui/icons-material";
+import UserList from "../components/UserList";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -98,9 +99,7 @@ const GroupInfo = () => {
             <EventFeed eventsData={groupData.events} />
           </CustomTabPanel>
           <CustomTabPanel value={tabState} index={1}>
-            {groupData.members.map((e, i) => (
-              <Box key={i}>{e}</Box>
-            ))}
+            <UserList />
           </CustomTabPanel>
           <CustomTabPanel value={tabState} index={2}>
             {groupData.description}

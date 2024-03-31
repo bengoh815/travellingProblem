@@ -23,6 +23,7 @@ const AppsTable = () => {
     {
       firstName: "John",
       lastName: "Doe",
+      phoneNumber: "4891232367",
       email: "johndoe@example.com",
       password: "password123",
       roles: [],
@@ -31,6 +32,7 @@ const AppsTable = () => {
     {
       firstName: "Kent",
       lastName: "Ady",
+      phoneNumber: "4891232367",
       email: "Kentady@example.com",
       password: "password123",
       roles: [],
@@ -39,6 +41,7 @@ const AppsTable = () => {
     {
       firstName: "Jerry",
       lastName: "Synth",
+      phoneNumber: "4891232367",
       email: "JerrySynth@example.com",
       password: "password123",
       roles: [],

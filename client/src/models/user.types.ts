@@ -9,6 +9,7 @@ export enum UserRoles {
 export interface IUser {
   firstName: string;
   lastName: string;
+  phoneNumber: string;
   address?: string;
   geolocation?: {
     longitude: number;
