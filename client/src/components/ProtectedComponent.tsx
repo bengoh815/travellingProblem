@@ -1,38 +1,20 @@
-// import React from "react";
-// import { Route, Navigate, RouteProps } from "react-router-dom";
+import React, { useEffect, ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/userContext";
 
-// interface ProtectedRouteProps extends RouteProps {
-//   isAuthenticated: boolean;
-//   authenticationPath: string;
-//   // Add more props as needed
-// }
+const ProtectedComponent: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const { user } = useUser();
+  const navigate = useNavigate();
 
-// const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
-//   isAuthenticated,
-//   authenticationPath,
-//   component: Component,
-//   ...rest
-// }) => {
-//   return (
-//     <Route
-//       {...rest}
-//       render={(props) =>
-//         isAuthenticated ? (
-//           <Component {...props} />
-//         ) : (
-//           <Navigate
-//             to={{
-//               pathname: authenticationPath,
-//               state: { from: props.location },
-//             }}
-//           />
-//         )
-//       }
-//     />
-//   );
-// };
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
-const ProtectedRoute = () => {
-  return <div>protected component</div>;
+  return <div>{children}</div>;
 };
-export default ProtectedRoute;
+
+export default ProtectedComponent;

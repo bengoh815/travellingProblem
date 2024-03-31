@@ -7,6 +7,7 @@ import { Add } from "@mui/icons-material";
 import UserList from "../components/UserList";
 import { useUser } from "../context/userContext";
 import { IUser } from "../models/user.types";
+import ProtectedComponent from "../components/ProtectedComponent";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -40,20 +41,6 @@ function a11yProps(index: number) {
 const GroupInfo = () => {
   const { user, login } = useUser();
 
-  useEffect(() => {
-    const fakeUser: IUser = {
-      firstName: "Jessica",
-      lastName: "Yean",
-      phoneNumber: "4891232367",
-      email: "jessicayean@example.com",
-      password: "password123",
-      roles: [],
-      isAdmin: true,
-      memberships: [],
-    };
-    login(fakeUser);
-  }, []); // Empty dependency array
-
   const [tabState, setTabState] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabState(newValue);
@@ -83,46 +70,48 @@ const GroupInfo = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item md={12}>
-        <Navbar />
-      </Grid>
-      <Grid item md={12}>
-        <Typography variant="h3">{groupData.name}</Typography>
-        <Typography variant="body1" color="text.secondary">
-          {groupData.members.length} members
-        </Typography>
-      </Grid>
-      <Grid item md={12}>
-        <Box sx={{ width: "100%" }}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Tabs
-              value={tabState}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-            >
-              <Tab label="Events" {...a11yProps(0)} />
-              <Tab label="People" {...a11yProps(1)} />
-              <Tab label="About" {...a11yProps(2)} />
-            </Tabs>
+    <ProtectedComponent>
+      <Grid container spacing={2}>
+        <Grid item md={12}>
+          <Navbar />
+        </Grid>
+        <Grid item md={12}>
+          <Typography variant="h3">{groupData.name}</Typography>
+          <Typography variant="body1" color="text.secondary">
+            {groupData.members.length} members
+          </Typography>
+        </Grid>
+        <Grid item md={12}>
+          <Box sx={{ width: "100%" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs
+                value={tabState}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+              >
+                <Tab label="Events" {...a11yProps(0)} />
+                <Tab label="People" {...a11yProps(1)} />
+                <Tab label="About" {...a11yProps(2)} />
+              </Tabs>
+            </Box>
+            <CustomTabPanel value={tabState} index={0}>
+              {user?.isAdmin && (
+                <Button variant="contained" endIcon={<Add />}>
+                  Create new event
+                </Button>
+              )}
+              <EventFeed eventsData={groupData.events} />
+            </CustomTabPanel>
+            <CustomTabPanel value={tabState} index={1}>
+              <UserList />
+            </CustomTabPanel>
+            <CustomTabPanel value={tabState} index={2}>
+              {groupData.description}
+            </CustomTabPanel>
           </Box>
-          <CustomTabPanel value={tabState} index={0}>
-            {user?.isAdmin && (
-              <Button variant="contained" endIcon={<Add />}>
-                Create new event
-              </Button>
-            )}
-            <EventFeed eventsData={groupData.events} />
-          </CustomTabPanel>
-          <CustomTabPanel value={tabState} index={1}>
-            <UserList />
-          </CustomTabPanel>
-          <CustomTabPanel value={tabState} index={2}>
-            {groupData.description}
-          </CustomTabPanel>
-        </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </ProtectedComponent>
   );
 };
 
