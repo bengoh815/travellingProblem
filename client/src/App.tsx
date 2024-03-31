@@ -11,25 +11,28 @@ import Error from "./pages/Error";
 import Playground from "./pages/Playground";
 import GroupInfo from "./pages/GroupInfo";
 import EventInfo from "./pages/EventInfo";
+import { UserProvider } from "./context/userContext";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
-        <Route path="/dashboard/driver" element={<DriverDashboard />} />
-        <Route path="/dashboard/organizer" element={<OrgDashboard />} />
-        <Route path="/dashboard/admin" element={<AdminDashboard />} />
-        <Route path="/groups/:id" element={<GroupInfo />} />
-        <Route path="/events/:id" element={<EventInfo />} />
-        <Route path="/playground" element={<Playground />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
+          <Route path="/dashboard/driver" element={<DriverDashboard />} />
+          <Route path="/dashboard/organizer" element={<OrgDashboard />} />
+          <Route path="/dashboard/admin" element={<AdminDashboard />} />
+          <Route path="/groups/:id" element={<GroupInfo />} />
+          <Route path="/events/:id" element={<EventInfo />} />
+          <Route path="/playground" element={<Playground />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 };
 

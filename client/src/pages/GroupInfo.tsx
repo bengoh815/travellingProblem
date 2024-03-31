@@ -1,10 +1,12 @@
 import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
 import EventFeed from "../components/EventFeed";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IGroup } from "../models/group.types";
 import Navbar from "../components/Navbar";
 import { Add } from "@mui/icons-material";
 import UserList from "../components/UserList";
+import { useUser } from "../context/userContext";
+import { IUser } from "../models/user.types";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -36,6 +38,22 @@ function a11yProps(index: number) {
 }
 
 const GroupInfo = () => {
+  const { user, login } = useUser();
+
+  useEffect(() => {
+    const fakeUser: IUser = {
+      firstName: "Jessica",
+      lastName: "Yean",
+      phoneNumber: "4891232367",
+      email: "jessicayean@example.com",
+      password: "password123",
+      roles: [],
+      isAdmin: true,
+      memberships: [],
+    };
+    login(fakeUser);
+  }, []); // Empty dependency array
+
   const [tabState, setTabState] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabState(newValue);
@@ -64,8 +82,6 @@ const GroupInfo = () => {
     ],
   };
 
-  const isAdmin: boolean = true;
-
   return (
     <Grid container spacing={2}>
       <Grid item md={12}>
@@ -91,7 +107,7 @@ const GroupInfo = () => {
             </Tabs>
           </Box>
           <CustomTabPanel value={tabState} index={0}>
-            {isAdmin && (
+            {user?.isAdmin && (
               <Button variant="contained" endIcon={<Add />}>
                 Create new event
               </Button>

@@ -18,5 +18,6 @@ export interface IUser {
   email: string;
   password: string;
   roles: UserRoles[];
+  isAdmin: boolean;
   memberships: IMembership[];
 }

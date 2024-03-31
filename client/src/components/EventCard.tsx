@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { IEvent } from "../models/event.types";
 import { Delete, Edit } from "@mui/icons-material";
+import { useUser } from "../context/userContext";
 
 interface EventCardProps {
   eventData: IEvent;
@@ -28,13 +29,13 @@ const EventCardOptions = () => {
 };
 
 const EventCard: React.FC<EventCardProps> = ({ eventData }) => {
-  const isAdmin = true;
+  const { user } = useUser();
 
   return (
     <Box sx={{ p: 2 }}>
       <Card variant="outlined">
         <CardHeader
-          action={isAdmin && <EventCardOptions />}
+          action={user?.isAdmin && <EventCardOptions />}
           title={eventData.name}
           subheader={eventData.date.toDateString()}
           sx={{ paddingBottom: 1 }}
