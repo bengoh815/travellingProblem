@@ -10,6 +10,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import RedirectDashboard from "../components/RedirectDashboard";
 
 const Signup = () => {
   const defaultUser: Pick<IUser, "firstName" | "lastName" | "email"> & {
@@ -42,7 +43,7 @@ const Signup = () => {
   };
 
   return (
-    <Box>
+    <RedirectDashboard>
       <Navbar />
       <Box
         sx={{
@@ -139,7 +140,7 @@ const Signup = () => {
           </Paper>
         </Box>
       </Box>
-    </Box>
+    </RedirectDashboard>
   );
 };
 

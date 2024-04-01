@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { IUser } from "../models/user.types";
+import RedirectDashboard from "../components/RedirectDashboard";
 
 const Login = () => {
   const defaultUser: Pick<IUser, "email"> & {
@@ -34,7 +35,7 @@ const Login = () => {
   };
 
   return (
-    <Box>
+    <RedirectDashboard>
       <Navbar />
       <Box
         sx={{
@@ -95,7 +96,7 @@ const Login = () => {
           </Paper>
         </Box>
       </Box>
-    </Box>
+    </RedirectDashboard>
   );
 };
 

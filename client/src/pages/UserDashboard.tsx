@@ -2,12 +2,13 @@ import { Box, Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 import GroupRec from "../components/GroupRec";
 import GroupInfo from "./GroupInfo";
+import ProtectedComponent from "../components/ProtectedComponent";
 
 const hasGroup = false;
 
 const UserDashboard = () => {
   return (
-    <div>
+    <ProtectedComponent>
       <Navbar />
       {hasGroup ? (
         <Box
@@ -30,7 +31,7 @@ const UserDashboard = () => {
           <GroupRec />
         </Box>
       )}
-    </div>
+    </ProtectedComponent>
   );
 };
 
