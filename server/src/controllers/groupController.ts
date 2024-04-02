@@ -34,6 +34,14 @@ export const getGroupById = async (req: Request, res: Response) => {
   }
 };
 
+export const getGroupUsers = async (req: Request, res: Response) => {
+  res.status(200);
+};
+
+export const getGroupEvents = async (req: Request, res: Response) => {
+  res.status(200);
+};
+
 export const updateGroup = async (req: Request, res: Response) => {
   try {
     const updatedGroup = await GroupModel.findByIdAndUpdate(

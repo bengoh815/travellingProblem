@@ -3,6 +3,7 @@ import {
   getAllEvents,
   createEvent,
   getEventById,
+  getEventUsers,
   updateEvent,
   deleteEvent,
 } from "../controllers/eventController";
@@ -16,6 +17,7 @@ const v1 = "/api/v1";
 eventsRouter.get(`${v1}/events`, getAllEvents);
 eventsRouter.post(`${v1}/events`, createEvent);
 eventsRouter.get(`${v1}/events/:id`, getEventById);
+eventsRouter.get(`${v1}/events/:id/users`, getEventUsers);
 eventsRouter.put(`${v1}/events/:id`, updateEvent);
 eventsRouter.delete(`${v1}/events/:id`, deleteEvent);
 

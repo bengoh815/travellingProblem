@@ -34,6 +34,10 @@ export const getEventById = async (req: Request, res: Response) => {
   }
 };
 
+export const getEventUsers = async (req: Request, res: Response) => {
+  res.status(200);
+};
+
 export const updateEvent = async (req: Request, res: Response) => {
   try {
     const updatedEvent = await EventModel.findByIdAndUpdate(
