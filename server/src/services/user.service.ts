@@ -12,7 +12,7 @@ class UserService {
   }
 
   async getUserById(userId: string): Promise<IUser | null> {
-    return await UserModel.findById(userId).select("-password");
+    return await UserModel.findById(userId).select("-password").exec();
   }
 
   async updateUser(
@@ -21,7 +21,9 @@ class UserService {
   ): Promise<IUser | null> {
     return await UserModel.findByIdAndUpdate(userId, updateData, {
       new: true,
-    }).select("-password");
+    })
+      .select("-password")
+      .exec();
   }
 
   async deleteUser(userId: string): Promise<IUser | null> {
