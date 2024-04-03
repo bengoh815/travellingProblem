@@ -1,13 +1,13 @@
 import express from "express";
 import connectToDatabase from "./config/db";
 import cors from "cors";
-import usersRouter from "./routes/userRouter";
-import applicationsRouter from "./routes/applicationRoutes";
-import carsRouter from "./routes/carRoutes";
-import eventsRouter from "./routes/eventRoutes";
-import groupsRouter from "./routes/groupRoutes";
-import ridesRouter from "./routes/rideRoutes";
-import membershipRouter from "./routes/membershipRoutes";
+import usersRouter from "./routes/user.router";
+import applicationsRouter from "./routes/application.routes";
+import carsRouter from "./routes/car.routes";
+import eventsRouter from "./routes/event.routes";
+import groupsRouter from "./routes/group.routes";
+import ridesRouter from "./routes/ride.routes";
+import membershipRouter from "./routes/membership.routes";
 
 const app = express();
 

@@ -5,7 +5,7 @@ import {
   getMembershipById,
   updateMembership,
   deleteMembership,
-} from "../controllers/membershipController";
+} from "../controllers/membership.controller";
 
 const membershipRouter = express.Router();
 

@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
-import MembershipModel, { IMembership } from "../models/membership.model";
+import membershipService from "../services/membership.service";
 import { handleError } from "../utils/errorHandler";
 
 export const getAllMemberships = async (req: Request, res: Response) => {
   try {
-    const memberships = await MembershipModel.find();
+    const memberships = await membershipService.getAllMemberships();
     res.status(Status.OK).json(memberships);
   } catch (error: unknown) {
     handleError(res, "Error fetching memberships", error);
@@ -14,8 +14,7 @@ export const getAllMemberships = async (req: Request, res: Response) => {
 
 export const createMembership = async (req: Request, res: Response) => {
   try {
-    const newMembership = new MembershipModel(req.body as IMembership);
-    await newMembership.save();
+    const newMembership = await membershipService.createMembership(req.body);
     res.status(Status.Created).json(newMembership);
   } catch (error: unknown) {
     handleError(res, "Error creating membership", error);
@@ -24,7 +23,7 @@ export const createMembership = async (req: Request, res: Response) => {
 
 export const getMembershipById = async (req: Request, res: Response) => {
   try {
-    const membership = await MembershipModel.findById(req.params.id);
+    const membership = await membershipService.getMembershipById(req.params.id);
     if (!membership) {
       return res
         .status(Status.NotFound)
@@ -38,10 +37,9 @@ export const getMembershipById = async (req: Request, res: Response) => {
 
 export const updateMembership = async (req: Request, res: Response) => {
   try {
-    const updatedMembership = await MembershipModel.findByIdAndUpdate(
+    const updatedMembership = await membershipService.updateMembership(
       req.params.id,
-      req.body,
-      { new: true }
+      req.body
     );
     if (!updatedMembership) {
       return res
@@ -56,7 +54,7 @@ export const updateMembership = async (req: Request, res: Response) => {
 
 export const deleteMembership = async (req: Request, res: Response) => {
   try {
-    const deletedMembership = await MembershipModel.findByIdAndDelete(
+    const deletedMembership = await membershipService.deleteMembership(
       req.params.id
     );
     if (!deletedMembership) {

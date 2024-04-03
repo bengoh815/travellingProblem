@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
-import User, { IUser } from "../models/user.model";
+import userService from "../services/user.service";
 import { handleError } from "../utils/errorHandler";
 
 export const getAllUsers = async (_req: Request, res: Response) => {
   try {
-    const users = await User.find().select("-password");
+    const users = await userService.getAllUsers();
     res.status(Status.OK).json(users);
   } catch (error: unknown) {
     handleError(res, "Error retrieving users", error);
@@ -14,8 +14,7 @@ export const getAllUsers = async (_req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const newUser = new User(req.body as IUser);
-    await newUser.save();
+    const newUser = await userService.createUser(req.body);
     res.status(Status.Created).json(newUser);
   } catch (error: unknown) {
     handleError(res, "Error creating user", error);
@@ -24,7 +23,7 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const getUserById = async (req: Request, res: Response) => {
   try {
-    const user = await User.findById(req.params.id).select("-password");
+    const user = await userService.getUserById(req.params.id);
     if (!user) {
       return res.status(Status.NotFound).json({ message: "User not found" });
     }
@@ -36,9 +35,7 @@ export const getUserById = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    }).select("-password");
+    const updatedUser = await userService.updateUser(req.params.id, req.body);
     if (!updatedUser) {
       return res.status(Status.NotFound).json({ message: "User not found" });
     }
@@ -50,7 +47,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    const deletedUser = await userService.deleteUser(req.params.id);
     if (!deletedUser) {
       return res.status(Status.NotFound).json({ message: "User not found" });
     }

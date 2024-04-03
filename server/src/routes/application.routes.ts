@@ -5,7 +5,7 @@ import {
   getApplicationById,
   updateApplication,
   deleteApplication,
-} from "../controllers/applicationController";
+} from "../controllers/application.controller";
 
 const applicationsRouter = express.Router();
 

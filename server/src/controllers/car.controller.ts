@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
+import carService from "../services/car.service";
 import { handleError } from "../utils/errorHandler";
-import CarModel, { ICar } from "../models/car.model";
 
 export const getAllCars = async (req: Request, res: Response) => {
   try {
-    const cars = await CarModel.find();
+    const cars = await carService.getAllCars();
     res.status(Status.OK).json(cars);
   } catch (error: unknown) {
     handleError(res, "Error fetching cars", error);
@@ -14,8 +14,7 @@ export const getAllCars = async (req: Request, res: Response) => {
 
 export const createCar = async (req: Request, res: Response) => {
   try {
-    const newCar = new CarModel(req.body as ICar);
-    await newCar.save();
+    const newCar = await carService.createCar(req.body);
     res.status(Status.Created).json(newCar);
   } catch (error: unknown) {
     handleError(res, "Error creating car", error);
@@ -24,7 +23,7 @@ export const createCar = async (req: Request, res: Response) => {
 
 export const getCarById = async (req: Request, res: Response) => {
   try {
-    const car = await CarModel.findById(req.params.id);
+    const car = await carService.getCarById(req.params.id);
     if (!car) {
       return res.status(Status.NotFound).json({ message: "Car not found" });
     }
@@ -36,15 +35,11 @@ export const getCarById = async (req: Request, res: Response) => {
 
 export const updateCar = async (req: Request, res: Response) => {
   try {
-    const updatedCar = await CarModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const updatedCar = await carService.updateCar(req.params.id, req.body);
     if (!updatedCar) {
       return res.status(Status.NotFound).json({ message: "Car not found" });
     }
-    res.status(Status.OK).json(updateCar);
+    res.status(Status.OK).json(updatedCar);
   } catch (error: unknown) {
     handleError(res, "Error updating car", error);
   }
@@ -52,7 +47,7 @@ export const updateCar = async (req: Request, res: Response) => {
 
 export const deleteCar = async (req: Request, res: Response) => {
   try {
-    const deletedCar = await CarModel.findByIdAndDelete(req.params.id);
+    const deletedCar = await carService.deleteCar(req.params.id);
     if (!deletedCar) {
       return res.status(Status.NotFound).json({ message: "Car not found" });
     }

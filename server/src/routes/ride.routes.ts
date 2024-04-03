@@ -5,7 +5,7 @@ import {
   getRideById,
   updateRide,
   deleteRide,
-} from "../controllers/rideController";
+} from "../controllers/ride.controller";
 
 const ridesRouter = express.Router();
 

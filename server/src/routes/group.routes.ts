@@ -7,7 +7,7 @@ import {
   getGroupEvents,
   updateGroup,
   deleteGroup,
-} from "../controllers/groupController";
+} from "../controllers/group.controller";
 
 const groupsRouter = express.Router();
 

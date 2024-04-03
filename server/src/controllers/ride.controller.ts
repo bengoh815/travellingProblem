@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
-import RideModel, { IRide } from "../models/ride.model";
+import rideService from "../services/ride.service";
 import { handleError } from "../utils/errorHandler";
 
 export const getAllRides = async (req: Request, res: Response) => {
   try {
-    const rides = await RideModel.find();
+    const rides = await rideService.getAllRides();
     res.status(Status.OK).json(rides);
   } catch (error: unknown) {
     handleError(res, "Error fetching rides", error);
@@ -14,8 +14,7 @@ export const getAllRides = async (req: Request, res: Response) => {
 
 export const createRide = async (req: Request, res: Response) => {
   try {
-    const newRide = new RideModel(req.body as IRide);
-    await newRide.save();
+    const newRide = await rideService.createRide(req.body);
     res.status(Status.Created).json(newRide);
   } catch (error: unknown) {
     handleError(res, "Error creating ride", error);
@@ -24,7 +23,7 @@ export const createRide = async (req: Request, res: Response) => {
 
 export const getRideById = async (req: Request, res: Response) => {
   try {
-    const ride = await RideModel.findById(req.params.id);
+    const ride = await rideService.getRideById(req.params.id);
     if (!ride) {
       return res.status(Status.NotFound).json({ message: "Ride not found" });
     }
@@ -36,11 +35,7 @@ export const getRideById = async (req: Request, res: Response) => {
 
 export const updateRide = async (req: Request, res: Response) => {
   try {
-    const updatedRide = await RideModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const updatedRide = await rideService.updateRide(req.params.id, req.body);
     if (!updatedRide) {
       return res.status(Status.NotFound).json({ message: "Ride not found" });
     }
@@ -52,7 +47,7 @@ export const updateRide = async (req: Request, res: Response) => {
 
 export const deleteRide = async (req: Request, res: Response) => {
   try {
-    const deletedRide = await RideModel.findByIdAndDelete(req.params.id);
+    const deletedRide = await rideService.deleteRide(req.params.id);
     if (!deletedRide) {
       return res.status(Status.NotFound).json({ message: "Ride not found" });
     }

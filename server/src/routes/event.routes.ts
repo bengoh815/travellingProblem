@@ -6,7 +6,7 @@ import {
   getEventUsers,
   updateEvent,
   deleteEvent,
-} from "../controllers/eventController";
+} from "../controllers/event.controller";
 
 const eventsRouter = express.Router();
 

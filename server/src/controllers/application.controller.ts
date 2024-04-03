@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { Status } from "../utils/statusCodes";
-import ApplicationModel, { IApplication } from "../models/application.model";
+import applicationService from "../services/application.service";
 import { handleError } from "../utils/errorHandler";
 
 export const getAllApplications = async (req: Request, res: Response) => {
   try {
-    const applications = await ApplicationModel.find();
+    const applications = await applicationService.getAllApplications();
     res.status(Status.OK).json(applications);
   } catch (error: unknown) {
     handleError(res, "Error fetching applications", error);
@@ -14,8 +14,7 @@ export const getAllApplications = async (req: Request, res: Response) => {
 
 export const createApplication = async (req: Request, res: Response) => {
   try {
-    const newApplication = new ApplicationModel(req.body as IApplication);
-    await newApplication.save();
+    const newApplication = await applicationService.createApplication(req.body);
     res.status(Status.Created).json(newApplication);
   } catch (error: unknown) {
     handleError(res, "Error creating application", error);
@@ -24,7 +23,9 @@ export const createApplication = async (req: Request, res: Response) => {
 
 export const getApplicationById = async (req: Request, res: Response) => {
   try {
-    const application = await ApplicationModel.findById(req.params.id);
+    const application = await applicationService.getApplicationById(
+      req.params.id
+    );
     if (!application) {
       return res
         .status(Status.NotFound)
@@ -38,10 +39,9 @@ export const getApplicationById = async (req: Request, res: Response) => {
 
 export const updateApplication = async (req: Request, res: Response) => {
   try {
-    const updatedApplication = await ApplicationModel.findByIdAndUpdate(
+    const updatedApplication = await applicationService.updateApplication(
       req.params.id,
-      req.body,
-      { new: true }
+      req.body
     );
     if (!updatedApplication) {
       return res
@@ -56,7 +56,7 @@ export const updateApplication = async (req: Request, res: Response) => {
 
 export const deleteApplication = async (req: Request, res: Response) => {
   try {
-    const deletedApplication = await ApplicationModel.findByIdAndDelete(
+    const deletedApplication = await applicationService.deleteApplication(
       req.params.id
     );
     if (!deletedApplication) {
