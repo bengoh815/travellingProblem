@@ -4,7 +4,7 @@
 
 import bcrypt from "bcrypt";
 import mongoose, { Schema, Document } from "mongoose";
-import { IMembership } from "./membership.model";
+import { IMembershipDocument } from "./membership.model";
 
 const SALT_ROUNDS = Number(process.env.SALT_ROUNDS) || 10;
 
@@ -14,7 +14,7 @@ export enum UserRoles {
   Admin = "admin",
 }
 
-export interface IUser extends Document {
+export interface IUser {
   firstName: string;
   lastName: string;
   address?: string;
@@ -25,10 +25,12 @@ export interface IUser extends Document {
   email: string;
   password: string;
   roles: UserRoles[];
-  memberships: IMembership["_id"][];
+  memberships: IMembershipDocument["_id"][];
 }
 
-const userSchema: Schema = new Schema<IUser>(
+export interface IUserDocument extends IUser, Document {}
+
+const userSchema: Schema = new Schema<IUserDocument>(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -47,7 +49,7 @@ const userSchema: Schema = new Schema<IUser>(
   }
 );
 
-userSchema.pre<IUser>("save", async function (next) {
+userSchema.pre<IUserDocument>("save", async function (next) {
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
   }
@@ -61,6 +63,6 @@ userSchema.methods.verifyPassword = async function (
 };
 userSchema.index({ email: 1 }, { unique: true });
 
-const UserModel = mongoose.model<IUser>("User", userSchema);
+const UserModel = mongoose.model<IUserDocument>("User", userSchema);
 
 export default UserModel;

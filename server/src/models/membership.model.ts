@@ -3,16 +3,18 @@
  */
 
 import mongoose, { Document, Schema } from "mongoose";
-import { IUser } from "./user.model";
-import { IGroup } from "./group.model";
+import { IUserDocument } from "./user.model";
+import { IGroupDocument } from "./group.model";
 
-export interface IMembership extends Document {
-  userId: IUser["_id"];
-  groupId: IGroup["_id"];
+export interface IMembership {
+  userId: IUserDocument["_id"];
+  groupId: IGroupDocument["_id"];
   dateCreated: Date;
 }
 
-const membershipSchema = new Schema<IMembership>({
+export interface IMembershipDocument extends IMembership, Document {}
+
+const membershipSchema = new Schema<IMembershipDocument>({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   groupId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -22,7 +24,7 @@ const membershipSchema = new Schema<IMembership>({
   dateCreated: { type: Date, default: Date.now },
 });
 
-const MembershipModel = mongoose.model<IMembership>(
+const MembershipModel = mongoose.model<IMembershipDocument>(
   "Membership",
   membershipSchema
 );

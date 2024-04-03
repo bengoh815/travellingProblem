@@ -33,6 +33,31 @@ export const getGroupById = async (req: Request, res: Response) => {
   }
 };
 
+export const getGroupUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await groupService.getGroupUsers(req.params.id);
+    if (!users) {
+      return res
+        .status(Status.NotFound)
+        .json({ message: "Group users not found" });
+    }
+  } catch (error: unknown) {
+    handleError(res, "Error getting group users", error);
+  }
+};
+export const getGroupEvents = async (req: Request, res: Response) => {
+  try {
+    const events = await groupService.getGroupEvents(req.params.id);
+    if (!events) {
+      return res
+        .status(Status.NotFound)
+        .json({ message: "Group events not found" });
+    }
+  } catch (error: unknown) {
+    handleError(res, "Error getting group events", error);
+  }
+};
+
 export const updateGroup = async (req: Request, res: Response) => {
   try {
     const updatedGroup = await groupService.updateGroup(

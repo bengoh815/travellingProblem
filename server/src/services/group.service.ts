@@ -1,4 +1,7 @@
+import EventModel, { IEvent } from "../models/event.model";
 import GroupModel, { IGroup } from "../models/group.model";
+import MembershipModel from "../models/membership.model";
+import { IUser } from "../models/user.model";
 
 class GroupService {
   async getAllGroups(): Promise<IGroup[]> {
@@ -13,6 +16,16 @@ class GroupService {
 
   async getGroupById(groupId: string): Promise<IGroup | null> {
     return await GroupModel.findById(groupId);
+  }
+
+  async getGroupUsers(groupId: string): Promise<IUser[] | null> {
+    const memberships = await MembershipModel.find({ groupId }).populate(
+      "userId"
+    );
+    return memberships.map((membership) => membership.userId);
+  }
+  async getGroupEvents(groupId: string): Promise<IEvent[] | null> {
+    return await EventModel.find({ groupId });
   }
 
   async updateGroup(

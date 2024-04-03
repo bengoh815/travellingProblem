@@ -3,19 +3,21 @@
  */
 
 import mongoose, { Schema, Document } from "mongoose";
-import { IUser } from "./user.model";
+import { IUserDocument } from "./user.model";
 
 export interface IRideAssignment {
-  driver: IUser["_id"];
-  passengers: IUser["_id"][];
+  driver: IUserDocument["_id"];
+  passengers: IUserDocument["_id"][];
 }
 
-export interface IRide extends Document {
+export interface IRide {
   eventId: mongoose.Types.ObjectId;
   assignments: IRideAssignment[];
 }
 
-const rideSchema = new Schema<IRide>({
+export interface IRideDocument extends IRide, Document {}
+
+const rideSchema = new Schema<IRideDocument>({
   eventId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Event",
@@ -33,6 +35,6 @@ const rideSchema = new Schema<IRide>({
   ],
 });
 
-const RideModel = mongoose.model<IRide>("Ride", rideSchema);
+const RideModel = mongoose.model<IRideDocument>("Ride", rideSchema);
 
 export default RideModel;

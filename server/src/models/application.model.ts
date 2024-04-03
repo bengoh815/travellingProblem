@@ -3,7 +3,7 @@
  */
 
 import mongoose, { Schema, Document } from "mongoose";
-import { IUser, UserRoles } from "./user.model";
+import { IUserDocument, UserRoles } from "./user.model";
 
 export enum ApplicationDecision {
   Pending = 0,
@@ -11,13 +11,15 @@ export enum ApplicationDecision {
   Denied = 2,
 }
 
-export interface IApplication extends Document {
-  user: IUser["_id"];
+export interface IApplication {
+  user: IUserDocument["_id"];
   appType: UserRoles;
   decision: ApplicationDecision;
 }
 
-const applicationSchema = new Schema<IApplication>(
+export interface IApplicationDocument extends IApplication, Document {}
+
+const applicationSchema = new Schema<IApplicationDocument>(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     appType: { type: String, enum: Object.values(UserRoles), required: true },
@@ -30,7 +32,7 @@ const applicationSchema = new Schema<IApplication>(
   { timestamps: true }
 );
 
-const ApplicationModel = mongoose.model<IApplication>(
+const ApplicationModel = mongoose.model<IApplicationDocument>(
   "Application",
   applicationSchema
 );

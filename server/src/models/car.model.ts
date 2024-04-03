@@ -3,22 +3,24 @@
  */
 
 import mongoose, { Document, Schema } from "mongoose";
-import { IUser } from "./user.model";
+import { IUserDocument } from "./user.model";
 
-export interface ICar extends Document {
+export interface ICar {
   carModel: string;
   description: string;
-  owner: IUser["_id"];
+  owner: IUserDocument["_id"];
   capacity: number;
 }
 
-const carSchema = new Schema<ICar>({
+export interface ICarDocument extends ICar, Document {}
+
+const carSchema = new Schema<ICarDocument>({
   carModel: { type: String, required: true },
   description: { type: String, required: true },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   capacity: { type: Number, required: true },
 });
 
-const CarModel = mongoose.model<ICar>("Car", carSchema);
+const CarModel = mongoose.model<ICarDocument>("Car", carSchema);
 
 export default CarModel;
