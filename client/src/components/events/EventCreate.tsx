@@ -1,14 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { TextField, Button, Grid, Container, Typography } from "@mui/material";
+import { IEvent } from "../../models/event.types";
 
 const EventCreate = () => {
-  const [event, setEvent] = useState({
+  const [event, setEvent] = useState<IEvent>({
     name: "",
     description: "",
-    date: "",
+    date: new Date(),
     groupId: "",
     attendees: [],
-    ridePlan: null,
+    ridePlan: undefined,
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

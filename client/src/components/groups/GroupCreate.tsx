@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { IGroup } from "../../models/group.types";
 import { Add } from "@mui/icons-material";
+import axios from "axios";
 
 // TODO implement assigner caretaker for group
 
@@ -20,22 +21,36 @@ const GroupCreate = () => {
   const handleClose = () => setOpen(false);
 
   // Group Form
-  const [group, setGroup] = useState<IGroup>({
+  const defaultForm: IGroup = {
     name: "",
     description: "",
     members: [],
     events: [],
-  });
+  };
+  const [group, setGroup] = useState<IGroup>(defaultForm);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setGroup({ ...group, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleClose();
-    // Handle form submission, such as sending data to a server
-  };
 
+    // Validation
+    if (!group.name || !group.description) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:8123/api/v1/groups", group);
+      handleClose();
+      // Reset the form or update state as needed
+      setGroup(defaultForm);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred while submitting the form.");
+    }
+  };
   return (
     <div>
       <Button variant="contained" onClick={handleOpen} endIcon={<Add />}>

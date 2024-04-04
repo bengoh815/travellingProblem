@@ -1,4 +1,5 @@
 import { Breadcrumbs, Grid, Link, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import Navbar from "../components/navigation/Navbar";
 import { IGroup } from "../models/group.types";
 
@@ -41,8 +42,8 @@ const EventInfo = () => {
       </Grid>
       <Grid item xs={12}>
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/groups/:id">
-            {groupData.name}
+          <Link underline="hover" color="inherit">
+            <RouterLink to="/groups/:id">{groupData.name}</RouterLink>
           </Link>
           <Typography color="text.primary">{eventData.name}</Typography>
         </Breadcrumbs>
