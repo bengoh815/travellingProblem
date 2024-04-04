@@ -1,5 +1,13 @@
 version: "3.8"
 services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8123:80"
+    depends_on:
+      - frontend
+      - backend
+
   frontend:
     build: ./client
     ports:
