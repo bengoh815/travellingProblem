@@ -6,11 +6,12 @@ import {
   updateCar,
   deleteCar,
 } from "../controllers/car.controller";
+import { APIVersion } from "../utils/apiVersion";
 
 const carsRouter = express.Router();
 
 // API version prefix
-const v1 = "/api/v1";
+const v1 = APIVersion.v1;
 
 // Routes
 carsRouter.get(`${v1}/cars`, getAllCars);

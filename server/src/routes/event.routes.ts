@@ -7,11 +7,12 @@ import {
   updateEvent,
   deleteEvent,
 } from "../controllers/event.controller";
+import { APIVersion } from "../utils/apiVersion";
 
 const eventsRouter = express.Router();
 
 // API version prefix
-const v1 = "/api/v1";
+const v1 = APIVersion.v1;
 
 // Routes
 eventsRouter.get(`${v1}/events`, getAllEvents);

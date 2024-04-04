@@ -8,11 +8,12 @@ import {
   updateGroup,
   deleteGroup,
 } from "../controllers/group.controller";
+import { APIVersion } from "../utils/apiVersion";
 
 const groupsRouter = express.Router();
 
 // API version prefix
-const v1 = "/api/v1";
+const v1 = APIVersion.v1;
 
 // Routes
 groupsRouter.get(`${v1}/groups`, getAllGroups);

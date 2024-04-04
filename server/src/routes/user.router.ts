@@ -6,11 +6,12 @@ import {
   updateUser,
   deleteUser,
 } from "../controllers/user.controller";
+import { APIVersion } from "../utils/apiVersion";
 
 const usersRouter = express.Router();
 
 // API version prefix
-const v1 = "/api/v1";
+const v1 = APIVersion.v1;
 
 // Routes
 usersRouter.get(`${v1}/users`, getAllUsers);

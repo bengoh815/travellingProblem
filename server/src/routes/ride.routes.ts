@@ -6,11 +6,12 @@ import {
   updateRide,
   deleteRide,
 } from "../controllers/ride.controller";
+import { APIVersion } from "../utils/apiVersion";
 
 const ridesRouter = express.Router();
 
 // API version prefix
-const v1 = "/api/v1";
+const v1 = APIVersion.v1;
 
 // Routes
 ridesRouter.get(`${v1}/rides`, getAllRides);

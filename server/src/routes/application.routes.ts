@@ -6,11 +6,12 @@ import {
   updateApplication,
   deleteApplication,
 } from "../controllers/application.controller";
+import { APIVersion } from "../utils/apiVersion";
 
 const applicationsRouter = express.Router();
 
 // API version prefix
-const v1 = "/api/v1";
+const v1 = APIVersion.v1;
 
 // Routes
 applicationsRouter.get(`${v1}/applications`, getAllApplications);
