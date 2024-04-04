@@ -1,4 +1,4 @@
 // Route prefix
 export enum APIVersion {
-  v1 = "api/v1",
+  v1 = "/api/v1",
 }
