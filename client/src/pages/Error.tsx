@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import StyledLink from "../components/StyledLink";
+import StyledLink from "../components/navigation/StyledLink";
 
 const Error = () => {
   return (

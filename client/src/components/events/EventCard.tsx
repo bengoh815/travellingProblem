@@ -7,9 +7,9 @@ import {
   CardHeader,
   Typography,
 } from "@mui/material";
-import { IEvent } from "../models/event.types";
+import { IEvent } from "../../models/event.types";
 import { Delete, Edit } from "@mui/icons-material";
-import { useUser } from "../context/userContext";
+import { useUser } from "../../context/userContext";
 
 interface EventCardProps {
   eventData: IEvent;

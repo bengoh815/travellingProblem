@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import AppsModal from "../components/AppsModal";
+import AppsModal from "../components/applications/AppsModal";
 
 const Playground = () => {
   const [message, setMessage] = useState("");

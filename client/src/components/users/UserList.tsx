@@ -1,5 +1,5 @@
 import { List, ListItem, ListItemText, Typography } from "@mui/material";
-import { IUser } from "../models/user.types";
+import { IUser } from "../../models/user.types";
 
 const UserList = () => {
   const userData: IUser[] = [

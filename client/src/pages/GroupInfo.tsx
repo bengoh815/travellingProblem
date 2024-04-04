@@ -1,13 +1,13 @@
 import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
-import EventFeed from "../components/EventFeed";
+import EventFeed from "../components/events/EventFeed";
 import { useEffect, useState } from "react";
 import { IGroup } from "../models/group.types";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 import { Add } from "@mui/icons-material";
-import UserList from "../components/UserList";
+import UserList from "../components/users/UserList";
 import { useUser } from "../context/userContext";
 import { IUser } from "../models/user.types";
-import ProtectedComponent from "../components/ProtectedComponent";
+import ProtectedComponent from "../components/utils/ProtectedComponent";
 
 interface TabPanelProps {
   children?: React.ReactNode;

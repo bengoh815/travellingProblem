@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import Navbar from "../components/Navbar";
-import AppsTable from "../components/AppsTable";
+import Navbar from "../components/navigation/Navbar";
+import AppsTable from "../components/applications/AppsTable";
 
 import Analytics from "../components/Analytics";
 

@@ -1,8 +1,8 @@
 import { Box, Grid, Typography } from "@mui/material";
-import Navbar from "../components/Navbar";
-import GroupRec from "../components/GroupRec";
-import ProtectedComponent from "../components/ProtectedComponent";
-import EventUpcoming from "../components/EventUpcoming";
+import Navbar from "../components/navigation/Navbar";
+import GroupRec from "../components/groups/GroupRec";
+import ProtectedComponent from "../components/utils/ProtectedComponent";
+import EventUpcoming from "../components/events/EventUpcoming";
 
 const UserDashboard = () => {
   return (

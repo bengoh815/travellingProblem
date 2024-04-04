@@ -7,7 +7,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { IGroup } from "../models/group.types";
+import { IGroup } from "../../models/group.types";
 
 interface GroupCardProps {
   data: IGroup;

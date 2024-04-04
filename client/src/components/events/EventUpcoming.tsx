@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { IEvent } from "../models/event.types";
+import { IEvent } from "../../models/event.types";
 
 const EventUpcoming = () => {
   const hasGroup = false;

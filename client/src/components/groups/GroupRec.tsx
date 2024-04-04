@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { IGroup } from "../models/group.types";
+import { IGroup } from "../../models/group.types";
 import GroupCard from "./GroupCard";
 
 const GroupRec = () => {

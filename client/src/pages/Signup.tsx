@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IUser } from "../models/user.types";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import RedirectDashboard from "../components/RedirectDashboard";
+import RedirectDashboard from "../components/utils/RedirectDashboard";
 
 const Signup = () => {
   const defaultUser: Pick<IUser, "firstName" | "lastName" | "email"> & {

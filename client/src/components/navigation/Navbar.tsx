@@ -1,8 +1,7 @@
-import { Box, Button, Divider } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import StyledLink from "./StyledLink";
-import { useUser } from "../context/userContext";
-import { useEffect } from "react";
-import { IUser } from "../models/user.types";
+import { useUser } from "../../context/userContext";
+import { IUser } from "../../models/user.types";
 
 const Navbar = () => {
   const { user } = useUser();
@@ -36,7 +35,6 @@ const Navbar = () => {
           <Box sx={{ display: "flex", p: 1, gap: 2 }}>
             <StyledLink to="/dashboard">Dashboard</StyledLink>
             <StyledLink to="/dashboard/driver">Driver</StyledLink>
-            <StyledLink to="/dashboard/organizer">Organizer</StyledLink>
             <StyledLink to="/dashboard/admin">Admin</StyledLink>
             <StyledLink to="/groups/:id">Group</StyledLink>
             <StyledLink to="/events/:id">Event</StyledLink>

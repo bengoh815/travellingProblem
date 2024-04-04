@@ -1,5 +1,5 @@
 import { Breadcrumbs, Grid, Link, Typography } from "@mui/material";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 import { IGroup } from "../models/group.types";
 
 const EventInfo = () => {

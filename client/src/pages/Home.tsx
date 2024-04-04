@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
-import Navbar from "../components/Navbar";
-import StyledLink from "../components/StyledLink";
-import RedirectDashboard from "../components/RedirectDashboard";
+import Navbar from "../components/navigation/Navbar";
+import StyledLink from "../components/navigation/StyledLink";
+import RedirectDashboard from "../components/utils/RedirectDashboard";
 
 const Home = () => {
   return (

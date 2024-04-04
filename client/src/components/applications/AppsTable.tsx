@@ -7,8 +7,11 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { ApplicationDecision, IApplication } from "../models/application.types";
-import { IUser, UserRoles } from "../models/user.types";
+import {
+  ApplicationDecision,
+  IApplication,
+} from "../../models/application.types";
+import { IUser, UserRoles } from "../../models/user.types";
 import Options from "./AppsOption";
 
 // TODO: Pagination

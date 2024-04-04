@@ -1,6 +1,6 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 import { Box, Typography } from "@mui/material";
-import RedirectDashboard from "../components/RedirectDashboard";
+import RedirectDashboard from "../components/utils/RedirectDashboard";
 
 const About = () => {
   return (

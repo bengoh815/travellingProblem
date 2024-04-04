@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { IUser } from "../models/user.types";
-import RedirectDashboard from "../components/RedirectDashboard";
+import RedirectDashboard from "../components/utils/RedirectDashboard";
 
 const Login = () => {
   const defaultUser: Pick<IUser, "email"> & {

@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from "react";
-import { useUser } from "../context/userContext";
+import { useUser } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
 const RedirectDashboard: React.FC<{ children: ReactNode }> = ({ children }) => {

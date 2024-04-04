@@ -1,4 +1,4 @@
-import { IEvent } from "../models/event.types";
+import { IEvent } from "../../models/event.types";
 import EventCard from "./EventCard";
 
 interface EventFeedProps {
