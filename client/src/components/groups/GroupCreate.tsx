@@ -1,4 +1,8 @@
+// Standard library
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import axios from "axios";
+
+// MUI
 import {
   Box,
   Button,
@@ -8,9 +12,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { IGroup } from "../../models/group.types";
 import { Add } from "@mui/icons-material";
-import axios from "axios";
+
+// Models
+import { IGroup } from "../../models/group.types";
 
 // TODO implement assigner caretaker for group
 

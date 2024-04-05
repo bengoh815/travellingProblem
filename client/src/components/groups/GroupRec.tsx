@@ -1,61 +1,38 @@
-import { Box, Divider, Typography } from "@mui/material";
-import { IGroup } from "../../models/group.types";
+// Standard library
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+// MUI
+import { Box, Typography } from "@mui/material";
+
+// Components
 import GroupCard from "./GroupCard";
 
+// Models
+import { IGroup } from "../../models/group.types";
+
 const GroupRec = () => {
-  const groupsData: IGroup[] = [
-    {
-      name: "International Student Group",
-      description:
-        "A group for international students to connect and share experiences.",
-      members: ["user1", "user2", "user3"],
-      events: [
-        {
-          name: "Welcome Party",
-          description: "A party to welcome new international students.",
-          date: new Date("2023-09-01T18:00:00Z"),
-          groupId: "group1",
-          attendees: ["user1", "user2"],
-        },
-        {
-          name: "Cultural Exchange Night",
-          description:
-            "An event to learn about and celebrate different cultures.",
-          date: new Date("2023-10-15T19:00:00Z"),
-          groupId: "group1",
-          attendees: ["user2", "user3"],
-        },
-      ],
-    },
-    {
-      name: "Tech Enthusiasts",
-      description: "A group for students interested in technology and coding.",
-      members: ["user4", "user5", "user6"],
-      events: [
-        {
-          name: "Hackathon",
-          description: "A coding competition for building innovative projects.",
-          date: new Date("2023-11-10T09:00:00Z"),
-          groupId: "group2",
-          attendees: ["user4", "user5"],
-        },
-        {
-          name: "Tech Talk",
-          description: "A talk on the latest trends in technology.",
-          date: new Date("2023-12-05T17:00:00Z"),
-          groupId: "group2",
-          attendees: ["user5", "user6"],
-        },
-      ],
-    },
-  ];
+  const [groupsData, setGroupsData] = useState<IGroup[]>([]);
+
+  useEffect(() => {
+    const fetchGroups = async () => {
+      try {
+        const response = await axios.get("http://localhost:8123/api/v1/groups");
+        setGroupsData(response.data);
+      } catch (error) {
+        console.error("Error fetching groups: ", error);
+      }
+    };
+
+    fetchGroups();
+  }, []);
 
   return (
     <Box>
       <Typography variant="h4">Groups</Typography>
       <Box sx={{ px: 5, display: "flex" }}>
-        {groupsData.map((e, i) => (
-          <GroupCard data={e} key={i} />
+        {groupsData.map((group, index) => (
+          <GroupCard data={group} key={index} />
         ))}
       </Box>
     </Box>

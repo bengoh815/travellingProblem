@@ -1,13 +1,23 @@
-import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
-import EventFeed from "../components/events/EventFeed";
+// Standard library
 import { useEffect, useState } from "react";
-import { IGroup } from "../models/group.types";
-import Navbar from "../components/navigation/Navbar";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
+// MUI
+import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
 import { Add } from "@mui/icons-material";
+
+// Components
+import Navbar from "../components/navigation/Navbar";
+import EventFeed from "../components/events/EventFeed";
 import UserList from "../components/users/UserList";
-import { useUser } from "../context/userContext";
-import { IUser } from "../models/user.types";
 import ProtectedComponent from "../components/utils/ProtectedComponent";
+
+// Context
+import { useUser } from "../context/userContext";
+
+// Models
+import { IGroup } from "../models/group.types";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -39,35 +49,38 @@ function a11yProps(index: number) {
 }
 
 const GroupInfo = () => {
-  const { user, login } = useUser();
+  // Get user context
+  const { user } = useUser();
 
+  // Manage tab components
   const [tabState, setTabState] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabState(newValue);
   };
 
-  const groupData: IGroup = {
-    name: "Tech Enthusiasts",
-    description:
-      "A group for people passionate about technology and innovation.",
-    members: ["member1", "member2", "member3"],
-    events: [
-      {
-        name: "Tech Talk",
-        description: "A discussion on the latest trends in technology.",
-        date: new Date("2023-05-20T18:00:00Z"),
-        groupId: "group1",
-        attendees: ["member1", "member2"],
-      },
-      {
-        name: "Hackathon",
-        description: "A coding competition to build innovative projects.",
-        date: new Date("2023-06-15T09:00:00Z"),
-        groupId: "group1",
-        attendees: ["member2", "member3"],
-      },
-    ],
+  // Group information
+  const defaultData: IGroup = {
+    name: "",
+    description: "",
+    members: [],
+    events: [],
   };
+  const [groupData, setGroupData] = useState<IGroup>(defaultData);
+  const params = useParams();
+  useEffect(() => {
+    const fetchGroupById = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8123/api/v1/groups/${params.id}`
+        );
+        setGroupData(response.data);
+      } catch (error) {
+        console.error("Error fetching group by id: ", error);
+      }
+    };
+
+    fetchGroupById();
+  }, [params.id]);
 
   return (
     <ProtectedComponent>

@@ -3,7 +3,7 @@
  */
 
 import mongoose, { Schema, Document } from "mongoose";
-import { IUserDocument } from "./user.model"; // Assuming you have a User model defined
+import { IUserDocument } from "./user.model";
 import { IEventDocument } from "./event.model";
 
 // Interface for Group
