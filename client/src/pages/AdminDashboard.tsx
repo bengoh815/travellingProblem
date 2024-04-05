@@ -4,6 +4,7 @@ import AppsTable from "../components/applications/AppsTable";
 
 import Analytics from "../components/Analytics";
 import GroupCreate from "../components/groups/GroupCreate";
+import GroupRec from "../components/groups/GroupRec";
 
 const AdminDashboard = () => {
   return (
@@ -16,6 +17,7 @@ const AdminDashboard = () => {
       </Grid>
       <Grid item xs={12}>
         <GroupCreate />
+        <GroupRec />
       </Grid>
       <Grid item xs={12}>
         <Box sx={{ px: 3 }}>

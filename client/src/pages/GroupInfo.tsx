@@ -18,6 +18,7 @@ import { useUser } from "../context/userContext";
 
 // Models
 import { IGroup } from "../models/group.types";
+import EventCreate from "../components/events/EventCreate";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -70,7 +71,6 @@ const GroupInfo = () => {
   const [groupData, setGroupData] = useState<IGroup>(defaultData);
   const params = useParams();
   useEffect(() => {
-    console.log(params.id);
     const fetchGroupById = async () => {
       try {
         const response = await axios.get(
@@ -111,11 +111,7 @@ const GroupInfo = () => {
               </Tabs>
             </Box>
             <CustomTabPanel value={tabState} index={0}>
-              {user?.isAdmin && (
-                <Button variant="contained" endIcon={<Add />}>
-                  Create new event
-                </Button>
-              )}
+              {user?.isAdmin && <EventCreate groupId={params.id} />}
               <EventFeed eventsData={groupData.events} />
             </CustomTabPanel>
             <CustomTabPanel value={tabState} index={1}>

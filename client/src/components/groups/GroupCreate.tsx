@@ -18,6 +18,7 @@ import { Add } from "@mui/icons-material";
 import { IGroup } from "../../models/group.types";
 
 // TODO implement assigner caretaker for group
+// TODO determine if alert needs to change
 
 const GroupCreate = () => {
   // Modal
@@ -33,6 +34,7 @@ const GroupCreate = () => {
     events: [],
   };
   const [group, setGroup] = useState<IGroup>(defaultForm);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setGroup({ ...group, [e.target.name]: e.target.value });
   };
@@ -46,16 +48,18 @@ const GroupCreate = () => {
       return;
     }
 
+    // Submit data
     try {
       await axios.post("http://localhost:8123/api/v1/groups", group);
       handleClose();
-      // Reset the form or update state as needed
+
       setGroup(defaultForm);
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("An error occurred while submitting the form.");
     }
   };
+
   return (
     <div>
       <Button variant="contained" onClick={handleOpen} endIcon={<Add />}>
@@ -64,8 +68,8 @@ const GroupCreate = () => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="group-modal-title"
+        aria-describedby="group-modal-description"
       >
         <Box
           sx={{
