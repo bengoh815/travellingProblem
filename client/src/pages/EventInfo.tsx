@@ -42,8 +42,13 @@ const EventInfo = () => {
       </Grid>
       <Grid item xs={12}>
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit">
-            <RouterLink to="/groups/:id">{groupData.name}</RouterLink>
+          <Link
+            underline="hover"
+            color="inherit"
+            component={RouterLink}
+            to="/groups/:groupId"
+          >
+            <Typography>{groupData.name}</Typography>
           </Link>
           <Typography color="text.primary">{eventData.name}</Typography>
         </Breadcrumbs>

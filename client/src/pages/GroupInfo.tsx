@@ -74,7 +74,7 @@ const GroupInfo = () => {
     const fetchGroupById = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8123/api/v1/groups/${params.id}`
+          `http://localhost:8123/api/v1/groups/${params.groupId}`
         );
         setGroupData(response.data);
       } catch (error) {
@@ -83,7 +83,7 @@ const GroupInfo = () => {
     };
 
     fetchGroupById();
-  }, [params.id]);
+  }, [params.groupId]);
 
   return (
     <ProtectedComponent>
@@ -111,7 +111,7 @@ const GroupInfo = () => {
               </Tabs>
             </Box>
             <CustomTabPanel value={tabState} index={0}>
-              {user?.isAdmin && <EventCreate groupId={params.id} />}
+              {user?.isAdmin && <EventCreate />}
               <EventFeed eventsData={groupData.events} />
             </CustomTabPanel>
             <CustomTabPanel value={tabState} index={1}>

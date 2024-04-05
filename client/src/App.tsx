@@ -24,8 +24,8 @@ const App = () => {
           <Route path="/dashboard" element={<UserDashboard />} />
           <Route path="/dashboard/driver" element={<DriverDashboard />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
-          <Route path="/groups/:id" element={<GroupInfo />} />
-          <Route path="/events/:id" element={<EventInfo />} />
+          <Route path="/groups/:groupId" element={<GroupInfo />} />
+          <Route path="/events/:eventId" element={<EventInfo />} />
           <Route path="/playground" element={<Playground />} />
           <Route path="*" element={<Error />} />
         </Routes>

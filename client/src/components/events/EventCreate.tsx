@@ -16,23 +16,23 @@ import {
 import { IEvent } from "../../models/event.types";
 import { Add } from "@mui/icons-material";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-interface EventCreateProps {
-  groupId: string | undefined;
-}
+// TODO fix date format issue
 
-const EventCreate: React.FC<EventCreateProps> = ({ groupId }) => {
+const EventCreate = () => {
   // Modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   // Event form
+  const params = useParams();
   const defaultForm: IEvent = {
     name: "",
     description: "",
     date: new Date(),
-    groupId: groupId ? groupId : "",
+    groupId: params.groupId ? params.groupId : "",
     attendees: [],
     ridePlan: undefined,
   };
@@ -47,7 +47,6 @@ const EventCreate: React.FC<EventCreateProps> = ({ groupId }) => {
 
     // Validation
     if (!event.name || !event.description || event.groupId === "") {
-      console.log(event.groupId === "");
       alert("Please fill out all required fields.");
       return;
     }
@@ -121,7 +120,7 @@ const EventCreate: React.FC<EventCreateProps> = ({ groupId }) => {
                     type="datetime-local"
                     label="Date"
                     name="date"
-                    value={event.date}
+                    value={event.date.toISOString()}
                     onChange={handleChange}
                     required
                     InputLabelProps={{
