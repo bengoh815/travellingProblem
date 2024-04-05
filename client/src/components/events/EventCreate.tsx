@@ -18,8 +18,6 @@ import { Add } from "@mui/icons-material";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-// TODO fix date format issue
-
 const EventCreate = () => {
   // Modal
   const [open, setOpen] = React.useState(false);

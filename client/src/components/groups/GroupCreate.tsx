@@ -17,9 +17,6 @@ import { Add } from "@mui/icons-material";
 // Models
 import { IGroup } from "../../models/group.types";
 
-// TODO implement assigner caretaker for group
-// TODO determine if alert needs to change
-
 const GroupCreate = () => {
   // Modal
   const [open, setOpen] = React.useState(false);

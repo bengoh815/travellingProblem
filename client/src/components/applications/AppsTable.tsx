@@ -14,9 +14,6 @@ import {
 import { IUser, UserRoles } from "../../models/user.types";
 import Options from "./AppsOption";
 
-// TODO: Pagination
-// TODO Options update function to call
-
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
