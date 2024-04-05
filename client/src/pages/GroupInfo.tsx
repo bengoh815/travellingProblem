@@ -48,6 +48,8 @@ function a11yProps(index: number) {
   };
 }
 
+// TODO: MANAGE UNKNOWN ROUTES ie /groups/jibberish123124
+
 const GroupInfo = () => {
   // Get user context
   const { user } = useUser();
@@ -68,6 +70,7 @@ const GroupInfo = () => {
   const [groupData, setGroupData] = useState<IGroup>(defaultData);
   const params = useParams();
   useEffect(() => {
+    console.log(params.id);
     const fetchGroupById = async () => {
       try {
         const response = await axios.get(

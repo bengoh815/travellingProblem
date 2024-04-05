@@ -36,7 +36,6 @@ const Navbar = () => {
             <StyledLink to="/dashboard">Dashboard</StyledLink>
             <StyledLink to="/dashboard/driver">Driver</StyledLink>
             <StyledLink to="/dashboard/admin">Admin</StyledLink>
-            <StyledLink to="/groups/:id">Group</StyledLink>
             <StyledLink to="/events/:id">Event</StyledLink>
             <StyledLink to="/playground">Playground</StyledLink>
           </Box>
