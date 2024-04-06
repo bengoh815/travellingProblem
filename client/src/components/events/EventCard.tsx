@@ -31,13 +31,15 @@ const EventCardOptions = () => {
 const EventCard: React.FC<EventCardProps> = ({ eventData }) => {
   const { user } = useUser();
 
+  const eventDate = "eventData.date.toDateString()";
+
   return (
     <Box sx={{ p: 2 }}>
       <Card variant="outlined">
         <CardHeader
           action={user?.isAdmin && <EventCardOptions />}
           title={eventData.name}
-          subheader={eventData.date.toDateString()}
+          subheader={eventDate}
           sx={{ paddingBottom: 1 }}
         />
         <CardContent sx={{ py: 0 }}>

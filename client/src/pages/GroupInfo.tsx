@@ -19,6 +19,7 @@ import { useUser } from "../context/userContext";
 // Models
 import { IGroup } from "../models/group.types";
 import EventCreate from "../components/events/EventCreate";
+import { IEvent } from "../models/event.types";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -81,6 +82,23 @@ const GroupInfo = () => {
     };
 
     fetchGroupById();
+  }, [params.groupId]);
+
+  // Get event data
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8123/api/v1/groups/${params.groupId}/events`
+        );
+
+        setGroupData({ ...groupData, events: response.data });
+      } catch (error) {
+        console.error("Error fetching group events: ", error);
+      }
+    };
+
+    fetchEventData();
   }, [params.groupId]);
 
   return (

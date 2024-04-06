@@ -24,6 +24,7 @@ class GroupService {
     );
     return memberships.map((membership) => membership.userId);
   }
+
   async getGroupEvents(groupId: string): Promise<IEvent[] | null> {
     return await EventModel.find({ groupId });
   }

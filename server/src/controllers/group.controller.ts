@@ -23,7 +23,7 @@ export const createGroup = async (req: Request, res: Response) => {
 
 export const getGroupById = async (req: Request, res: Response) => {
   try {
-    const group = await groupService.getGroupById(req.params.id);
+    const group = await groupService.getGroupById(req.params.groupId);
     if (!group) {
       return res.status(Status.NotFound).json({ message: "Group not found" });
     }
@@ -35,24 +35,26 @@ export const getGroupById = async (req: Request, res: Response) => {
 
 export const getGroupUsers = async (req: Request, res: Response) => {
   try {
-    const users = await groupService.getGroupUsers(req.params.id);
+    const users = await groupService.getGroupUsers(req.params.groupId);
     if (!users) {
       return res
         .status(Status.NotFound)
         .json({ message: "Group users not found" });
     }
+    res.status(Status.OK).json(users);
   } catch (error: unknown) {
     handleError(res, "Error getting group users", error);
   }
 };
 export const getGroupEvents = async (req: Request, res: Response) => {
   try {
-    const events = await groupService.getGroupEvents(req.params.id);
+    const events = await groupService.getGroupEvents(req.params.groupId);
     if (!events) {
       return res
         .status(Status.NotFound)
         .json({ message: "Group events not found" });
     }
+    res.status(Status.OK).json(events);
   } catch (error: unknown) {
     handleError(res, "Error getting group events", error);
   }
@@ -61,7 +63,7 @@ export const getGroupEvents = async (req: Request, res: Response) => {
 export const updateGroup = async (req: Request, res: Response) => {
   try {
     const updatedGroup = await groupService.updateGroup(
-      req.params.id,
+      req.params.groupId,
       req.body
     );
     if (!updatedGroup) {
@@ -75,7 +77,7 @@ export const updateGroup = async (req: Request, res: Response) => {
 
 export const deleteGroup = async (req: Request, res: Response) => {
   try {
-    const deletedGroup = await groupService.deleteGroup(req.params.id);
+    const deletedGroup = await groupService.deleteGroup(req.params.groupId);
     if (!deletedGroup) {
       return res.status(Status.NotFound).json({ message: "Group not found" });
     }

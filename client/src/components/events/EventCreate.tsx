@@ -118,7 +118,7 @@ const EventCreate = () => {
                     type="datetime-local"
                     label="Date"
                     name="date"
-                    value={event.date.toISOString()}
+                    value={event.date}
                     onChange={handleChange}
                     required
                     InputLabelProps={{
