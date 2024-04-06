@@ -36,7 +36,7 @@ const GroupCard: React.FC<GroupCardProps> = ({ data }) => {
                 {data.description}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {data.members.length} members
+                TO BE UPDATED members
               </Typography>
             </CardContent>
           </Link>

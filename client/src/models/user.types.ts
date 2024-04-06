@@ -1,5 +1,3 @@
-import { IMembership } from "./membership.types";
-
 export enum UserRoles {
   Driver = "driver",
   Organizer = "organizer",
@@ -19,5 +17,4 @@ export interface IUser {
   password: string;
   roles: UserRoles[];
   isAdmin: boolean;
-  memberships: IMembership[];
 }

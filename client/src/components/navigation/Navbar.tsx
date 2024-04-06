@@ -15,7 +15,6 @@ const Navbar = () => {
     password: "password123",
     roles: [],
     isAdmin: true,
-    memberships: [],
   };
 
   const handleChange = () => {

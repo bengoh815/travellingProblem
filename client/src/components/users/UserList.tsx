@@ -11,7 +11,6 @@ const UserList = () => {
       password: "password123",
       isAdmin: false,
       roles: [],
-      memberships: [],
     },
     {
       firstName: "Jessica",
@@ -21,7 +20,6 @@ const UserList = () => {
       password: "password123",
       isAdmin: false,
       roles: [],
-      memberships: [],
     },
     {
       firstName: "Poe",
@@ -31,7 +29,6 @@ const UserList = () => {
       password: "password123",
       isAdmin: false,
       roles: [],
-      memberships: [],
     },
   ];
 

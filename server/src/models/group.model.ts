@@ -10,8 +10,6 @@ import { IEventDocument } from "./event.model";
 export interface IGroup {
   name: string;
   description: string;
-  members: IUserDocument["_id"][];
-  events: IEventDocument["_id"][];
 }
 
 export interface IGroupDocument extends IGroup, Document {}
@@ -20,8 +18,6 @@ export interface IGroupDocument extends IGroup, Document {}
 const groupSchema = new Schema<IGroupDocument>({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  members: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
 });
 
 // Create and export the model

@@ -61,14 +61,13 @@ const GroupInfo = () => {
   };
 
   // Group information
+  const params = useParams();
   const defaultData: IGroup = {
     name: "",
     description: "",
-    members: [],
-    events: [],
   };
   const [groupData, setGroupData] = useState<IGroup>(defaultData);
-  const params = useParams();
+
   useEffect(() => {
     const fetchGroupById = async () => {
       try {
@@ -84,23 +83,6 @@ const GroupInfo = () => {
     fetchGroupById();
   }, [params.groupId]);
 
-  // Get event data
-  useEffect(() => {
-    const fetchEventData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8123/api/v1/groups/${params.groupId}/events`
-        );
-
-        setGroupData({ ...groupData, events: response.data });
-      } catch (error) {
-        console.error("Error fetching group events: ", error);
-      }
-    };
-
-    fetchEventData();
-  }, [params.groupId]);
-
   return (
     <ProtectedComponent>
       <Grid container spacing={2}>
@@ -110,7 +92,7 @@ const GroupInfo = () => {
         <Grid item md={12}>
           <Typography variant="h3">{groupData.name}</Typography>
           <Typography variant="body1" color="text.secondary">
-            {groupData.members.length} members
+            TO BE FIXED members
           </Typography>
         </Grid>
         <Grid item md={12}>
@@ -128,7 +110,7 @@ const GroupInfo = () => {
             </Box>
             <CustomTabPanel value={tabState} index={0}>
               {user?.isAdmin && <EventCreate />}
-              <EventFeed eventsData={groupData.events} />
+              <EventFeed />
             </CustomTabPanel>
             <CustomTabPanel value={tabState} index={1}>
               <UserList />

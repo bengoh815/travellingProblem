@@ -28,7 +28,6 @@ const AppsTable = () => {
       password: "password123",
       isAdmin: false,
       roles: [],
-      memberships: [],
     },
     {
       firstName: "Kent",
@@ -38,7 +37,6 @@ const AppsTable = () => {
       password: "password123",
       isAdmin: false,
       roles: [],
-      memberships: [],
     },
     {
       firstName: "Jerry",
@@ -48,7 +46,6 @@ const AppsTable = () => {
       password: "password123",
       isAdmin: false,
       roles: [],
-      memberships: [],
     },
   ];
 

@@ -25,7 +25,6 @@ export interface IUser {
   email: string;
   password: string;
   roles: UserRoles[];
-  memberships: IMembershipDocument["_id"][];
 }
 
 export interface IUserDocument extends IUser, Document {}
@@ -42,7 +41,6 @@ const userSchema: Schema = new Schema<IUserDocument>(
     email: { type: String, required: true },
     password: { type: String, required: true },
     roles: [{ type: String, enum: Object.values(UserRoles) }],
-    memberships: [{ type: mongoose.Schema.Types.ObjectId, ref: "Membership" }],
   },
   {
     timestamps: true,

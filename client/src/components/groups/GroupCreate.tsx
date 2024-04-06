@@ -27,8 +27,6 @@ const GroupCreate = () => {
   const defaultForm: IGroup = {
     name: "",
     description: "",
-    members: [],
-    events: [],
   };
   const [group, setGroup] = useState<IGroup>(defaultForm);
 
