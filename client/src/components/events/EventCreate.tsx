@@ -18,7 +18,17 @@ import { Add } from "@mui/icons-material";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const EventCreate = () => {
+interface EventCreateProps {
+  addEvent: (event: IEvent) => void;
+  updateEvent: (updatedEvent: IEvent) => void;
+  removeEvent: (eventId: string) => void;
+}
+
+const EventCreate: React.FC<EventCreateProps> = ({
+  addEvent,
+  updateEvent,
+  removeEvent,
+}) => {
   // Modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -49,13 +59,23 @@ const EventCreate = () => {
       return;
     }
 
+    // Optimistic update
+    const tempId = Date.now().toString(); // Temporary ID for optimistic update
+    const optimisticEvent: IEvent = { ...event, _id: tempId };
+    addEvent(optimisticEvent);
+
     // Submit data
     try {
-      await axios.post("http://localhost:8123/api/v1/events", event);
       handleClose();
+      const response = await axios.post(
+        "http://localhost:8123/api/v1/events",
+        event
+      );
+      updateEvent({ ...event, _id: response.data._id });
 
       setEvent(defaultForm);
     } catch (error) {
+      removeEvent(tempId);
       console.error("Error submitting form:", error);
       alert("An error occurred while submitting the form.");
     }

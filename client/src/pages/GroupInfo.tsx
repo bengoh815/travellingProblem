@@ -20,6 +20,7 @@ import { useUser } from "../context/userContext";
 import { IGroup } from "../models/group.types";
 import EventCreate from "../components/events/EventCreate";
 import { IEvent } from "../models/event.types";
+import GroupEvents from "../components/groups/GroupEvents";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -109,8 +110,7 @@ const GroupInfo = () => {
               </Tabs>
             </Box>
             <CustomTabPanel value={tabState} index={0}>
-              {user?.isAdmin && <EventCreate />}
-              <EventFeed />
+              <GroupEvents />
             </CustomTabPanel>
             <CustomTabPanel value={tabState} index={1}>
               <UserList />
