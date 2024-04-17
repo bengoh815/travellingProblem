@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Card,
+  CardActionArea,
   CardActions,
   CardContent,
   CardHeader,
@@ -10,6 +11,7 @@ import {
 import { IEvent } from "../../models/event.types";
 import { Delete, Edit } from "@mui/icons-material";
 import { useUser } from "../../context/userContext";
+import { Link } from "react-router-dom";
 
 interface EventCardProps {
   eventData: IEvent;
@@ -36,15 +38,21 @@ const EventCard: React.FC<EventCardProps> = ({ eventData }) => {
   return (
     <Box sx={{ p: 2 }}>
       <Card variant="outlined">
-        <CardHeader
-          action={user?.isAdmin && <EventCardOptions />}
-          title={eventData.name}
-          subheader={eventDate}
-          sx={{ paddingBottom: 1 }}
-        />
-        <CardContent sx={{ py: 0 }}>
-          <Typography variant="body1">{eventData.description}</Typography>
-        </CardContent>
+        <CardActionArea>
+          <Link
+            to="/events/:eventId"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <CardHeader
+              title={eventData.name}
+              subheader={eventDate}
+              sx={{ paddingBottom: 1 }}
+            />
+            <CardContent sx={{ py: 0 }}>
+              <Typography variant="body1">{eventData.description}</Typography>
+            </CardContent>
+          </Link>
+        </CardActionArea>
         <CardActions>
           <Button size="small">Join</Button>
           <Button size="small">Share</Button>
