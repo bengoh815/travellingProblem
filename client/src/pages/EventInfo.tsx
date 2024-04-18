@@ -21,6 +21,9 @@ const EventInfo = () => {
 
   // Group information
   const defaultGroupData: IGroup = {
+    _id: "",
+    createdAt: "",
+    updatedAt: "",
     name: "",
     description: "",
   };

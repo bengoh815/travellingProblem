@@ -15,7 +15,7 @@ import {
 import { Add } from "@mui/icons-material";
 
 // Models
-import { IGroup } from "../../models/group.types";
+import { IGroupBase } from "../../models/group.types";
 
 const GroupCreate = () => {
   // Modal
@@ -24,11 +24,11 @@ const GroupCreate = () => {
   const handleClose = () => setOpen(false);
 
   // Group Form
-  const defaultForm: IGroup = {
+  const defaultForm: IGroupBase = {
     name: "",
     description: "",
   };
-  const [group, setGroup] = useState<IGroup>(defaultForm);
+  const [group, setGroup] = useState<IGroupBase>(defaultForm);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setGroup({ ...group, [e.target.name]: e.target.value });

@@ -62,11 +62,7 @@ const GroupInfo = () => {
 
   // Group information
   const params = useParams();
-  const defaultData: IGroup = {
-    name: "",
-    description: "",
-  };
-  const [groupData, setGroupData] = useState<IGroup>(defaultData);
+  const [groupData, setGroupData] = useState<IGroup | null>(null);
 
   useEffect(() => {
     const fetchGroupById = async () => {
@@ -91,7 +87,7 @@ const GroupInfo = () => {
           <Navbar />
         </Grid>
         <Grid item md={12}>
-          <Typography variant="h3">{groupData.name}</Typography>
+          <Typography variant="h3">{groupData?.name}</Typography>
           <Typography variant="body1" color="text.secondary">
             TO BE FIXED members
           </Typography>
@@ -116,10 +112,10 @@ const GroupInfo = () => {
               <UserList />
             </CustomTabPanel>
             <CustomTabPanel value={tabState} index={2}>
-              {groupData.description}
+              {groupData?.description}
               {"\n"}
               {new Date(
-                groupData.createdAt ? groupData.createdAt : ""
+                groupData?.createdAt ? groupData.createdAt : ""
               ).toDateString()}
             </CustomTabPanel>
           </Box>

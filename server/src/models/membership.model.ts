@@ -14,15 +14,23 @@ export interface IMembership {
 
 export interface IMembershipDocument extends IMembership, Document {}
 
-const membershipSchema = new Schema<IMembershipDocument>({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  groupId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Group",
-    required: true,
+const membershipSchema = new Schema<IMembershipDocument>(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    groupId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Group",
+      required: true,
+    },
   },
-  dateCreated: { type: Date, default: Date.now },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const MembershipModel = mongoose.model<IMembershipDocument>(
   "Membership",
