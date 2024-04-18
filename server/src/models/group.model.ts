@@ -15,10 +15,15 @@ export interface IGroup {
 export interface IGroupDocument extends IGroup, Document {}
 
 // Schema for Group
-const groupSchema = new Schema<IGroupDocument>({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-});
+const groupSchema = new Schema<IGroupDocument>(
+  {
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 // Create and export the model
 const GroupModel = mongoose.model<IGroupDocument>("Group", groupSchema);

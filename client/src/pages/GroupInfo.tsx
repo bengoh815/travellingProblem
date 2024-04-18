@@ -75,6 +75,7 @@ const GroupInfo = () => {
           `http://localhost:8123/api/v1/groups/${params.groupId}`
         );
         setGroupData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching group by id: ", error);
       }
@@ -116,6 +117,10 @@ const GroupInfo = () => {
             </CustomTabPanel>
             <CustomTabPanel value={tabState} index={2}>
               {groupData.description}
+              {"\n"}
+              {new Date(
+                groupData.createdAt ? groupData.createdAt : ""
+              ).toDateString()}
             </CustomTabPanel>
           </Box>
         </Grid>
