@@ -40,7 +40,7 @@ const EventCard: React.FC<EventCardProps> = ({ eventData }) => {
       <Card variant="outlined">
         <CardActionArea>
           <Link
-            to="/events/:eventId"
+            to={`/events/${eventData._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <CardHeader

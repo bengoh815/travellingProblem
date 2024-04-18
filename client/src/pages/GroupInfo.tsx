@@ -9,7 +9,6 @@ import { Add } from "@mui/icons-material";
 
 // Components
 import Navbar from "../components/navigation/Navbar";
-import EventFeed from "../components/events/EventFeed";
 import UserList from "../components/users/UserList";
 import ProtectedComponent from "../components/utils/ProtectedComponent";
 

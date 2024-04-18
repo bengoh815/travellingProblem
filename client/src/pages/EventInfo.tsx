@@ -1,22 +1,56 @@
 import { Breadcrumbs, Grid, Link, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import Navbar from "../components/navigation/Navbar";
 import { IGroup } from "../models/group.types";
+import { IEvent } from "../models/event.types";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const EventInfo = () => {
-  const eventData = {
-    name: "Tech Talk",
-    description: "A discussion on the latest trends in technology.",
-    date: new Date("2023-05-20T18:00:00Z"),
-    groupId: "group1",
-    attendees: ["member1", "member2"],
+  // Event information
+  const params = useParams();
+  const defaultEventData: IEvent = {
+    _id: "",
+    name: "",
+    description: "",
+    date: new Date(),
+    groupId: "",
+    attendees: [],
   };
+  const [eventData, setEventData] = useState<IEvent>(defaultEventData);
 
-  const groupData: IGroup = {
-    name: "Tech Enthusiasts",
-    description:
-      "A group for people passionate about technology and innovation.",
+  // Group information
+  const defaultGroupData: IGroup = {
+    name: "",
+    description: "",
   };
+  const [groupData, setGroupData] = useState<IGroup>(defaultGroupData);
+
+  useEffect(() => {
+    const fetchEventById = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8123/api/v1/events/${params.eventId}`
+        );
+        setEventData(response.data);
+      } catch (error) {
+        console.error("Error fetching event by id: ", error);
+      }
+    };
+
+    const fetchGroupById = async (groupId: string) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8123/api/v1/groups/${groupId}`
+        );
+        setGroupData(response.data);
+      } catch (error) {
+        console.error("Error fetching group by id: ", error);
+      }
+    };
+    fetchEventById();
+    fetchGroupById(eventData.groupId);
+  }, [eventData.groupId, params.eventId]);
 
   return (
     <Grid container spacing={2}>
@@ -29,7 +63,7 @@ const EventInfo = () => {
             underline="hover"
             color="inherit"
             component={RouterLink}
-            to="/groups/:groupId"
+            to={`/groups/${eventData.groupId}`}
           >
             <Typography>{groupData.name}</Typography>
           </Link>
@@ -40,7 +74,7 @@ const EventInfo = () => {
         <Typography variant="h3">{eventData.name}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h5">{eventData.date.toDateString()}</Typography>
+        <Typography variant="h5">{"temporary date"}</Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="body1">{eventData.description}</Typography>
