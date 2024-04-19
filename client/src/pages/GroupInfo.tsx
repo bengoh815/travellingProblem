@@ -1,10 +1,18 @@
 // Standard library
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // MUI
-import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Skeleton,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import { Add } from "@mui/icons-material";
 
 // Components
@@ -16,7 +24,7 @@ import ProtectedComponent from "../components/utils/ProtectedComponent";
 import { useUser } from "../context/userContext";
 
 // Models
-import { IGroup } from "../models/group.types";
+import { IGroup, IGroupState } from "../models/group.types";
 import EventCreate from "../components/events/EventCreate";
 import { IEvent } from "../models/event.types";
 import GroupEvents from "../components/groups/GroupEvents";
@@ -51,6 +59,8 @@ function a11yProps(index: number) {
 }
 
 const GroupInfo = () => {
+  const navigate = useNavigate();
+
   // Get user context
   const { user } = useUser();
 
@@ -61,24 +71,48 @@ const GroupInfo = () => {
   };
 
   // Group information
-  const params = useParams();
-  const [groupData, setGroupData] = useState<IGroup | null>(null);
+  const { groupId } = useParams<{ groupId: string }>();
+  const [groupState, setGroupState] = useState<IGroupState>({
+    group: null,
+    isLoading: false,
+    error: null,
+  });
 
   useEffect(() => {
     const fetchGroupById = async () => {
+      setGroupState((prevState) => ({ ...prevState, isLoading: true }));
+
+      function delay(ms: number): Promise<void> {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
       try {
-        const response = await axios.get(
-          `http://localhost:8123/api/v1/groups/${params.groupId}`
+        await delay(5000);
+        const response = await axios.get<IGroup>(
+          `http://localhost:8123/api/v1/groups/${groupId}`
         );
-        setGroupData(response.data);
-        console.log(response.data);
+        setGroupState({ group: response.data, isLoading: false, error: null });
       } catch (error) {
-        console.error("Error fetching group by id: ", error);
+        console.error("Error fetching group by id:", error);
+        setGroupState((prevState) => ({
+          ...prevState,
+          isLoading: false,
+          error: "Failed to fetch group",
+        }));
+        navigate("/error");
       }
     };
 
-    fetchGroupById();
-  }, [params.groupId]);
+    if (groupId) {
+      fetchGroupById();
+    }
+  }, [groupId]);
+
+  const groupCreatedAtDate = groupState.group ? (
+    new Date(groupState.group.createdAt).toDateString()
+  ) : (
+    <Skeleton />
+  );
 
   return (
     <ProtectedComponent>
@@ -87,9 +121,11 @@ const GroupInfo = () => {
           <Navbar />
         </Grid>
         <Grid item md={12}>
-          <Typography variant="h3">{groupData?.name}</Typography>
+          <Typography variant="h3">
+            {groupState.group ? groupState.group.name : <Skeleton />}
+          </Typography>
           <Typography variant="body1" color="text.secondary">
-            TO BE FIXED members
+            {groupState.group ? `5 members (TO BE FIXED)` : <Skeleton />}
           </Typography>
         </Grid>
         <Grid item md={12}>
@@ -98,7 +134,7 @@ const GroupInfo = () => {
               <Tabs
                 value={tabState}
                 onChange={handleChange}
-                aria-label="basic tabs example"
+                aria-label="basic tabs"
               >
                 <Tab label="Events" {...a11yProps(0)} />
                 <Tab label="People" {...a11yProps(1)} />
@@ -112,11 +148,10 @@ const GroupInfo = () => {
               <UserList />
             </CustomTabPanel>
             <CustomTabPanel value={tabState} index={2}>
-              {groupData?.description}
-              {"\n"}
-              {new Date(
-                groupData?.createdAt ? groupData.createdAt : ""
-              ).toDateString()}
+              <Typography>
+                {groupState.group ? groupState.group.description : <Skeleton />}
+              </Typography>
+              <Typography>{groupCreatedAtDate}</Typography>
             </CustomTabPanel>
           </Box>
         </Grid>
