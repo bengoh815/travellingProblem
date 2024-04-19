@@ -1,14 +1,11 @@
+// Standard library
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
+// Component
 import { IGroup, IGroupState } from "../models/group.types";
 
-export const useGroupInfo = (groupId: string | undefined) => {
-  const navigate = useNavigate();
-  if (!groupId) {
-    navigate("/error");
-  }
-
+export const useFetchGroup = (groupId: string) => {
   const [groupState, setGroupState] = useState<IGroupState>({
     group: null,
     isLoading: false,
@@ -30,14 +27,13 @@ export const useGroupInfo = (groupId: string | undefined) => {
           isLoading: false,
           error: "Failed to fetch group",
         }));
-        navigate("/error");
       }
     };
 
     if (groupId) {
       fetchGroupById();
     }
-  }, [groupId, navigate]);
+  }, [groupId]);
 
   return groupState;
 };
