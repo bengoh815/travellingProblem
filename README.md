@@ -4,12 +4,25 @@ Doxa Ride Finder is a full-stack application designed to streamline the process 
 
 ## Table of Contents
 
+- [Description](#description)
+- [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-- [Credits](#credits)
 - [Contact](#contact)
+
+## Description
+This application helps organizers plan rides for weekly church group meetups, ensuring smooth coordination among users, drivers, and organizers.
+
+## Features
+- User registration and Google sign-in
+- Option for users to join family groups
+- Drivers can volunteer to fetch attendees
+- Organizers can view event attendees and assign rides automatically
+- Drivers can access optimized routes and passenger contacts
+- Organizers can manage communications with users
+
 
 ## Installation
 
