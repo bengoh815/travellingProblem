@@ -3,17 +3,24 @@
  */
 
 import mongoose, { Document, Schema } from "mongoose";
-import { IUserDocument } from "./user.model";
+import { IUserDocument, UserRoles } from "./user.model";
 import { IGroupDocument } from "./group.model";
 
+/**
+ * Interface for Membership
+ */
 export interface IMembership {
   userId: IUserDocument["_id"];
   groupId: IGroupDocument["_id"];
-  dateCreated: Date;
+  role: UserRoles;
+  driverCapacity: Number;
 }
 
 export interface IMembershipDocument extends IMembership, Document {}
 
+/**
+ * Schema for Membership
+ */
 const membershipSchema = new Schema<IMembershipDocument>(
   {
     userId: {
@@ -26,12 +33,20 @@ const membershipSchema = new Schema<IMembershipDocument>(
       ref: "Group",
       required: true,
     },
+    role: {
+      type: Number,
+      enum: Object.values(UserRoles),
+      required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
 
+/**
+ * Create and export Membership model
+ */
 const MembershipModel = mongoose.model<IMembershipDocument>(
   "Membership",
   membershipSchema
