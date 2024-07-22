@@ -7,11 +7,17 @@ import mongoose, { Schema, Document } from "mongoose";
 
 const SALT_ROUNDS = Number(process.env.SALT_ROUNDS) || 10;
 
+/**
+ * Interface for Geolocation
+ */
 export interface IGeolocation {
   longitude: number;
   latitude: number;
 }
 
+/**
+ * Interface for User
+ */
 export interface IUser {
   firstName: string;
   lastName: string;
@@ -27,11 +33,17 @@ export interface IUserDocument extends IUser, Document {
   verifyPassword(candidatePassword: string): Promise<boolean>;
 }
 
+/**
+ * Schema for Geolocation
+ */
 const geolocationSchema = new Schema<IGeolocation>({
   longitude: { type: Number, required: true },
   latitude: { type: Number, required: true },
 });
 
+/**
+ * Schema for User
+ */
 const userSchema: Schema<IUserDocument> = new Schema(
   {
     firstName: { type: String, required: true, trim: true },
@@ -63,6 +75,9 @@ userSchema.methods.verifyPassword = async function (
 // Ensure email is unique
 userSchema.index({ email: 1 }, { unique: true });
 
+/**
+ * Create and export User model
+ */
 const UserModel = mongoose.model<IUserDocument>("User", userSchema);
 
 export default UserModel;
