@@ -4,6 +4,7 @@
 
 import mongoose, { Schema, Document } from "mongoose";
 import { IUserDocument, UserRoles } from "./user.model";
+import { IGroupDocument } from "./group.model";
 
 export enum ApplicationDecision {
   Pending = 0,
@@ -11,18 +12,34 @@ export enum ApplicationDecision {
   Denied = 2,
 }
 
+/**
+ * Interface for Application
+ */
 export interface IApplication {
-  user: IUserDocument["_id"];
-  appType: UserRoles;
+  userId: IUserDocument["_id"];
+  groupId: IGroupDocument["_id"];
+  role: UserRoles;
   decision: ApplicationDecision;
 }
 
 export interface IApplicationDocument extends IApplication, Document {}
 
+/**
+ * Schema for Application
+ */
 const applicationSchema = new Schema<IApplicationDocument>(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    appType: { type: String, enum: Object.values(UserRoles), required: true },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    groupId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Group",
+      required: true,
+    },
+    role: { type: Number, enum: Object.values(UserRoles), required: true },
     decision: {
       type: Number,
       enum: Object.values(ApplicationDecision),
@@ -32,6 +49,9 @@ const applicationSchema = new Schema<IApplicationDocument>(
   { timestamps: true }
 );
 
+/**
+ * Create and export Application Model
+ */
 const ApplicationModel = mongoose.model<IApplicationDocument>(
   "Application",
   applicationSchema
