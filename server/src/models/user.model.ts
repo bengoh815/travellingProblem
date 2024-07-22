@@ -4,43 +4,43 @@
 
 import bcrypt from "bcrypt";
 import mongoose, { Schema, Document } from "mongoose";
-import { IMembershipDocument } from "./membership.model";
 
 const SALT_ROUNDS = Number(process.env.SALT_ROUNDS) || 10;
 
-export enum UserRoles {
-  Driver = "driver",
-  Organizer = "organizer",
-  Admin = "admin",
+export interface IGeolocation {
+  longitude: number;
+  latitude: number;
 }
 
 export interface IUser {
   firstName: string;
   lastName: string;
   address?: string;
-  geolocation?: {
-    longitude: number;
-    latitude: number;
-  };
+  geolocation?: IGeolocation;
   email: string;
   password: string;
-  roles: UserRoles[];
+  phoneNumber: string;
+  createdOn?: Date;
 }
 
-export interface IUserDocument extends IUser, Document {}
+export interface IUserDocument extends IUser, Document {
+  verifyPassword(candidatePassword: string): Promise<boolean>;
+}
 
-const userSchema: Schema = new Schema<IUserDocument>(
+const geolocationSchema = new Schema<IGeolocation>({
+  longitude: { type: Number, required: true },
+  latitude: { type: Number, required: true },
+});
+
+const userSchema: Schema<IUserDocument> = new Schema(
   {
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    address: { type: String },
-    geolocation: {
-      longitude: { type: Number },
-      latitude: { type: Number },
-    },
-    email: { type: String, required: true },
+    firstName: { type: String, required: true, trim: true },
+    lastName: { type: String, required: true, trim: true },
+    address: { type: String, trim: true },
+    geolocation: { type: geolocationSchema, required: false },
+    email: { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true },
-    roles: [{ type: String, enum: Object.values(UserRoles) }],
+    phoneNumber: { type: String, required: true, trim: true },
   },
   {
     timestamps: true,
@@ -59,6 +59,8 @@ userSchema.methods.verifyPassword = async function (
 ): Promise<boolean> {
   return bcrypt.compare(candidatePassword, this.password);
 };
+
+// Ensure email is unique
 userSchema.index({ email: 1 }, { unique: true });
 
 const UserModel = mongoose.model<IUserDocument>("User", userSchema);
