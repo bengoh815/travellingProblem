@@ -36,7 +36,6 @@ export interface IUser {
   email: string;
   password: string;
   phoneNumber: string;
-  createdOn?: Date;
 }
 
 export interface IUserDocument extends IUser, Document {
