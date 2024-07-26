@@ -90,7 +90,7 @@ export class GroupController {
 
   addUserToGroup = async (req: Request, res: Response) => {
     try {
-      // Do something
+      // Create membership
     } catch (error: unknown) {
       handleError(res, "Error adding user to group", error);
     }
@@ -98,7 +98,7 @@ export class GroupController {
 
   delUserFromGroup = async (req: Request, res: Response) => {
     try {
-      // Do something
+      // Delete membership
     } catch (error: unknown) {
       handleError(res, "Error deleting user from group", error);
     }

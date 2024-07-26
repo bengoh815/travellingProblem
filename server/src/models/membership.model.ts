@@ -34,8 +34,13 @@ const membershipSchema = new Schema<IMembershipDocument>(
       required: true,
     },
     role: {
-      type: Number,
+      type: String,
       enum: Object.values(UserRoles),
+      required: true,
+    },
+    driverCapacity: {
+      type: Number,
+      default: 0,
       required: true,
     },
   },

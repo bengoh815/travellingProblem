@@ -39,7 +39,7 @@ const applicationSchema = new Schema<IApplicationDocument>(
       ref: "Group",
       required: true,
     },
-    role: { type: Number, enum: Object.values(UserRoles), required: true },
+    role: { type: String, enum: Object.values(UserRoles), required: true },
     decision: {
       type: Number,
       enum: Object.values(ApplicationDecision),

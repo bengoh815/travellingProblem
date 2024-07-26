@@ -11,10 +11,10 @@ const SALT_ROUNDS = Number(process.env.SALT_ROUNDS) || 10;
  * Enumerator for UserRoles
  */
 export enum UserRoles {
-  User = 0,
-  Driver = 1,
-  Organizer = 2,
-  Admin = 3,
+  User = "user",
+  Driver = "driver",
+  Organizer = "organizer",
+  Admin = "admin",
 }
 
 /**
