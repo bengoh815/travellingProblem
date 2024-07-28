@@ -20,6 +20,7 @@ export interface IApplication {
   groupId: IGroupDocument["_id"];
   role: UserRoles;
   decision: ApplicationDecision;
+  decidedBy?: IUserDocument["_id"];
 }
 
 export interface IApplicationDocument extends IApplication, Document {}
@@ -43,6 +44,12 @@ const applicationSchema = new Schema<IApplicationDocument>(
     decision: {
       type: String,
       enum: Object.values(ApplicationDecision),
+      required: true,
+    },
+    decidedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
       required: true,
     },
   },

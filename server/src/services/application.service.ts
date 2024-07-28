@@ -27,10 +27,6 @@ class ApplicationService {
       new: true,
     });
   }
-
-  async deleteApplication(applicationId: string): Promise<IApplication | null> {
-    return await ApplicationModel.findByIdAndDelete(applicationId);
-  }
 }
 
 export default new ApplicationService();

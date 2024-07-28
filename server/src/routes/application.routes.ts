@@ -24,9 +24,5 @@ applicationsRouter.put(
   `${v1}/applications/:id`,
   ApplicationController.updateApplication
 );
-applicationsRouter.delete(
-  `${v1}/applications/:id`,
-  ApplicationController.deleteApplication
-);
 
 export default applicationsRouter;

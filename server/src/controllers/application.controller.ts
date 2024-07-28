@@ -65,22 +65,6 @@ export class ApplicationController {
       handleError(res, "Error updating application", error);
     }
   };
-
-  deleteApplication = async (req: Request, res: Response) => {
-    try {
-      const deletedApplication = await applicationService.deleteApplication(
-        req.params.id
-      );
-      if (!deletedApplication) {
-        return res
-          .status(Status.NotFound)
-          .json({ message: "Application not found" });
-      }
-      res.status(Status.NoContent).send();
-    } catch (error: unknown) {
-      handleError(res, "Error deleting application", error);
-    }
-  };
 }
 
 export default new ApplicationController();
