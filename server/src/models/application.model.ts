@@ -7,9 +7,9 @@ import { IUserDocument, UserRoles } from "./user.model";
 import { IGroupDocument } from "./group.model";
 
 export enum ApplicationDecision {
-  Pending = 0,
-  Approved = 1,
-  Denied = 2,
+  Pending = "pending",
+  Approved = "approved",
+  Denied = "denied",
 }
 
 /**
@@ -41,7 +41,7 @@ const applicationSchema = new Schema<IApplicationDocument>(
     },
     role: { type: String, enum: Object.values(UserRoles), required: true },
     decision: {
-      type: Number,
+      type: String,
       enum: Object.values(ApplicationDecision),
       required: true,
     },
