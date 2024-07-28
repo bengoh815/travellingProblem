@@ -1,5 +1,4 @@
 import MembershipModel, { IMembership } from "../models/membership.model";
-import { UserRoles } from "../models/user.model";
 
 class MembershipService {
   async getAllMemberships(): Promise<IMembership[]> {

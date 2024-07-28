@@ -3,13 +3,15 @@
  */
 
 import mongoose, { Schema, Document } from "mongoose";
-import { IUserDocument, UserRoles } from "./user.model";
+import { IUserDocument } from "./user.model";
 import { IGroupDocument } from "./group.model";
+import { MembershipRoles } from "./membership.model";
 
 export enum ApplicationDecision {
   Pending = "pending",
   Approved = "approved",
   Denied = "denied",
+  Withdrawn = "withdrawn",
 }
 
 /**
@@ -18,7 +20,7 @@ export enum ApplicationDecision {
 export interface IApplication {
   userId: IUserDocument["_id"];
   groupId: IGroupDocument["_id"];
-  role: UserRoles;
+  role: MembershipRoles;
   decision: ApplicationDecision;
   decidedBy?: IUserDocument["_id"];
 }
@@ -40,7 +42,11 @@ const applicationSchema = new Schema<IApplicationDocument>(
       ref: "Group",
       required: true,
     },
-    role: { type: String, enum: Object.values(UserRoles), required: true },
+    role: {
+      type: String,
+      enum: Object.values(MembershipRoles),
+      required: true,
+    },
     decision: {
       type: String,
       enum: Object.values(ApplicationDecision),
@@ -50,7 +56,6 @@ const applicationSchema = new Schema<IApplicationDocument>(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       default: null,
-      required: true,
     },
   },
   { timestamps: true }

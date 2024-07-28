@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Status } from "../utils/statusCodes";
 import membershipService from "../services/membership.service";
+import { Status } from "../utils/statusCodes";
 import { handleError } from "../utils/errorHandler";
-import { UserRoles } from "../models/user.model";
+import { MembershipRoles } from "../models/membership.model";
 
 export class MembershipController {
   getAllMemberships = async (req: Request, res: Response) => {
@@ -20,7 +20,7 @@ export class MembershipController {
       const membershipData = {
         userId,
         groupId,
-        role: [UserRoles.User],
+        role: [MembershipRoles.User],
         driverCapacity: 0,
       };
       const newMembership = await membershipService.createMembership(

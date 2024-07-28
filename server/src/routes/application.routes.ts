@@ -1,6 +1,7 @@
 import express from "express";
 import ApplicationController from "../controllers/application.controller";
 import { APIVersion } from "../utils/apiVersion";
+import { validateCreateApplication } from "../middleware/validation/applicationValidate";
 
 const applicationsRouter = express.Router();
 
@@ -14,6 +15,7 @@ applicationsRouter.get(
 );
 applicationsRouter.post(
   `${v1}/applications`,
+  validateCreateApplication,
   ApplicationController.createApplication
 );
 applicationsRouter.get(
