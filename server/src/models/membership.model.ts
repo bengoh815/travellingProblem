@@ -12,7 +12,7 @@ import { IGroupDocument } from "./group.model";
 export interface IMembership {
   userId: IUserDocument["_id"];
   groupId: IGroupDocument["_id"];
-  role: UserRoles;
+  role: UserRoles[];
   driverCapacity: Number;
 }
 
@@ -34,7 +34,7 @@ const membershipSchema = new Schema<IMembershipDocument>(
       required: true,
     },
     role: {
-      type: String,
+      type: [String],
       enum: Object.values(UserRoles),
       required: true,
     },

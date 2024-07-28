@@ -16,12 +16,12 @@ export class MembershipController {
 
   createMembership = async (req: Request, res: Response) => {
     try {
-      const { userId, groupId, role, driverCapacity } = req.body;
+      const { userId, groupId } = req.body;
       const membershipData = {
         userId,
         groupId,
-        role: UserRoles[role as keyof typeof UserRoles],
-        driverCapacity: driverCapacity || 0,
+        role: [UserRoles.User],
+        driverCapacity: 0,
       };
       const newMembership = await membershipService.createMembership(
         membershipData
