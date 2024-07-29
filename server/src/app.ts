@@ -8,6 +8,7 @@ import eventsRouter from "./routes/event.routes";
 import groupsRouter from "./routes/group.routes";
 import ridesRouter from "./routes/ride.routes";
 import membershipRouter from "./routes/membership.routes";
+import { handleError } from "./middleware/errorHandler";
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use(groupsRouter);
 app.use(membershipRouter);
 app.use(ridesRouter);
 app.use(usersRouter);
+app.use(handleError);
 
 export default app;

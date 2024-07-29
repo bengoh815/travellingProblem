@@ -5,15 +5,7 @@ import { handleError } from "../utils/errorHandler";
 import { MembershipRoles } from "../models/membership.model";
 
 export class MembershipController {
-  getAllMemberships = async (req: Request, res: Response) => {
-    try {
-      const memberships = await membershipService.getAllMemberships();
-      res.status(Status.OK).json(memberships);
-    } catch (error: unknown) {
-      handleError(res, "Error fetching memberships", error);
-    }
-  };
-
+  // Create operations
   createMembership = async (req: Request, res: Response) => {
     try {
       const { userId, groupId } = req.body;
@@ -33,6 +25,16 @@ export class MembershipController {
     }
   };
 
+  // Read operations
+  getAllMemberships = async (req: Request, res: Response) => {
+    try {
+      const memberships = await membershipService.getAllMemberships();
+      res.status(Status.OK).json(memberships);
+    } catch (error: unknown) {
+      handleError(res, "Error fetching memberships", error);
+    }
+  };
+
   getMembershipById = async (req: Request, res: Response) => {
     try {
       const membership = await membershipService.getMembershipById(
@@ -49,6 +51,7 @@ export class MembershipController {
     }
   };
 
+  // Update operations
   updateMembership = async (req: Request, res: Response) => {
     try {
       const updatedMembership = await membershipService.updateMembership(
@@ -66,6 +69,7 @@ export class MembershipController {
     }
   };
 
+  // Delete operations
   deleteMembership = async (req: Request, res: Response) => {
     try {
       const deletedMembership = await membershipService.deleteMembership(

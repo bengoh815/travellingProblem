@@ -1,6 +1,7 @@
 import express from "express";
 import MembershipController from "../controllers/membership.controller";
 import { APIVersion } from "../utils/apiVersion";
+import { validateCreateMembership } from "../middleware/validation/membershipValidator";
 
 const membershipRouter = express.Router();
 
@@ -14,6 +15,7 @@ membershipRouter.get(
 );
 membershipRouter.post(
   `${v1}/memberships`,
+  validateCreateMembership,
   MembershipController.createMembership
 );
 membershipRouter.get(
