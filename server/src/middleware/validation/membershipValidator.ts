@@ -8,7 +8,6 @@ export const validateCreateMembership = [
   body("userId").isMongoId().withMessage("Invalid user ID"),
   body("groupId").isMongoId().withMessage("Invalid group ID"),
   (req: Request, res: Response, next: NextFunction) => {
-    console.log("validate called");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });

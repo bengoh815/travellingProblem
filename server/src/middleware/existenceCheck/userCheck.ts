@@ -6,7 +6,6 @@ export const checkUserExistence = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("Checking user");
   const { userId } = req.body;
   try {
     const userExists = await UserModel.exists({ _id: userId });
