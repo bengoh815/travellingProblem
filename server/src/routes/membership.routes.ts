@@ -9,19 +9,12 @@ const membershipRouter = express.Router();
 const v1 = APIVersion.v1;
 
 // Routes
-membershipRouter.get(
-  `${v1}/memberships`,
-  MembershipController.getAllMemberships
-);
 membershipRouter.post(
   `${v1}/memberships`,
   validateCreateMembership,
   MembershipController.createMembership
 );
-membershipRouter.get(
-  `${v1}/memberships/:id`,
-  MembershipController.getMembershipById
-);
+membershipRouter.get(`${v1}/memberships`, MembershipController.getMembership);
 membershipRouter.put(
   `${v1}/memberships/:id`,
   MembershipController.updateMembership

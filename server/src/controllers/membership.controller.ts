@@ -3,6 +3,7 @@ import membershipService from "../services/membership.service";
 import { Status } from "../utils/statusCodes";
 import { handleError } from "../utils/errorHandler";
 import { MembershipRoles } from "../models/membership.model";
+import { optionsConstructor } from "../utils/optionsConstructor";
 
 export class MembershipController {
   // Create operations
@@ -31,7 +32,7 @@ export class MembershipController {
       const memberships = await membershipService.getAllMemberships();
       res.status(Status.OK).json(memberships);
     } catch (error: unknown) {
-      handleError(res, "Error fetching memberships", error);
+      handleError(res, "Error getting all memberships", error);
     }
   };
 
@@ -47,7 +48,39 @@ export class MembershipController {
       }
       res.status(Status.OK).json(membership);
     } catch (error: unknown) {
-      handleError(res, "Error getting membership", error);
+      handleError(res, "Error getting membership by Id", error);
+    }
+  };
+
+  getMembership = async (req: Request, res: Response) => {
+    try {
+      // Validation
+      const { id, userId, groupId, role, limit, offset, sortBy, sortOrder } =
+        req.query;
+
+      const criteria: any = {};
+      if (id) criteria._id = id;
+      if (userId) criteria.userId = userId;
+      if (groupId) criteria.groupId = groupId;
+      if (role) criteria.decision = role;
+
+      const options: any = optionsConstructor(
+        limit as string,
+        offset as string,
+        sortBy as string,
+        sortOrder as string
+      );
+
+      // Query
+      const memberships = await membershipService.getMemberships(
+        criteria,
+        options
+      );
+
+      // Response
+      res.status(Status.OK).json(memberships);
+    } catch (error: unknown) {
+      handleError(res, "Error getting membership by criteria", error);
     }
   };
 
