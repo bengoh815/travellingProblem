@@ -4,15 +4,7 @@ import groupService from "../services/group.service";
 import { handleError } from "../utils/errorHandler";
 
 export class GroupController {
-  getAllGroups = async (req: Request, res: Response) => {
-    try {
-      const groups = await groupService.getAllGroups();
-      res.status(Status.OK).json(groups);
-    } catch (error: unknown) {
-      handleError(res, "Error fetching groups", error);
-    }
-  };
-
+  // Create operations
   createGroup = async (req: Request, res: Response) => {
     try {
       const newGroup = await groupService.createGroup(req.body);
@@ -22,45 +14,17 @@ export class GroupController {
     }
   };
 
-  getGroupById = async (req: Request, res: Response) => {
+  // Read operations
+  getAllGroups = async (req: Request, res: Response) => {
     try {
-      const group = await groupService.getGroupById(req.params.groupId);
-      if (!group) {
-        return res.status(Status.NotFound).json({ message: "Group not found" });
-      }
-      res.status(Status.OK).json(group);
+      const groups = await groupService.getAllGroups();
+      res.status(Status.OK).json(groups);
     } catch (error: unknown) {
-      handleError(res, "Error getting group", error);
+      handleError(res, "Error fetching groups", error);
     }
   };
 
-  getGroupUsers = async (req: Request, res: Response) => {
-    try {
-      const users = await groupService.getGroupUsers(req.params.groupId);
-      if (!users) {
-        return res
-          .status(Status.NotFound)
-          .json({ message: "Group users not found" });
-      }
-      res.status(Status.OK).json(users);
-    } catch (error: unknown) {
-      handleError(res, "Error getting group users", error);
-    }
-  };
-  getGroupEvents = async (req: Request, res: Response) => {
-    try {
-      const events = await groupService.getGroupEvents(req.params.groupId);
-      if (!events) {
-        return res
-          .status(Status.NotFound)
-          .json({ message: "Group events not found" });
-      }
-      res.status(Status.OK).json(events);
-    } catch (error: unknown) {
-      handleError(res, "Error getting group events", error);
-    }
-  };
-
+  // Update operations
   updateGroup = async (req: Request, res: Response) => {
     try {
       const updatedGroup = await groupService.updateGroup(
@@ -76,6 +40,7 @@ export class GroupController {
     }
   };
 
+  // Delete operations
   deleteGroup = async (req: Request, res: Response) => {
     try {
       const deletedGroup = await groupService.deleteGroup(req.params.groupId);
