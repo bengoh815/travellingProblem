@@ -7,15 +7,15 @@ import mongoose, { Schema, Document } from "mongoose";
 
 const SALT_ROUNDS = Number(process.env.SALT_ROUNDS) || 10;
 
-// /**
-//  * Enumerator for UserRoles
-//  */
-// export enum UserRoles {
-//   User = "user",
-//   Driver = "driver",
-//   Organizer = "organizer",
-//   Admin = "admin",
-// }
+/**
+ * Enumerator for UserRoles
+ */
+export enum UserRoles {
+  User = "user",
+  Driver = "driver",
+  Organizer = "organizer",
+  Admin = "admin",
+}
 
 /**
  * Interface for Geolocation
