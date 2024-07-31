@@ -4,17 +4,15 @@
 
 import bcrypt from "bcrypt";
 import mongoose, { Schema, Document } from "mongoose";
-
-const SALT_ROUNDS = Number(process.env.SALT_ROUNDS) || 10;
+import { SALT_ROUNDS } from "../config";
 
 /**
  * Enumerator for UserRoles
  */
 export enum UserRoles {
   User = "user",
-  Driver = "driver",
-  Organizer = "organizer",
   Admin = "admin",
+  SuperAdmin = "superadmin",
 }
 
 /**
@@ -36,6 +34,7 @@ export interface IUser {
   email: string;
   password: string;
   phoneNumber: string;
+  role: UserRoles;
 }
 
 export interface IUserDocument extends IUser, Document {
@@ -62,6 +61,11 @@ const userSchema: Schema<IUserDocument> = new Schema(
     email: { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true },
     phoneNumber: { type: String, required: true, trim: true },
+    role: {
+      type: String,
+      enum: Object.values(UserRoles),
+      default: UserRoles.User,
+    },
   },
   {
     timestamps: true,
@@ -70,7 +74,11 @@ const userSchema: Schema<IUserDocument> = new Schema(
 
 userSchema.pre<IUserDocument>("save", async function (next) {
   if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
+    try {
+      this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
+    } catch (err) {
+      return next(err as Error);
+    }
   }
   next();
 });

@@ -2,12 +2,11 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/user.model";
 import { Request, Response } from "express";
+import { SECRET_KEY } from "../config";
 // import {
 //   sendVerificationEmail,
 //   sendResetPasswordEmail,
 // } from "../utils/emailService";
-
-const SECRET_KEY = "THIS-IS-A-TESTRUN-KEY";
 
 export const register = async (req: Request, res: Response) => {
   try {
