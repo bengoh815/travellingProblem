@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.6",
     "nodemon": "^2.x.x",
     "ts-node": "^10.x.x",
     "typescript": "^4.x.x"

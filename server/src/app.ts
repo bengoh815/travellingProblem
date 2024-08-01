@@ -9,6 +9,7 @@ import groupsRouter from "./routes/group.routes";
 import ridesRouter from "./routes/ride.routes";
 import membershipRouter from "./routes/membership.routes";
 import { handleError } from "./middleware/errorHandler";
+import authRouter from "./routes/auth.routes";
 
 const app = express();
 
@@ -26,6 +27,7 @@ connectToDatabase();
 // Routes
 app.get("/", (req, res) => res.send("Hello world!"));
 app.use(applicationsRouter);
+app.use(authRouter);
 app.use(carsRouter);
 app.use(eventsRouter);
 app.use(groupsRouter);

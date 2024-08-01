@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import UserModel from "../models/user.model";
 import { Request, Response } from "express";
 import { SECRET_KEY } from "../config";
+import { handleError } from "../utils/errorHandler";
 // import {
 //   sendVerificationEmail,
 //   sendResetPasswordEmail,
@@ -10,17 +11,25 @@ import { SECRET_KEY } from "../config";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { firstName, lastName, username, email, password } = req.body;
+    console.log("Here");
+    const { firstName, lastName, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new UserModel({ username, email, password: hashedPassword });
+    const user = new UserModel({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+    });
     await user.save();
+
+    console.log(user);
 
     const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: "1h" });
     // sendVerificationEmail(user, token);
 
     res.status(201).send("User registered");
   } catch (error) {
-    res.status(500).send("Server error");
+    handleError(res, "Error registering user", error);
   }
 };
 
@@ -39,7 +48,7 @@ export const login = async (req: Request, res: Response) => {
     });
     res.json({ token });
   } catch (error) {
-    res.status(500).send("Server error");
+    handleError(res, "Error logging in user", error);
   }
 };
 

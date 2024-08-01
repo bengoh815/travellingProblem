@@ -33,7 +33,7 @@ export interface IUser {
   geolocation?: IGeolocation;
   email: string;
   password: string;
-  phoneNumber: string;
+  phoneNumber?: string;
   role: UserRoles;
 }
 
@@ -60,7 +60,7 @@ const userSchema: Schema<IUserDocument> = new Schema(
     geolocation: { type: geolocationSchema, required: false },
     email: { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true },
-    phoneNumber: { type: String, required: true, trim: true },
+    phoneNumber: { type: String, trim: true },
     role: {
       type: String,
       enum: Object.values(UserRoles),

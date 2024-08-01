@@ -1,14 +1,16 @@
 import express from "express";
 
 import { APIVersion } from "../utils/apiVersion";
-import { register } from "../controllers/auth.controller";
+import { login, register } from "../controllers/auth.controller";
+import { validateAuthRegister } from "../middleware/validation/authValidator";
 
-const applicationsRouter = express.Router();
+const authRouter = express.Router();
 
 // API version prefix
 const v1 = APIVersion.v1;
 
 // Routes
-applicationsRouter.post(`${v1}/applications`, register);
+authRouter.post(`${v1}/register`, validateAuthRegister, register);
+authRouter.post(`${v1}/login`, login);
 
-export default applicationsRouter;
+export default authRouter;
