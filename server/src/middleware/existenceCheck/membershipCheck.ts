@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import MembershipModel from "../../models/membership.model";
+import { Status } from "../../utils/statusCodes";
 
 export const checkMembershipExistence = async (
   req: Request,
@@ -12,7 +13,9 @@ export const checkMembershipExistence = async (
     const membershipExists = await MembershipModel.exists({ userId, groupId });
 
     if (membershipExists) {
-      return res.status(409).json({ message: "Membership already exists" });
+      return res
+        .status(Status.Conflict)
+        .json({ message: "Membership already exists" });
     }
 
     next();

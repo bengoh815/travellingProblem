@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import GroupModel from "../../models/group.model";
+import { Status } from "../../utils/statusCodes";
 
 export const checkGroupExistence = async (
   req: Request,
@@ -12,7 +13,7 @@ export const checkGroupExistence = async (
     const groupExists = await GroupModel.exists({ _id: groupId });
 
     if (!groupExists) {
-      return res.status(404).json({ message: "Group not found" });
+      return res.status(Status.NotFound).json({ message: "Group not found" });
     }
 
     next();

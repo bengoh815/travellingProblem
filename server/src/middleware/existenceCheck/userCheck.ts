@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import UserModel from "../../models/user.model";
+import { Status } from "../../utils/statusCodes";
 
 export const checkUserExistence = async (
   req: Request,
@@ -11,7 +12,7 @@ export const checkUserExistence = async (
     const userExists = await UserModel.exists({ _id: userId });
 
     if (!userExists) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(Status.NotFound).json({ message: "User not found" });
     }
 
     next();
