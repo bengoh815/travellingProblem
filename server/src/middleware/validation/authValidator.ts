@@ -1,10 +1,22 @@
 import { body, validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express";
+import { Status } from "../../utils/statusCodes";
+import { checkUserEmailExistence } from "../existenceCheck/authCheck";
 
 export const validateAuthRegister = [
-  body("firstName").isString().withMessage("First name must be a string"),
-  body("lastName").isString().withMessage("Last name must be a string"),
-  body("email").isEmail().withMessage("Invalid email format"),
+  body("firstName")
+    .isString()
+    .withMessage("First name must be a string")
+    .isLength({ min: 2 })
+    .withMessage("First name must be at least 2 characters long")
+    .trim(),
+  body("lastName")
+    .isString()
+    .withMessage("Last name must be a string")
+    .isLength({ min: 2 })
+    .withMessage("Last name must be at least 2 characters long")
+    .trim(),
+  body("email").isEmail().withMessage("Invalid email format").normalizeEmail(),
   body("password")
     .isLength({ min: 8 })
     .withMessage("Password must be at least 8 characters long")
@@ -19,7 +31,22 @@ export const validateAuthRegister = [
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(Status.BadRequest).json({ errors: errors.array() });
+    }
+    next();
+  },
+  checkUserEmailExistence,
+];
+
+export const validateAuthLogin = [
+  body("email").isEmail().withMessage("Invalid email format").normalizeEmail(),
+  body("password")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters long"),
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(Status.BadRequest).json({ errors: errors.array() });
     }
     next();
   },
