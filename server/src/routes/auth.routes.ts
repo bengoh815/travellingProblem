@@ -8,9 +8,10 @@ const authRouter = express.Router();
 
 // API version prefix
 const v1 = APIVersion.v1;
+const auth = "auth";
 
 // Routes
-authRouter.post(`${v1}/register`, validateAuthRegister, register);
-authRouter.post(`${v1}/login`, login);
+authRouter.post(`${v1}/${auth}/register`, validateAuthRegister, register);
+authRouter.post(`${v1}/${auth}/login`, login);
 
 export default authRouter;

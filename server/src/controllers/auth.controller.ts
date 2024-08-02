@@ -13,12 +13,11 @@ export const register = async (req: Request, res: Response) => {
   try {
     console.log("Here");
     const { firstName, lastName, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
     const user = new UserModel({
       firstName,
       lastName,
       email,
-      password: hashedPassword,
+      password,
     });
     await user.save();
 
