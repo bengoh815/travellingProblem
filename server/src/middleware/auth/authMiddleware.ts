@@ -4,22 +4,42 @@ import { SECRET_KEY } from "../../config";
 import { Status } from "../../utils/statusCodes";
 
 interface AuthenticatedRequest extends Request {
-  user?: string | jwt.JwtPayload;
+  user?: jwt.JwtPayload & { role?: string };
 }
 
-export const authenticateJWT = (
+const authenticateJWT = (
   req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
 ) => {
   const token = req.headers.authorization?.split(" ")[1];
-  if (!token) return res.status(Status.Unauthorized).send("Access Denied");
+  if (!token) {
+    return res
+      .status(Status.Unauthorized)
+      .json({ message: "Access Denied: No token provided" });
+  }
 
   try {
-    const verified = jwt.verify(token, SECRET_KEY);
+    const verified = jwt.verify(token, SECRET_KEY) as jwt.JwtPayload & {
+      role?: string;
+    };
     req.user = verified;
     next();
   } catch (err) {
-    res.status(Status.BadRequest).send("Invalid Token");
+    res.status(Status.Unauthorized).json({ message: "Invalid Token" });
   }
 };
+
+const authorize = (requiredRole: string) => {
+  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (req.user && req.user.role === requiredRole) {
+      next();
+    } else {
+      res.status(Status.Forbidden).json({
+        message: "Forbidden: You do not have access to this resource",
+      });
+    }
+  };
+};
+
+export default { authenticateJWT, authorize };
