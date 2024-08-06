@@ -7,9 +7,10 @@ import carsRouter from "./routes/car.routes";
 import eventsRouter from "./routes/event.routes";
 import groupsRouter from "./routes/group.routes";
 import ridesRouter from "./routes/ride.routes";
-import membershipRouter from "./routes/membership.routes";
+import membershipsRouter from "./routes/membership.routes";
 import { handleError } from "./middleware/errorHandler";
 import authRouter from "./routes/auth.routes";
+import { APIVersion } from "./utils/apiVersion";
 
 const app = express();
 
@@ -25,15 +26,16 @@ app.use(cors(corsOptions)); // Apply CORS to all routes
 connectToDatabase();
 
 // Routes
-app.get("/", (req, res) => res.send("Hello world!"));
-app.use(applicationsRouter);
-app.use(authRouter);
-app.use(carsRouter);
-app.use(eventsRouter);
-app.use(groupsRouter);
-app.use(membershipRouter);
-app.use(ridesRouter);
-app.use(usersRouter);
+const v1 = APIVersion.v1;
+
+app.use(`${v1}/applications`, applicationsRouter);
+app.use(`${v1}/auth`, authRouter);
+app.use(`${v1}/cars`, carsRouter);
+app.use(`${v1}/events`, eventsRouter);
+app.use(`${v1}/groups`, groupsRouter);
+app.use(`${v1}/memberships`, membershipsRouter);
+app.use(`${v1}/rides`, ridesRouter);
+app.use(`${v1}/users`, usersRouter);
 app.use(handleError);
 
 export default app;

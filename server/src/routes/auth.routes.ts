@@ -9,12 +9,8 @@ import {
 
 const authRouter = express.Router();
 
-// API version prefix
-const v1 = APIVersion.v1;
-const auth = "auth";
-
 // Routes
-authRouter.post(`${v1}/${auth}/register`, validateAuthRegister, register);
-authRouter.post(`${v1}/${auth}/login`, validateAuthLogin, login);
+authRouter.post(`/register`, validateAuthRegister, register);
+authRouter.post(`/login`, validateAuthLogin, login);
 
 export default authRouter;

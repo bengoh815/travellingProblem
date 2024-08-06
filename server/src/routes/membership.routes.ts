@@ -3,25 +3,16 @@ import MembershipController from "../controllers/membership.controller";
 import { APIVersion } from "../utils/apiVersion";
 import { validateCreateMembership } from "../middleware/validation/membershipValidator";
 
-const membershipRouter = express.Router();
-
-// API version prefix
-const v1 = APIVersion.v1;
+const membershipsRouter = express.Router();
 
 // Routes
-membershipRouter.post(
-  `${v1}/memberships`,
+membershipsRouter.post(
+  `/`,
   validateCreateMembership,
   MembershipController.createMembership
 );
-membershipRouter.get(`${v1}/memberships`, MembershipController.getMembership);
-membershipRouter.put(
-  `${v1}/memberships/:id`,
-  MembershipController.updateMembership
-);
-membershipRouter.delete(
-  `${v1}/memberships/:id`,
-  MembershipController.deleteMembership
-);
+membershipsRouter.get(`/`, MembershipController.getMembership);
+membershipsRouter.put(`/:id`, MembershipController.updateMembership);
+membershipsRouter.delete(`/:id`, MembershipController.deleteMembership);
 
-export default membershipRouter;
+export default membershipsRouter;

@@ -10,14 +10,11 @@ import { APIVersion } from "../utils/apiVersion";
 
 const carsRouter = express.Router();
 
-// API version prefix
-const v1 = APIVersion.v1;
-
 // Routes
-carsRouter.get(`${v1}/cars`, getAllCars);
-carsRouter.post(`${v1}/cars`, createCar);
-carsRouter.get(`${v1}/cars/:id`, getCarById);
-carsRouter.put(`${v1}/cars/:id`, updateCar);
-carsRouter.delete(`${v1}/cars/:id`, deleteCar);
+carsRouter.get(`/`, getAllCars);
+carsRouter.post(`/`, createCar);
+carsRouter.get(`/:id`, getCarById);
+carsRouter.put(`/:id`, updateCar);
+carsRouter.delete(`/:id`, deleteCar);
 
 export default carsRouter;

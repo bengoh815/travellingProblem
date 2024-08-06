@@ -10,14 +10,11 @@ import { APIVersion } from "../utils/apiVersion";
 
 const ridesRouter = express.Router();
 
-// API version prefix
-const v1 = APIVersion.v1;
-
 // Routes
-ridesRouter.get(`${v1}/rides`, getAllRides);
-ridesRouter.post(`${v1}/rides`, createRide);
-ridesRouter.get(`${v1}/rides/:id`, getRideById);
-ridesRouter.put(`${v1}/rides/:id`, updateRide);
-ridesRouter.delete(`${v1}/rides/:id`, deleteRide);
+ridesRouter.get(`/`, getAllRides);
+ridesRouter.post(`/`, createRide);
+ridesRouter.get(`/:id`, getRideById);
+ridesRouter.put(`/:id`, updateRide);
+ridesRouter.delete(`/:id`, deleteRide);
 
 export default ridesRouter;
