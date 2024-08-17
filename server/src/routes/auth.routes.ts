@@ -1,6 +1,4 @@
 import express from "express";
-
-import { APIVersion } from "../utils/apiVersion";
 import { login, register } from "../controllers/auth.controller";
 import {
   validateAuthLogin,

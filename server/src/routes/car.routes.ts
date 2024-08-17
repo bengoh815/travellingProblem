@@ -6,7 +6,6 @@ import {
   updateCar,
   deleteCar,
 } from "../controllers/car.controller";
-import { APIVersion } from "../utils/apiVersion";
 
 const carsRouter = express.Router();
 

@@ -6,7 +6,6 @@ import {
   updateRide,
   deleteRide,
 } from "../controllers/ride.controller";
-import { APIVersion } from "../utils/apiVersion";
 
 const ridesRouter = express.Router();
 

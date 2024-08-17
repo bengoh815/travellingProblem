@@ -1,6 +1,5 @@
 import express from "express";
 import UserController from "../controllers/user.controller";
-import { APIVersion } from "../utils/apiVersion";
 
 const usersRouter = express.Router();
 

@@ -1,6 +1,5 @@
 import express from "express";
 import MembershipController from "../controllers/membership.controller";
-import { APIVersion } from "../utils/apiVersion";
 import { validateCreateMembership } from "../middleware/validation/membershipValidator";
 
 const membershipsRouter = express.Router();

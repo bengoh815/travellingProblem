@@ -1,6 +1,5 @@
 import express from "express";
 import GroupController from "../controllers/group.controller";
-import { APIVersion } from "../utils/apiVersion";
 
 const groupsRouter = express.Router();
 

@@ -7,7 +7,6 @@ import {
   updateEvent,
   deleteEvent,
 } from "../controllers/event.controller";
-import { APIVersion } from "../utils/apiVersion";
 
 const eventsRouter = express.Router();
 
