@@ -7,7 +7,7 @@ interface AuthenticatedRequest extends Request {
   user?: jwt.JwtPayload & { role?: string };
 }
 
-const authenticateJWT = (
+export const authJWT = (
   req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
@@ -30,7 +30,7 @@ const authenticateJWT = (
   }
 };
 
-const authorize = (requiredRole: string) => {
+export const authRole = (requiredRole: string) => {
   return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     if (req.user && req.user.role === requiredRole) {
       next();
@@ -41,5 +41,3 @@ const authorize = (requiredRole: string) => {
     }
   };
 };
-
-export default { authenticateJWT, authorize };
