@@ -6,6 +6,17 @@ import mongoose, { Schema, Document } from "mongoose";
 import { IUserDocument } from "./user.model";
 
 /**
+ * Enumerator for GroupRoles
+ */
+
+export enum GroupRoles {
+  Admin = "admin",
+  Moderator = "moderator",
+  Driver = "driver",
+  Member = "member",
+}
+
+/**
  * Interface for Group
  */
 export interface IGroup {

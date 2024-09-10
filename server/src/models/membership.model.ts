@@ -4,17 +4,7 @@
 
 import mongoose, { Document, Schema } from "mongoose";
 import { IUserDocument } from "./user.model";
-import { IGroupDocument } from "./group.model";
-
-/**
- * Enumerator for MembershipRoles
- */
-export enum MembershipRoles {
-  User = "user",
-  Driver = "driver",
-  Organizer = "organizer",
-  Admin = "admin",
-}
+import { GroupRoles, IGroupDocument } from "./group.model";
 
 /**
  * Interface for Membership
@@ -22,7 +12,7 @@ export enum MembershipRoles {
 export interface IMembership {
   userId: IUserDocument["_id"];
   groupId: IGroupDocument["_id"];
-  role: MembershipRoles[];
+  role: GroupRoles[];
   driverCapacity: Number;
 }
 
@@ -45,7 +35,7 @@ const membershipSchema = new Schema<IMembershipDocument>(
     },
     role: {
       type: [String],
-      enum: Object.values(MembershipRoles),
+      enum: Object.values(GroupRoles),
       required: true,
     },
     driverCapacity: {
