@@ -50,6 +50,7 @@ const applicationSchema = new Schema<IApplicationDocument>(
       type: String,
       enum: Object.values(ApplicationDecision),
       required: true,
+      default: ApplicationDecision.Pending,
     },
     decidedBy: {
       type: mongoose.Schema.Types.ObjectId,
