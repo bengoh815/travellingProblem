@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import membershipService from "../services/membership.service";
 import { Status } from "../utils/statusCodes";
 import { handleError } from "../utils/errorHandler";
-import { MembershipRoles } from "../models/membership.model";
 import { optionsConstructor } from "../utils/optionsConstructor";
+import { GroupRoles } from "../models/group.model";
 
 export class MembershipController {
   // Create operations
@@ -13,7 +13,7 @@ export class MembershipController {
       const membershipData = {
         userId,
         groupId,
-        role: [MembershipRoles.User],
+        role: [GroupRoles.Member],
         driverCapacity: 0,
       };
       const newMembership = await membershipService.createMembership(

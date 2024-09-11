@@ -3,7 +3,7 @@ import ApplicationModel, {
   ApplicationDecision,
   IApplication,
 } from "../models/application.model";
-import { MembershipRoles } from "../models/membership.model";
+import { GroupRoles } from "../models/group.model";
 
 class ApplicationService {
   // Create operations
@@ -37,10 +37,7 @@ class ApplicationService {
     if (criteria.groupId && mongoose.Types.ObjectId.isValid(criteria.groupId)) {
       validCriteria.groupId = criteria.groupId;
     }
-    if (
-      criteria.role &&
-      Object.values(MembershipRoles).includes(criteria.role)
-    ) {
+    if (criteria.role && Object.values(GroupRoles).includes(criteria.role)) {
       validCriteria.role = criteria.role;
     }
     if (

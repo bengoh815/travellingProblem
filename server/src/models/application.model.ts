@@ -4,8 +4,7 @@
 
 import mongoose, { Schema, Document } from "mongoose";
 import { IUserDocument } from "./user.model";
-import { IGroupDocument } from "./group.model";
-import { MembershipRoles } from "./membership.model";
+import { GroupRoles, IGroupDocument } from "./group.model";
 
 export enum ApplicationDecision {
   Pending = "pending",
@@ -20,7 +19,7 @@ export enum ApplicationDecision {
 export interface IApplication {
   userId: IUserDocument["_id"];
   groupId: IGroupDocument["_id"];
-  role: MembershipRoles;
+  role: GroupRoles;
   decision: ApplicationDecision;
   decidedBy?: IUserDocument["_id"];
 }
@@ -44,7 +43,7 @@ const applicationSchema = new Schema<IApplicationDocument>(
     },
     role: {
       type: String,
-      enum: Object.values(MembershipRoles),
+      enum: Object.values(GroupRoles),
       required: true,
     },
     decision: {

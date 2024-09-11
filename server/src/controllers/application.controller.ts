@@ -3,7 +3,6 @@ import { Status } from "../utils/statusCodes";
 import applicationService from "../services/application.service";
 import { handleError } from "../utils/errorHandler";
 import { ApplicationDecision } from "../models/application.model";
-import { MembershipRoles } from "../models/membership.model";
 
 export class ApplicationController {
   // Create operations

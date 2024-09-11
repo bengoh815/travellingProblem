@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
-import MembershipModel, {
-  IMembership,
-  MembershipRoles,
-} from "../models/membership.model";
+import MembershipModel, { IMembership } from "../models/membership.model";
+import { GroupRoles } from "../models/group.model";
 
 class MembershipService {
   // Create operations
@@ -34,7 +32,7 @@ class MembershipService {
     }
 
     if (criteria.role) {
-      const validRoles = Object.values(MembershipRoles);
+      const validRoles = Object.values(GroupRoles);
       if (Array.isArray(criteria.role)) {
         validCriteria.role = {
           $in: criteria.role.filter((role: any) => validRoles.includes(role)),
