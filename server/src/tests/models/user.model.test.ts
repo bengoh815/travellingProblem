@@ -1,18 +1,19 @@
-import UserModel, { IUserDocument, UserRoles } from "../../models/user.model";
+import UserModel, { UserRoles } from "../../models/user.model";
 
 jest.mock("bcrypt", () => require("bcryptjs"));
 
 describe("User Model Tests", () => {
   it("should create and save a user successfully", async () => {
-    const validUser: IUserDocument = new UserModel({
+    const userData = {
       firstName: "John",
       lastName: "Doe",
       email: "john.doe@example.com",
       password: "supersecretpassword",
       role: UserRoles.User,
-    });
+    };
 
-    const savedUser = await validUser.save();
+    const user = new UserModel(userData);
+    const savedUser = await user.save();
 
     // Validate fields
     expect(savedUser._id).toBeDefined();
@@ -23,14 +24,16 @@ describe("User Model Tests", () => {
   });
 
   it("should not save a user without required fields", async () => {
-    const invalidUser: IUserDocument = new UserModel({
+    const userData = {
       firstName: "Jane",
       // lastName and email are missing
-    });
+    };
+
+    const user = new UserModel(userData);
 
     let err;
     try {
-      await invalidUser.save();
+      await user.save();
     } catch (error) {
       err = error as Error;
     }
@@ -39,26 +42,28 @@ describe("User Model Tests", () => {
   });
 
   it('should validate user role and default to "user"', async () => {
-    const user: IUserDocument = new UserModel({
+    const userData = {
       firstName: "Sam",
       lastName: "Smith",
       email: "sam.smith@example.com",
       password: "test1234",
-    });
-
+    };
+    const user = new UserModel(userData);
     const savedUser = await user.save();
+
     expect(savedUser.role).toBe(UserRoles.User); // Default role
   });
 
   it("should correctly hash the password before saving", async () => {
-    const user: IUserDocument = new UserModel({
+    const userData = {
       firstName: "Alice",
       lastName: "Wonderland",
       email: "alice.wonderland@example.com",
       password: "plaintextpassword",
-    });
-
+    };
+    const user = new UserModel(userData);
     const savedUser = await user.save();
+
     const isPasswordCorrect = await savedUser.verifyPassword(
       "plaintextpassword"
     );
