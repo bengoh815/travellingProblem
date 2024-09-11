@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon src/server.ts",
-    "test": "jest --passWithNoTests"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
