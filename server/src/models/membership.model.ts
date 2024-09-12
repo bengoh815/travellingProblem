@@ -12,7 +12,7 @@ import { GroupRoles, IGroupDocument } from "./group.model";
 export interface IMembership {
   userId: IUserDocument["_id"];
   groupId: IGroupDocument["_id"];
-  role: GroupRoles[];
+  role: GroupRoles;
   driverCapacity: Number;
 }
 
@@ -34,7 +34,7 @@ const membershipSchema = new Schema<IMembershipDocument>(
       required: true,
     },
     role: {
-      type: [String],
+      type: String,
       enum: Object.values(GroupRoles),
       required: true,
     },
@@ -42,6 +42,12 @@ const membershipSchema = new Schema<IMembershipDocument>(
       type: Number,
       default: 0,
       required: true,
+      validate: {
+        validator: function (value: number) {
+          return value >= 0; // Ensure driverCapacity is non-negative
+        },
+        message: "Driver capacity must be a non-negative number.",
+      },
     },
   },
   {
