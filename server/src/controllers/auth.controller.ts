@@ -2,13 +2,13 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/user.model";
 import { Request, Response } from "express";
-import { SECRET_KEY } from "../config";
+import { SECRET_KEY, EMAIL_SECRET_KEY } from "../config";
 import { handleError } from "../utils/errorHandler";
 import { Status } from "../utils/statusCodes";
-// import {
-//   sendVerificationEmail,
-//   sendResetPasswordEmail,
-// } from "../utils/emailService";
+import {
+  sendVerificationEmail,
+  // sendResetPasswordEmail,
+} from "../utils/emailService";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -21,8 +21,17 @@ export const register = async (req: Request, res: Response) => {
     });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: "1h" });
-    // sendVerificationEmail(user, token);
+    // Send Verification Email
+    const emailToken = jwt.sign(
+      { id: user._id, email: user.email },
+      EMAIL_SECRET_KEY,
+      { expiresIn: "24h" } // Expire in 24 hours
+    );
+
+    const verificationLink = `${req.protocol}://${req.get(
+      "host"
+    )}/verify-email/${emailToken}`;
+    sendVerificationEmail(user.email, verificationLink);
 
     res.status(Status.Created).send("User registered");
   } catch (error) {
