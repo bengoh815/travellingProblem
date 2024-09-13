@@ -22,7 +22,7 @@ class GroupService {
     const memberships = await MembershipModel.find({ groupId }).populate(
       "userId"
     );
-    return memberships.map((membership) => membership.userId);
+    return memberships.map((membership) => membership.userId as IUser);
   }
 
   async getGroupEvents(groupId: string): Promise<IEvent[] | null> {

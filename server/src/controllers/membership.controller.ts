@@ -13,7 +13,7 @@ export class MembershipController {
       const membershipData = {
         userId,
         groupId,
-        role: [GroupRoles.Member],
+        role: GroupRoles.Member,
         driverCapacity: 0,
       };
       const newMembership = await membershipService.createMembership(
