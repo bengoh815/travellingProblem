@@ -1,7 +1,6 @@
 import { body, validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express";
 import { Status } from "../../utils/statusCodes";
-import { checkUserEmailExistence } from "../existenceCheck/authCheck";
 
 export const validateAuthRegister = [
   body("firstName")
@@ -35,7 +34,6 @@ export const validateAuthRegister = [
     }
     next();
   },
-  checkUserEmailExistence,
 ];
 
 export const validateAuthLogin = [

@@ -1,8 +1,5 @@
 import { body, validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express";
-import { checkUserExistence } from "../existenceCheck/userCheck";
-import { checkGroupExistence } from "../existenceCheck/groupCheck";
-import { checkMembershipExistence } from "../existenceCheck/membershipCheck";
 import { Status } from "../../utils/statusCodes";
 
 export const validateCreateMembership = [
@@ -15,7 +12,4 @@ export const validateCreateMembership = [
     }
     next();
   },
-  checkUserExistence,
-  checkGroupExistence,
-  checkMembershipExistence,
 ];
